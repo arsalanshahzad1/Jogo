@@ -771,6 +771,50 @@ p {
   color: #EA5A40;
 }
 
+.home-icon-button.active svg path:nth-child(1) {
+  fill: #C1AF9B;
+}
+
+.home-icon-button.active svg path:nth-child(2) {
+  fill: #FFFDF9;
+}
+
+.home-icon-button.active svg path:nth-child(3) {
+  fill: #EA5A40;
+}
+
+.home-icon-button.active svg path:nth-child(4) {
+  fill: #FFE6E1;
+}
+
+.home-icon-button.active svg path:nth-child(5) {
+  fill: #EA5A40;
+}
+
+.home-icon-button.active svg path:nth-child(6) {
+  fill: #FFCFC6;
+}
+
+.home-icon-button.active svg path:nth-child(7) {
+  fill: #fff;
+}
+
+.home-icon-button.active svg path:nth-child(8) {
+  fill: #fff;
+}
+
+.home-icon-button.active svg path:nth-child(9) {
+  fill: #FFCFC6;
+}
+
+.home-icon-button.active svg path:nth-child(10) {
+  fill: #fff;
+}
+
+.home-icon-button.active span {
+  color: #EA5A40;
+}
+
 
 .token-icon-button:hover svg path:nth-child(1) {
   fill: #C1AF9B;
@@ -817,6 +861,54 @@ p {
 }
 
 .token-icon-button:hover span {
+  color: #EA5A40;
+}
+
+.token-icon-button.active svg path:nth-child(1) {
+  fill: #C1AF9B;
+}
+
+.token-icon-button.active svg path:nth-child(2) {
+  fill: #EA5A40;
+}
+
+.token-icon-button.active svg path:nth-child(3) {
+  fill: #FFE6E1;
+}
+
+.token-icon-button.active svg g path:nth-child(1) {
+  fill: #EA5A40;
+}
+
+.token-icon-button.active svg g path:nth-child(2) {
+  fill: #EA5A40;
+}
+
+.token-icon-button.active svg g path:nth-child(3) {
+  fill: #EA5A40;
+}
+
+.token-icon-button.active svg g path:nth-child(4) {
+  fill: #EA5A40;
+}
+
+.token-icon-button.active svg path:nth-child(5) {
+  fill: #FFCFC6;
+}
+
+.token-icon-button.active svg path:nth-child(6) {
+  fill: #fff;
+}
+
+.token-icon-button.active svg path:nth-child(7) {
+  fill: #fff;
+}
+
+.token-icon-button.active svg path:nth-child(8) {
+  fill: #FFCFC6;
+}
+
+.token-icon-button.active span {
   color: #EA5A40;
 }
 
@@ -875,6 +967,63 @@ p {
 }
 
 
+
+
+.fund-icon-button.active svg path:nth-child(1) {
+  fill: #C1AF9B;
+}
+
+.fund-icon-button.active svg path:nth-child(2) {
+  fill: #FFFDF9;
+}
+
+.fund-icon-button.active svg path:nth-child(3) {
+  fill: #FFE6E1;
+}
+
+.fund-icon-button.active svg path:nth-child(4) {
+  fill: #EA5A40;
+}
+
+.fund-icon-button.active svg path:nth-child(5) {
+  fill: #EA5A40;
+}
+
+.fund-icon-button.active svg path:nth-child(6) {
+  fill: #EA5A40;
+}
+
+.fund-icon-button.active svg path:nth-child(7) {
+  fill: #EA5A40;
+}
+
+.fund-icon-button.active svg path:nth-child(8) {
+  fill: #FFCFC6;
+}
+
+.fund-icon-button.active svg path:nth-child(9) {
+  fill: #fff;
+}
+
+.fund-icon-button.active svg path:nth-child(10) {
+  fill: #fff;
+}
+
+.fund-icon-button.active svg path:nth-child(12) {
+  fill: #fff;
+}
+
+.fund-icon-button.active svg path:nth-child(11) {
+  fill: #FFCFC6;
+}
+
+.fund-icon-button.active span {
+  color: #EA5A40;
+}
+
+
+
+
 .roadmap-icon-button:hover svg path:nth-child(1) {
   fill: #C1AF9B;
 }
@@ -914,6 +1063,51 @@ p {
 .roadmap-icon-button:hover span {
   color: #EA5A40;
 }
+
+
+
+.roadmap-icon-button.active svg path:nth-child(1) {
+  fill: #C1AF9B;
+}
+
+.roadmap-icon-button.active svg path:nth-child(2) {
+  fill: #FFFDF9;
+}
+
+.roadmap-icon-button.active svg path:nth-child(3) {
+  fill: #FFE6E1;
+}
+
+.roadmap-icon-button.active svg path:nth-child(4) {
+  fill: #EA5A40;
+}
+
+.roadmap-icon-button.active svg path:nth-child(5) {
+  fill: #FFCFC6;
+}
+
+.roadmap-icon-button.active svg path:nth-child(6) {
+  fill: #fff;
+}
+
+.roadmap-icon-button.active svg path:nth-child(7) {
+  fill: #fff;
+}
+
+.roadmap-icon-button.active svg path:nth-child(8) {
+  fill: #FFCFC6;
+}
+
+.roadmap-icon-button.active svg path:nth-child(9) {
+  fill: #fff;
+}
+
+.roadmap-icon-button.active span {
+  color: #EA5A40;
+}
+
+
+
 
 .team-icon-button:hover svg path:nth-child(1) {
   fill: #C1AF9B;
@@ -974,6 +1168,73 @@ p {
 .team-icon-button:hover span {
   color: #EA5A40;
 }
+
+
+
+
+.team-icon-button.active svg path:nth-child(1) {
+  fill: #C1AF9B;
+}
+
+.team-icon-button.active svg path:nth-child(2) {
+  fill: #FFFDF9;
+}
+
+.team-icon-button.active svg path:nth-child(3) {
+  fill: #FFE6E1;
+}
+
+.team-icon-button.active svg g path:nth-child(1) {
+  fill: #EA5A40;
+}
+
+.team-icon-button.active svg g path:nth-child(2) {
+  fill: #EA5A40;
+}
+
+.team-icon-button.active svg g path:nth-child(3) {
+  fill: #EA5A40;
+}
+
+.team-icon-button.active svg g path:nth-child(4) {
+  fill: #EA5A40;
+}
+
+.team-icon-button.active svg g path:nth-child(5) {
+  fill: #EA5A40;
+}
+
+.team-icon-button.active svg g path:nth-child(6) {
+  fill: #EA5A40;
+}
+
+.team-icon-button.active svg path:nth-child(5) {
+  fill: #FFCFC6;
+}
+
+.team-icon-button.active svg path:nth-child(6) {
+  fill: #fff;
+}
+
+.team-icon-button.active svg path:nth-child(7) {
+  fill: #fff;
+}
+
+.team-icon-button.active svg path:nth-child(8) {
+  fill: #FFCFC6;
+}
+
+.team-icon-button.active svg path:nth-child(9) {
+  fill: #fff;
+}
+
+.team-icon-button.active span {
+  color: #EA5A40;
+}
+
+
+
+
 
 .q2 {
   position: absolute;
@@ -1852,10 +2113,6 @@ color: #fff;
     /* transform: rotate(-364deg); */
     z-index: -1;
     right: 0%;
-    opacity: 0;
 }
 
-.pie-chart-wrap .hard-pie:hover .seven{
-  opacity: 1;
-}
 

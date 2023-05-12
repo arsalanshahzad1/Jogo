@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import ApexCharts from 'react-apexcharts';
 
 const PieChart = () => {
+
+    const [index , setIndex] = useState(' ')
     // const data = [
     //     {
     //         heading : 'one',
@@ -40,19 +42,20 @@ const PieChart = () => {
         },
     });
 
+    console.log(index);
+
     return (
 
         <div style={{ position: 'relative', zIndex: '1'  , width :'420px' , padding : '60px'}} >
             <div className="pie-chart-wrap">
-            <svg width="311" height="291" viewBox="0 0 311 291" fill="none" xmlns="http://www.w3.org/2000/svg" className='hard-pie'>
-                <path d="M145.502 145.502L81.8237 14.8085C102.375 4.77339 122.635 0.0910645 145.502 0.0910645V145.502Z" fill="#BFBFBF" />
-                <path d="M145.502 145.502L3.41797 115.258C12.9439 70.4061 40.6516 34.9006 81.8237 14.7976L145.502 145.502Z" fill="#5F5F5F" />
-                <path d="M145.502 145.502L84.1132 277.281C21.8036 248.192 -10.8909 182.581 3.41792 115.262L145.502 145.502Z" fill="#9F9F9F" />
-                <path d="M145.502 145.502V290.909C122.635 290.909 104.832 286.959 84.1133 277.288L145.502 145.502Z" fill="#404040" />
-                <path d="M145.502 145.502L287.582 175.746C280.708 208.353 262.833 237.6 236.96 258.571C211.087 279.542 178.793 290.961 145.502 290.909V145.502Z" fill="#808080" />
-                <path d="M145.502 145.502L206.887 13.7153C269.196 42.8004 301.891 108.415 287.582 175.735L145.502 145.502Z" fill="#D3D3D3" />
-
-                <path d="M145.502 145.502V0.0910645C168.365 0.0910645 186.168 4.04463 206.887 13.7154L145.502 145.502Z" fill="#575757" />
+            <svg width="311" height="291" viewBox="0 0 311 291" fill="none" xmlns="http://www.w3.org/2000/svg" >
+                <path d="M145.502 145.502L81.8237 14.8085C102.375 4.77339 122.635 0.0910645 145.502 0.0910645V145.502Z" fill="#BFBFBF" onClick={() =>{setIndex(1)}}/>
+                <path d="M145.502 145.502L3.41797 115.258C12.9439 70.4061 40.6516 34.9006 81.8237 14.7976L145.502 145.502Z" fill="#5F5F5F" onClick={() =>{setIndex(2)}}/>
+                <path d="M145.502 145.502L84.1132 277.281C21.8036 248.192 -10.8909 182.581 3.41792 115.262L145.502 145.502Z" fill="#9F9F9F" onClick={() =>{setIndex(3)}}/>
+                <path d="M145.502 145.502V290.909C122.635 290.909 104.832 286.959 84.1133 277.288L145.502 145.502Z" fill="#404040" onClick={() =>{setIndex(4)}}/>
+                <path d="M145.502 145.502L287.582 175.746C280.708 208.353 262.833 237.6 236.96 258.571C211.087 279.542 178.793 290.961 145.502 290.909V145.502Z" fill="#808080" onClick={() =>{setIndex(5)}}/>
+                <path d="M145.502 145.502L206.887 13.7153C269.196 42.8004 301.891 108.415 287.582 175.735L145.502 145.502Z" fill="#D3D3D3" onClick={() =>{setIndex(6)}}/>
+                <path d="M145.502 145.502V0.0910645C168.365 0.0910645 186.168 4.04463 206.887 13.7154L145.502 145.502Z" fill="#575757" onClick={() =>{setIndex(0)}}/>
                 <defs>
                     <filter id="filter0_d_158_154" x="125.502" y="8.71533" width="185.411" height="202.019" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
                         <feFlood flood-opacity="0" result="BackgroundImageFix" />
@@ -75,7 +78,7 @@ const PieChart = () => {
             <div className='seven'> --------------- 7</div>
             </div>
 
-            <div class="message-box">
+            {/* <div class="message-box">
                 <div>
                     <svg width="313" height="244" viewBox="0 0 293 224" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <g filter="url(#filter0_d_58_3723)">
@@ -88,7 +91,7 @@ const PieChart = () => {
                             190.071 23.0592 193.306 25.375 196.031C27.6907 198.755 30.6228 200.891 33.9292 202.262C37.2356 
                             203.633 40.8214 204.199 44.3905 203.915Z" fill="url(#paint0_linear_58_3723)"></path>
                             </g><defs><filter id="filter0_d_58_3723" x="0.0175781" y="0.0344238" 
-                            width="292.957" height="223.952" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB"><feFlood flood-opacity="0" result="BackgroundImageFix"></feFlood><feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"></feColorMatrix><feOffset></feOffset><feGaussianBlur stdDeviation="10"></feGaussianBlur><feComposite in2="hardAlpha" operator="out"></feComposite><feColorMatrix type="matrix" values="0 0 0 0 1 0 0 0 0 0.756863 0 0 0 0 0.027451 0 0 0 0.9 0"></feColorMatrix><feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_58_3723"></feBlend><feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_58_3723" result="shape"></feBlend></filter><linearGradient id="paint0_linear_58_3723" x1="257.353" y1="192.615" x2="119.287" y2="2.77215" gradientUnits="userSpaceOnUse"><stop stop-color="#222222"></stop><stop offset="1" stop-color="#444444"></stop></linearGradient></defs></svg><p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam</p></div></div>
+                            width="292.957" height="223.952" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB"><feFlood flood-opacity="0" result="BackgroundImageFix"></feFlood><feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"></feColorMatrix><feOffset></feOffset><feGaussianBlur stdDeviation="10"></feGaussianBlur><feComposite in2="hardAlpha" operator="out"></feComposite><feColorMatrix type="matrix" values="0 0 0 0 1 0 0 0 0 0.756863 0 0 0 0 0.027451 0 0 0 0.9 0"></feColorMatrix><feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_58_3723"></feBlend><feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_58_3723" result="shape"></feBlend></filter><linearGradient id="paint0_linear_58_3723" x1="257.353" y1="192.615" x2="119.287" y2="2.77215" gradientUnits="userSpaceOnUse"><stop stop-color="#222222"></stop><stop offset="1" stop-color="#444444"></stop></linearGradient></defs></svg><p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam</p></div></div> */}
 
         </div>
 

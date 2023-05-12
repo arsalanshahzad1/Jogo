@@ -6,7 +6,7 @@ const Header = ({ state , setState}) => {
 console.log(state,"STATE")
   return (
     <>
-      <Link className="home-icon-button" onClick={()=>setState("home")}>
+      <Link className={`home-icon-button ${state === 'home' ? 'active' : '' }`} onClick={()=>setState("home")}>
         {/* <img src="/assets/images/page-btn/home-btn.png" alt="" /> */}
         <svg width="74.4" height="56" viewBox="0 0 93 69" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M82.0835 7.719C81.0029 7.00144 71.0013 0.855975 46.4604 0.707336C21.9059 0.855975 11.9145 7.02193 10.8641 7.71387C-3.41272 16.622 0.428343 46.4113 0.583197 47.6619C1.73114 57.0364 8.84432 63.2075 22.3334 66.5134C33.0689 69.1479 44.3294 69.03 46.4637 68.9839C46.7229 68.9839 47.2919 68.9839 48.1099 68.9839C51.8129 68.9839 61.4576 68.7379 70.6075 66.4929C84.0966 63.187 91.2098 57.0159 92.3577 47.6517C92.5261 46.4113 96.3536 16.6322 82.0835 7.719Z" fill="#BCBCBF" />
@@ -23,7 +23,7 @@ console.log(state,"STATE")
         <span>HOME</span>
       </Link>
 
-      <Link className="token-icon-button" onClick={()=>setState("Token")}>
+      <Link className={`token-icon-button ${state === 'Token' ? 'active' : '' }`} onClick={()=>setState("Token")}>
         {/* <img src="/assets/images/page-btn/token-btn.png" alt="" /> */}
         <svg width="74.4" height="56" viewBox="0 0 95 70" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M83.2172 7.75506C82.1316 7.03413 72.0832 0.859906 47.4273 0.710571C22.7579 0.859906 12.7197 7.05472 11.6645 7.7499C-2.67918 16.6997 1.17986 46.6284 1.33544 47.8849C2.48875 57.3033 9.63523 63.5033 23.1875 66.8247C33.9732 69.4715 45.2864 69.3531 47.4307 69.3067C47.6911 69.3067 48.2627 69.3067 49.0846 69.3067C52.805 69.3067 62.4948 69.0596 71.6875 66.8041C85.2398 63.4827 92.3862 57.2827 93.5396 47.8746C93.7087 46.6285 97.5541 16.71 83.2172 7.75506Z" fill="#BCBCBF" />
@@ -50,7 +50,7 @@ console.log(state,"STATE")
         <span>Token Economics</span>
       </Link>
 
-      <Link className="fund-icon-button"  onClick={()=>setState("fund")}>
+      <Link className={`fund-icon-button ${state === 'fund' ? 'active' : '' }`}  onClick={()=>setState("fund")}>
         {/* <img src="/assets/images/page-btn/fund-btn.png" alt="" /> */}
         <svg width="74.4" height="56" viewBox="0 0 95 70" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M83.2172 7.75506C82.1316 7.03413 72.0832 0.859906 47.4273 0.710571C22.7579 0.859906 12.7197 7.05472 11.6645 7.7499C-2.67918 16.6997 1.17986 46.6284 1.33544 47.8849C2.48875 57.3033 9.63523 63.5033 23.1875 66.8247C33.9732 69.4715 45.2864 69.3531 47.4307 69.3067C47.6911 69.3067 48.2627 69.3067 49.0846 69.3067C52.805 69.3067 62.4948 69.0596 71.6875 66.8041C85.2398 63.4827 92.3862 57.2827 93.5396 47.8746C93.7087 46.6285 97.5541 16.71 83.2172 7.75506Z" fill="#BCBCBF" />
@@ -70,7 +70,7 @@ console.log(state,"STATE")
         <span>Fund Allocation</span>
       </Link>
 
-      <Link className="roadmap-icon-button"  onClick={()=>setState("roadmap")}>
+      <Link className={`roadmap-icon-button ${state === 'roadmap' ? 'active' : '' }`}  onClick={()=>setState("roadmap")}>
         {/* <img src="/assets/images/page-btn/roadmap-btn.png" alt="" /> */}
         <svg width="74.4" height="56" viewBox="0 0 95 70" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M83.2177 7.75512C82.132 7.03419 72.0837 0.859967 47.4278 0.710632C22.7584 0.859967 12.7202 7.05479 11.665 7.74997C-2.67869 16.6998 1.18035 46.6285 1.33593 47.885C2.48924 57.3034 9.63571 63.5033 23.188 66.8248C33.9736 69.4716 45.2869 69.3531 47.4312 69.3068C47.6916 69.3068 48.2632 69.3068 49.0851 69.3068C52.8054 69.3068 62.4953 69.0596 71.688 66.8042C85.2402 63.4827 92.3867 57.2828 93.54 47.8747C93.7091 46.6285 97.5546 16.7101 83.2177 7.75512Z" fill="#BCBCBF" />
@@ -87,7 +87,7 @@ console.log(state,"STATE")
         <span>Roadmap</span>
       </Link>
 
-      <Link className="team-icon-button" onClick={() =>{setState('team')}}>
+      <Link className={`team-icon-button ${state === 'team' ? 'active' : '' }`} onClick={() =>{setState('team')}}>
         {/* <img src="/assets/images/page-btn/team-btn.png" alt="" /> */}
         <svg width="74.4" height="56" viewBox="0 0 95 70" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M83.2177 7.75512C82.132 7.03419 72.0837 0.859967 47.4278 0.710632C22.7584 0.859967 12.7202 7.05479 11.665 7.74997C-2.67869 16.6998 1.18035 46.6285 1.33593 47.885C2.48924 57.3034 9.63571 63.5033 23.188 66.8248C33.9736 69.4716 45.2869 69.3531 47.4312 69.3068C47.6916 69.3068 48.2632 69.3068 49.0851 69.3068C52.8054 69.3068 62.4953 69.0596 71.688 66.8042C85.2402 63.4827 92.3867 57.2828 93.54 47.8747C93.7091 46.6285 97.5546 16.7101 83.2177 7.75512Z" fill="#BCBCBF" />
