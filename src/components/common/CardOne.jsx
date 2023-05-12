@@ -1,6 +1,7 @@
 import React from 'react'
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
+import PieChart from './PieChart';
 
 const CardOne = ({ style , content }) => {
     console.log(content);
@@ -57,6 +58,7 @@ const CardOne = ({ style , content }) => {
                     </p>
                 </div> */}
             </Carousel>;
+            
         </div>
     )
 }

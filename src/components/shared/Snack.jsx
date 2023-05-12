@@ -132,7 +132,7 @@ const Snack = ({close}) => {
     }
     return (
         <>
-            <section className="home-section-seven"  >
+            <section className="home-section-seven"  id="roadmap">
                 <div className='bg-overlay' onClick={() => setTab('')}>
 
                 </div>
