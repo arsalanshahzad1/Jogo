@@ -1,22 +1,25 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState  , useRef} from "react";
 import Header from './Header'
 import { Link } from "react-router-dom";
-import Button from "../../components/shared/Button";
 import Snack from "../../components/shared/Snack";
 import Team from "../Team";
-// import {ReactComponent as WalletBtn} from "./assets/WalletBtn.svg";
+import TokenEconomics from "../TokenEconomics";
+import FundAllocation from "../FundAllocation";
 
-const LandingPage = ({state,setState}) => {
+const LandingPage = ({ state, setState, index, setIndex }) => {
+  const [activeSection, setActiveSection] = useState('');
   const [close, setClose] = useState('')
+
+ 
+
   useEffect(() => {
- console.log("ABC")
-    console.log(state,"STATE");
-    //window.scrollTo({ top: 0 });
+    window.scrollTo({ top: 0 });
     document
-        .getElementById(state)
-        ?.scrollIntoView?.({ block: "start", behavior: "smooth" });
-  
+      .getElementById(state)
+      ?.scrollIntoView?.({ block: "start", behavior: "smooth" });
+
   }, [state]);
+
   return (
     <>
       <section className="home_wrap">
@@ -44,7 +47,7 @@ const LandingPage = ({state,setState}) => {
                         </svg>
                       </div>
                       <div className="right">
-                        
+
 
                         <Link to={'/pre-sale'}>
                           <svg width="139" height="44" viewBox="0 0 139 44" fill="none" xmlns="http://www.w3.org/2000/svg" className="sale-btn">
@@ -56,6 +59,31 @@ const LandingPage = ({state,setState}) => {
                           </svg>
                         </Link>
                         <ul className="social-icons">
+                          <li><a href="http://">
+                            <svg width="44" height="42" viewBox="0 0 44 42" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <path d="M38.5887 7.35828C32.6456 1.02101 23.156 1.26533 21.8838 1.32748C20.6224 1.26533 11.1307 1.02101 5.17902 7.35828C1.2898 11.5053 -0.222201 17.5189 0.681573 25.215C1.09232 28.2663 2.20278 31.1812 3.92614 33.7318C6.53252 37.5895 11.7667 42.1586 21.8624 41.9958H22.3893C32.168 41.9958 37.263 37.5187 39.8244 33.7275C41.5444 31.1825 42.654 28.2745 43.0668 25.23C43.9899 17.5189 42.4779 11.5053 38.5887 7.35828Z" fill="#A5A5A5" />
+                              <path d="M38.4087 5.90309C32.5192 -0.260593 23.0874 -0.0398492 21.8924 0.0158726C20.6952 -0.037706 11.2655 -0.260593 5.376 5.90309C1.49962 9.96006 -0.0102357 15.8044 0.878546 23.2626C1.28671 26.2552 2.39149 29.11 4.10387 31.5972C6.65243 35.3027 11.7067 39.6748 21.3527 39.6748H21.8667H22.3828C32.0802 39.6748 37.1366 35.2813 39.6701 31.5972C41.376 29.1205 42.4764 26.2773 42.8826 23.2968C43.7928 15.8108 42.2829 9.96006 38.4087 5.90309Z" fill="#AFAFAF" />
+                              <path d="M21.8924 1.32753C20.4746 1.25252 -0.511353 0.521704 2.19997 23.1362C2.19997 23.1362 3.64343 38.6461 21.8924 38.3525C40.1413 38.6418 41.5827 23.1362 41.5827 23.1362C44.294 0.521704 23.308 1.25252 21.8924 1.32753Z" fill="#EAEAEA" />
+                              <g clipPath="url(#clip0_57_1266)">
+                                <path d="M18.8085 10H26.4902C27.1489 10.2013 27.3602 10.6637 27.3602 11.3273C27.3478 16.1071 27.3602 20.8857 27.3602 25.6656C27.3602 26.4311 26.9426 26.8475 26.1808 26.8475H15.1994C14.4276 26.8475 14.0112 26.4299 14.0112 25.6519C14.0112 22.1099 14.0112 18.5671 14.0112 15.0234C14.0112 14.9576 14.0112 14.8917 14.0199 14.8097H14.2759C15.2466 14.8097 16.2172 14.8097 17.1878 14.8097C17.3606 14.8134 17.5331 14.795 17.7011 14.755C18.4008 14.5661 18.8196 14.018 18.8196 13.281C18.8122 12.1836 18.8085 11.0937 18.8085 10ZM20.8926 19.7573H17.5545C17.4302 19.7573 17.3059 19.7573 17.1816 19.7573C17.0793 19.7687 16.9826 19.8102 16.9039 19.8766C16.8251 19.9429 16.7678 20.0312 16.7392 20.1301C16.7109 20.2293 16.7168 20.3351 16.756 20.4305C16.7953 20.5259 16.8655 20.6053 16.9554 20.6558C17.0755 20.7158 17.2077 20.7477 17.3419 20.749C19.7033 20.754 22.0646 20.754 24.4259 20.749C24.5 20.7512 24.5742 20.7457 24.6472 20.7329C24.7662 20.7089 24.8724 20.6423 24.9457 20.5454C25.0189 20.4486 25.0542 20.3282 25.0449 20.2072C25.031 20.0783 24.9674 19.9599 24.8676 19.8773C24.7678 19.7947 24.6396 19.7543 24.5104 19.7647L20.8926 19.7573ZM20.8926 18.0583H24.1562C24.3041 18.0583 24.4533 18.0583 24.6012 18.0583C24.6916 18.0538 24.7787 18.0232 24.8521 17.9703C24.9255 17.9174 24.9821 17.8444 25.015 17.7601C25.0512 17.6842 25.0654 17.5998 25.056 17.5163C25.0465 17.4328 25.0138 17.3536 24.9616 17.2878C24.8274 17.0977 24.6322 17.0728 24.421 17.0728H17.373C17.2987 17.0713 17.2243 17.0755 17.1506 17.0852C17.0699 17.097 16.9936 17.1289 16.9286 17.1781C16.8636 17.2273 16.8121 17.2921 16.7789 17.3665C16.7457 17.4409 16.7318 17.5224 16.7385 17.6036C16.7453 17.6848 16.7724 17.763 16.8175 17.8309C16.872 17.9103 16.947 17.9735 17.0346 18.0137C17.1221 18.054 17.2188 18.0698 17.3146 18.0596C18.5002 18.0559 19.6933 18.0583 20.8877 18.0583H20.8926ZM19.0732 23.2781C19.6672 23.2781 20.2601 23.2781 20.8529 23.2781C21.2058 23.2781 21.4333 23.0147 21.3786 22.6915C21.3363 22.443 21.1201 22.2851 20.8168 22.2851H17.3146C16.9616 22.2851 16.728 22.4902 16.733 22.7909C16.7379 23.0917 16.9679 23.2794 17.3134 23.2794L19.0732 23.2781Z" fill="#999999" />
+                                <path d="M16.2037 27.4428H26.1983C26.9104 27.4428 27.4486 27.1507 27.7804 26.5107C27.9073 26.239 27.965 25.9401 27.9482 25.6407C27.9482 21.2329 27.9482 16.8238 27.9482 12.4135V12.1836C28.6777 12.0792 29.1649 12.1836 29.4395 12.7478C29.5168 12.9222 29.5546 13.1115 29.5501 13.3021C29.5568 18.1499 29.5568 22.9968 29.5501 27.843C29.5501 28.57 29.1176 28.995 28.3943 28.995H17.3557C16.6287 28.995 16.2049 28.57 16.2012 27.8442L16.2037 27.4428Z" fill="#999999" />
+                                <path d="M18.2143 11.9263C18.2143 12.3712 18.2143 12.8162 18.2143 13.2611C18.2143 13.8377 17.8601 14.2093 17.2847 14.2156C16.3638 14.2255 15.4429 14.2156 14.5219 14.2156C14.4226 14.2262 14.3226 14.2039 14.2372 14.152C14.1519 14.1001 14.086 14.0215 14.0497 13.9285C14.0149 13.8382 14.0101 13.7391 14.0358 13.6458C14.0615 13.5525 14.1165 13.47 14.1926 13.4102C15.2639 12.3439 16.3348 11.2722 17.4053 10.1951C17.5569 10.0422 17.7346 9.96517 17.9397 10.0509C18.0316 10.0899 18.1083 10.1579 18.1581 10.2445C18.2079 10.3311 18.2281 10.4315 18.2156 10.5306C18.2106 10.9992 18.2143 11.4627 18.2143 11.9263Z" fill="#999999" />
+                              </g>
+                              <path d="M21.8921 8.0463C23.0871 8.00558 37.7274 7.6691 41.5952 15.8323C39.4536 0.693167 23.1385 1.25896 21.8921 1.32754C20.6478 1.2611 4.33061 0.684595 2.18896 15.8323C6.05463 7.6691 20.6928 8.00558 21.8921 8.0463Z" fill="#F0F0F0" />
+                              <path d="M21.8923 33.1166C9.72773 33.2431 4.78053 28.9332 2.79736 25.8492C4.16159 30.2813 8.50485 38.5688 21.8923 38.3566C35.2775 38.5709 39.6208 30.2813 40.985 25.8492C39.0019 28.9332 34.0547 33.2388 21.8923 33.1166Z" fill="#E1E1E1" />
+                              <path d="M17.9217 7.3903C17.4699 5.43575 14.7607 4.38989 11.8695 5.06713C8.97824 5.74436 7.00362 7.85322 7.4555 9.81634C7.90739 11.7795 10.2397 11.1772 13.1287 10.5064C16.0178 9.83562 18.3736 9.34271 17.9217 7.3903Z" fill="#FAF8FA" />
+                              <path d="M4.74642 11.651C3.97329 12.3325 3.66059 13.5798 4.2474 14.2507C4.83421 14.9215 5.93716 14.8936 6.71029 14.2207C7.48342 13.5477 7.63335 12.444 7.04654 11.7796C6.9096 11.6114 6.73912 11.4737 6.54598 11.3752C6.35284 11.2766 6.14127 11.2195 5.92482 11.2074C5.70837 11.1953 5.49179 11.2285 5.28889 11.3049C5.08598 11.3813 4.90123 11.4991 4.74642 11.651Z" fill="#FAF8FA" />
+                              <path d="M27.8717 34.3705C27.8932 35.8086 30.3432 36.0122 32.3371 35.2685C34.3309 34.5248 36.0314 33.2346 35.5303 31.8888C35.0291 30.5429 33.6734 32.4481 31.3219 33.1575C29.2874 33.7726 27.8546 33.2261 27.8717 34.3705Z" fill="#CFCFCF" />
+                              <defs>
+                                <clipPath id="clip0_57_1266">
+                                  <rect width="15.5537" height="19" fill="white" transform="translate(14 10)" />
+                                </clipPath>
+                              </defs>
+                            </svg>
+
+
+                          </a>
+                          </li>
                           <li><a href="http://">
                             {/* <img src="/assets/images/share-btn/btn-1.png" alt="" /> */}
                             <svg width="40" height="39" viewBox="0 0 40 39" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -119,16 +147,17 @@ const LandingPage = ({state,setState}) => {
                 <div className="col-lg-12">
                   <div className="bottom-wrap">
                     <div className="left-side">
-                      <Header state={state} setState={setState}/>
+                      <Header state={state} setState={setState} />
                     </div>
                     <div className="right-side">
 
                       <div className="main-screen">
-                        <section data-sec='0' className="home-section-one" id="home">
+                        <section className="home-section-one" id="home">
                           <div className="home-wrap">
                             <div className="row">
                               <div className="col-lg-6">
                                 <div className="detail">
+                                  <h2></h2>
                                   <h2>The First Web 3.0 <br /> Meme Platform</h2>
                                   <p>Create Browse. Vote. <br /> The Future of meme sharing is here.</p>
                                 </div>
@@ -151,66 +180,29 @@ const LandingPage = ({state,setState}) => {
                             <img src="assets/images/sticky.png" alt="" width={'100%'} height={'100%'} />
                           </div>
                           <div className="sec-absolute">
-                            <section className="home-section-three" id="Token">
-                              <div className="sec-image">
-                                <img className="sec-main-image" src="/assets/images/sec-3.png" alt="" />
+                            <TokenEconomics index={index} setIndex={setIndex} />
+                            <section className="home-section-four">
+                              <div className="detail">
+                                <h2>How to participate in presale?</h2>
+                                <p>If you are using mobile phone then we recommend you to use trust wallet browser.
+                                  Make sure you have 30 USDT before you start trading.
+                                  Once the presale ends you will be able to claim your tokens.</p>
                               </div>
                             </section>
                             <section className="home-section-four">
                               <div className="detail">
-                                <h2>Lorem ipsum dolor sit amet, consectetuer.</h2>
+                                <h2>Token Economy.</h2>
                                 <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy
                                   nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut
                                   wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit
                                   lobortis nisl ut aliquip.</p>
                               </div>
                             </section>
-                            <section className="home-section-four">
-                              <div className="detail">
-                                <h2>Lorem ipsum dolor sit amet, consectetuer.</h2>
-                                <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy
-                                  nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut
-                                  wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit
-                                  lobortis nisl ut aliquip.</p>
-                              </div>
-                            </section>
-                            <section className="home-section-five" id="fund">
-                              <div className="sec-image">
-                                <img className="sec-main-image" src="/assets/images/sec-3.png" alt="" />
-                              </div>
-                              <div className="message-box">
-                                <div>
-                                  <svg width="313" height="244" viewBox="0 0 293 224" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <g filter="url(#filter0_d_58_3723)">
-                                      <path d="M44.3905 203.915L252.241 186.826C255.54 186.556 258.74 185.566 261.613 183.925C264.487 182.285 266.963 180.033 268.867 177.331C270.771 174.629 272.056 171.542 272.631 168.29C273.206 165.037 273.058 161.698 272.195 158.509L248.798 72.3788C247.503 67.608 244.669 63.3957 240.734 60.3932C236.799 57.3907 231.982 55.7652 227.028 55.768L207.742 55.768L176.723 20.0344L180.782 55.768L68.644 55.768C63.6212 55.7681 58.742 57.4408 54.7799 60.521C50.8178 63.6011 47.9994 67.9125 46.7714 72.7718L20.6852 176.025C19.8208 179.492 19.7953 183.114 20.6108 186.592C21.4262 190.071 23.0592 193.306 25.375 196.031C27.6907 198.755 30.6228 200.891 33.9292 202.262C37.2356 203.633 40.8214 204.199 44.3905 203.915Z" fill="url(#paint0_linear_58_3723)" />
-                                    </g>
-                                    <defs>
-                                      <filter id="filter0_d_58_3723" x="0.0175781" y="0.0344238" width="292.957" height="223.952" filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
-                                        <feFlood floodOpacity="0" result="BackgroundImageFix" />
-                                        <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha" />
-                                        <feOffset />
-                                        <feGaussianBlur stdDeviation="10" />
-                                        <feComposite in2="hardAlpha" operator="out" />
-                                        <feColorMatrix type="matrix" values="0 0 0 0 1 0 0 0 0 0.756863 0 0 0 0 0.027451 0 0 0 0.9 0" />
-                                        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_58_3723" />
-                                        <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_58_3723" result="shape" />
-                                      </filter>
-                                      <linearGradient id="paint0_linear_58_3723" x1="257.353" y1="192.615" x2="119.287" y2="2.77215" gradientUnits="userSpaceOnUse">
-                                        <stop stopColor="#222222" />
-                                        <stop offset="1" stopColor="#444444" />
-                                      </linearGradient>
-                                    </defs>
-                                  </svg>
+                            <FundAllocation index={index} setIndex={setIndex} />
 
-                                  <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt
-                                    ut laoreet dolore magna aliquam</p>
-                                </div>
-
-                              </div>
-                            </section>
                             <Snack close={close} />
 
-                            <Team/>
+                            <Team />
 
                           </div>
 

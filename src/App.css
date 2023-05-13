@@ -288,7 +288,7 @@ p {
 }
 
 .home-section-three {
-  padding: 80px 0px;
+  padding: 0px 0px 80px 0px;
   position: relative;
   margin-top: -450px;
   /* height: 100%; */
@@ -297,7 +297,7 @@ p {
 }
 
 .home-section-five {
-  padding: 80px 0px;
+  padding: 9px 0px 49px 0px;
   position: relative;
 }
 
@@ -590,7 +590,7 @@ p {
 
 .home-section-six {
   position: relative;
-  padding: 160px 60px;
+  padding: 120px 0px;
 }
 
 .home-section-six .last-sec-wrap {
@@ -611,7 +611,7 @@ p {
 
 .home-section-seven {
   position: relative;
-  padding: 80px 0px;
+  padding: 10px 0px;
 }
 
 .home-section-seven h2 {
@@ -1980,139 +1980,5 @@ padding: 10px 0px !important;
   }
 }
 
-
-.hard-pie path:nth-child(1):hover{
-  fill: #FAAF40;
-}
-.hard-pie path:nth-child(2):hover{
-  fill: #FAAF40;
-}
-.hard-pie path:nth-child(3):hover{
-  fill: #FAAF40;
-}
-.hard-pie path:nth-child(4):hover{
-  fill: #FAAF40;
-}
-.hard-pie path:nth-child(5):hover{
-  fill: #FAAF40;
-}
-.hard-pie path:nth-child(6):hover{
-  fill: #FAAF40;
-  offset: unset;
-}
-.hard-pie path:nth-child(7):hover{
-  fill: #FAAF40;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-.hard-pie path:nth-child(1){
-  fill: #BFBFBF;
-  position: relative;
-}
-.hard-pie path:nth-child(2){
-  fill: #5F5F5F;
-  position: relative;
-}
-.hard-pie path:nth-child(3){
-  fill: #9F9F9F;
-  position: relative;
-}
-.hard-pie path:nth-child(4){
-  fill: #404040;
-  position: relative;
-}
-.hard-pie path:nth-child(5){
-  fill: #808080;
-  position: relative;
-}
-.hard-pie path:nth-child(6){
-  fill: lightgrey;
-  position: relative;
-}
-.hard-pie path:nth-child(7){
-  fill: #575757;
-  position: relative;
-}
-
-.pie-chart-wrap{
-/* position: relative; */
-/* display: inline-block; */
-/* z-index: 1; */
-}
-
-.pie-chart-wrap div{
-color: #fff;
-}
-
-.pie-chart-wrap .one {
-  position: absolute;
-  right: 18%;
-  top: 13%;
-  /* transform: rotate(-78deg); */
-  z-index: -1;
-  
-}
-
-.pie-chart-wrap .two {
-  position: absolute;
-  right: 58%;
-  top: 13%;
-  /* transform: rotate(-285deg); */
-  z-index: -1;
-  
-}
-.pie-chart-wrap .three {
-  position: absolute;
-    right: 70%;
-    top: 20%;
-    /* transform: rotate(-364deg); */
-    z-index: -1;
-    
-}
-.pie-chart-wrap .four {
-  
-  position: absolute;
-  right: 70%;
-  top: 65%;
-  /* transform: rotate(-364deg); */
-  z-index: -1;
-  
-
-}
-.pie-chart-wrap .five {
-  position: absolute;
-  right: 58%;
-  top: 80%;
-  /* transform: rotate(-364deg); */
-  z-index: -1;
-  
-}
-
-.pie-chart-wrap .six {
-  position: absolute;
-  bottom: 28%;
-  /* transform: rotate(-364deg); */
-  z-index: -1;
-  right: 7%;
-  
-}
-
-.pie-chart-wrap .seven {
-  position: absolute;
-    bottom: 60%;
-    /* transform: rotate(-364deg); */
-    z-index: -1;
-    right: 0%;
-}
 
 

@@ -8,10 +8,16 @@ import PreSales from './pages/PreSales';
 
 function App() {
 const [state,setState] = useState("home")
+const [index, setIndex] = useState(0)
   return (
     <Router>
       <Routes>
-        <Route path='/' exact element={<LandingPage state={state} setState={setState}/>} />
+        <Route path='/' exact 
+        element={<LandingPage 
+        state={state} 
+        setState={setState}
+        index={index} 
+        setIndex={setIndex}/>} />
         <Route path='*' element={<LandingPage/>} />
         <Route path='/pre-sale'  element={<PreSales/>} />
       </Routes>

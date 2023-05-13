@@ -3,7 +3,6 @@ import CardOne from '../common/CardOne'
 
 const Snack = ({close}) => {
     useEffect(() =>{
-        console.log(close + 'close data');
     })
     const [tab , setTab] = useState('');
 
@@ -264,9 +263,7 @@ const Snack = ({close}) => {
                     </div>
                 </div>
             </section>
-            {data.q2.map((x , index) =>{
-                console.log(x);
-            })}
+       
         </>
     )
 }

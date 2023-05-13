@@ -1,9 +1,8 @@
 import React from "react";
-// import { Link } from "react-router-dom";
-import { Link } from 'react-scroll';
+import { Link } from "react-router-dom";
+// import { Link } from 'react-scroll';
 
 const Header = ({ state , setState}) => {
-console.log(state,"STATE")
   return (
     <>
       <Link className={`home-icon-button ${state === 'home' ? 'active' : '' }`} onClick={()=>setState("home")}>

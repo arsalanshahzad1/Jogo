@@ -4,7 +4,6 @@ import "react-multi-carousel/lib/styles.css";
 import PieChart from './PieChart';
 
 const CardOne = ({ style , content }) => {
-    console.log(content);
     const responsive = {
         desktop: {
             breakpoint: { max: 3000, min: 1024 },
@@ -22,7 +21,6 @@ const CardOne = ({ style , content }) => {
             slidesToSlide: 1 // optional, default to 1.
         }
     };
-    console.log(style);
     return (
         <div className="detail-box" style={{ bottom: style.bottom, left: style.left }}>
             <Carousel
