@@ -74,7 +74,7 @@ const PreSales = () => {
                                                                     <img src="/assets/images/bg-frame.png" alt="" width={'100%'}/>
                                                                     <div className="detail">
                                                                         <h2>You have 0 ICO Tokens</h2>
-                                                                        <h3>View your potential returns</h3>
+                                                                        {/* <h3>View your potential returns</h3> */}
                                                                         <p className='p1'>Connected Wallet</p>
                                                                         <p className='p2'>xasdOTBASas459747asdqwr7654:x879</p>
                                                                         <div className='btn-line-one'>
