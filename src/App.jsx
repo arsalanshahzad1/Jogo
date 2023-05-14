@@ -9,6 +9,7 @@ import PreSales from './pages/PreSales';
 function App() {
 const [state,setState] = useState("home")
 const [index, setIndex] = useState(0)
+const [activeSection, setActiveSection] = useState(null);
   return (
     <Router>
       <Routes>
@@ -17,7 +18,11 @@ const [index, setIndex] = useState(0)
         state={state} 
         setState={setState}
         index={index} 
-        setIndex={setIndex}/>} />
+        setIndex={setIndex}
+        activeSection={activeSection}
+        setActiveSection={setActiveSection}
+        />
+        } />
         <Route path='*' element={<LandingPage/>} />
         <Route path='/pre-sale'  element={<PreSales/>} />
       </Routes>

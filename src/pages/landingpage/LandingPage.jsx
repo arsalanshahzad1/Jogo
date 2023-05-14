@@ -7,22 +7,47 @@ import TokenEconomics from "../TokenEconomics";
 import FundAllocation from "../FundAllocation";
 
 const LandingPage = ({ state, setState, index, setIndex }) => {
-  const [activeSection, setActiveSection] = useState('');
+
   const [close, setClose] = useState('')
 
  
 
+  // useEffect(() => {
+  //   window.scrollTo({ top: 0 });
+  //   document
+  //     .getElementById(state)
+  //     ?.scrollIntoView?.({ block: "start", behavior: "smooth" });
+
+  // }, [state]);
+
+  const [activeSection, setActiveSection] = useState('home');
+
   useEffect(() => {
     window.scrollTo({ top: 0 });
     document
-      .getElementById(state)
-      ?.scrollIntoView?.({ block: "start", behavior: "smooth" });
+       .getElementById(state)
+       ?.scrollIntoView?.({ block: "start", behavior: "smooth" });
 
-  }, [state]);
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        const sectionId = entry.target.getAttribute('id');
+        if (sectionId && entry.isIntersecting) {
+          setActiveSection(sectionId);
+          console.log(activeSection);
+        }
+      });
+    });
+
+    document.querySelectorAll('section').forEach((section) => {
+      observer.observe(section);
+    });
+
+    return () => observer.disconnect();
+  }, [state , activeSection]);
 
   return (
     <>
-      <section className="home_wrap">
+      <div className="home_wrap">
         <div className="container-fluid">
           <div className="row">
             <div className="sec-wrap">
@@ -147,7 +172,7 @@ const LandingPage = ({ state, setState, index, setIndex }) => {
                 <div className="col-lg-12">
                   <div className="bottom-wrap">
                     <div className="left-side">
-                      <Header state={state} setState={setState} />
+                      <Header state={state} setState={setState} activeSection={activeSection} setActiveSection={setActiveSection}/>
                     </div>
                     <div className="right-side">
 
@@ -172,32 +197,18 @@ const LandingPage = ({ state, setState, index, setIndex }) => {
                             <img className="image-six" src="/assets/images/section-one/sec-6.png" alt="" />
                           </div>
                         </section>
-                        <section className="home-section-two" >
+                        <div className="home-section-two">
                           <img className="play-btn" src="/assets/images/play-btn.png" alt="" />
-                        </section>
+                        </div>
                         <div className="sticky-background">
                           <div className="bg-fixed-img" onClick={() => setClose('')}>
                             <img src="assets/images/sticky.png" alt="" width={'100%'} height={'100%'} />
                           </div>
                           <div className="sec-absolute">
+                        
+                          
                             <TokenEconomics index={index} setIndex={setIndex} />
-                            <section className="home-section-four">
-                              <div className="detail">
-                                <h2>How to participate in presale?</h2>
-                                <p>If you are using mobile phone then we recommend you to use trust wallet browser.
-                                  Make sure you have 30 USDT before you start trading.
-                                  Once the presale ends you will be able to claim your tokens.</p>
-                              </div>
-                            </section>
-                            <section className="home-section-four">
-                              <div className="detail">
-                                <h2>Token Economy.</h2>
-                                <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy
-                                  nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut
-                                  wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit
-                                  lobortis nisl ut aliquip.</p>
-                              </div>
-                            </section>
+                                            
                             <FundAllocation index={index} setIndex={setIndex} />
 
                             <Snack close={close} />
@@ -225,7 +236,7 @@ const LandingPage = ({ state, setState, index, setIndex }) => {
             </div>
           </div>
         </div>
-      </section>
+      </div>
 
     </>
   );

@@ -25,7 +25,7 @@ const responsive = {
 const Team = () => {
   return (
     <>
-      <section className="home-section-six" id='team'>
+         <section className="home-section-six" id='team'>
         <div className="row">
           <Carousel
             swipeable={false}
@@ -68,7 +68,7 @@ const Team = () => {
           </Carousel>
 
         </div>
-      </section>
+        </section>
     </>
   )
 }

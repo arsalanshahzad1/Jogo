@@ -8,7 +8,7 @@ const FundAllocation = (index , setIndex) => {
         <div className="sec-image">
           <PieChart  index={index} setIndex={setIndex}/>
         </div>
-      </section>
+        </section>
 
     </>
   )
