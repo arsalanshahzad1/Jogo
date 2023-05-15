@@ -129,16 +129,47 @@ const PieChart = (index, setIndex) => {
                 {lineFive ?
                     <div className="line-five">
                         <div className="line-wrap">
-                            <span>Research partnerships 13% for </span>
+                            <span>Research partnerships 13% </span>
                         </div>
                     </div> : ''
                 }
+            
+                    <div className="line-one show-mobile">
+                        <div className="line-wrap">
+                            <span>Research and <br/> Development 31%</span>
+                        </div>
+                    </div> 
 
-                {index.index.index === 1 ? <PieChartCard content={data.section1} index={index.index.index} setIndex={index.index.setIndex} style={{ top: '60%', left: '53%' }} /> : ''}
-                {index.index.index === 2 ? <PieChartCard content={data.section2} index={index.index.index} setIndex={index.index.setIndex} style={{ top: '95%', left: '48%' }} /> : ''}
-                {index.index.index === 3 ? <PieChartCard content={data.section3} index={index.index.index} setIndex={index.index.setIndex} style={{ top: '100%', left: '42%' }} /> : ''}
-                {index.index.index === 4 ? <PieChartCard content={data.section4} index={index.index.index} setIndex={index.index.setIndex} style={{ top: '75%', left: '32%' }} /> : ''}
-                {index.index.index === 5 ? <PieChartCard content={data.section5} index={index.index.index} setIndex={index.index.setIndex} style={{ top: '50%', left: '37%' }} /> : ''}
+                    <div className="line-two show-mobile">
+                        <div className="line-wrap">
+                            <span>Marketing and <br/> Promotion 16%</span>
+                        </div>
+                    </div> 
+
+                    <div className="line-three show-mobile">
+                        <div className="line-wrap">
+                            <span>Token and <br/> Exchange listing 13%</span>
+                        </div>
+                    </div> 
+
+                    <div className="line-four show-mobile">
+                        <div className="line-wrap">
+                            <span>Expansion and <br/> Growth 26%</span>
+                        </div>
+                    </div>
+
+                    <div className="line-five show-mobile">
+                        <div className="line-wrap">
+                            <span>Research <br/> partnerships 13% </span>
+                        </div>
+                    </div> 
+                    
+
+                {index.index.index === 1 ? <PieChartCard content={data.section1} index={index.index.index} setIndex={index.index.setIndex} style={{ top: '60%', left: '55%' , width : '400px' , height : '310px' , padding : '85px 65px 40px 70px'}} /> : ''}
+                {index.index.index === 2 ? <PieChartCard content={data.section2} index={index.index.index} setIndex={index.index.setIndex} style={{ top: '90%', left: '46%' , width : '450px' , height : '310px' , padding : '95px 75px 40px 80px'}} /> : ''}
+                {index.index.index === 3 ? <PieChartCard content={data.section3} index={index.index.index} setIndex={index.index.setIndex} style={{ top: '95%', left: '33%' , width : '460px' , height : '330px' , padding : '95px 80px 40px 80px'}} /> : ''}
+                {index.index.index === 4 ? <PieChartCard content={data.section4} index={index.index.index} setIndex={index.index.setIndex} style={{ top: '65%', left: '5%' , width : '510px' , height : '310px' , padding : '105px 85px 40px 90px'}} /> : ''}
+                {index.index.index === 5 ? <PieChartCard content={data.section5} index={index.index.index} setIndex={index.index.setIndex} style={{ top: '45%', left: '22%' , width : '470px' , height : '310px' , padding : '100px 75px 40px 75px'}} /> : ''}
 
             </div>
         </>

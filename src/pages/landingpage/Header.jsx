@@ -22,7 +22,7 @@ const Header = ({ state , setState , activeSection}) => {
         <span>HOME</span>
       </Link>
 
-      <Link className={`token-icon-button ${activeSection === 'Token' ? 'active' : '' }`} onClick={()=>setState("Token")}>
+      <Link className={`token-icon-button ${activeSection === 'tokenEco' ? 'active' : '' } ${activeSection === 'tokenEnd'  ? 'active' : '' }`} onClick={()=>setState("tokenEco")}>
         {/* <img src="/assets/images/page-btn/token-btn.png" alt="" /> */}
         <svg width="74.4" height="56" viewBox="0 0 95 70" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M83.2172 7.75506C82.1316 7.03413 72.0832 0.859906 47.4273 0.710571C22.7579 0.859906 12.7197 7.05472 11.6645 7.7499C-2.67918 16.6997 1.17986 46.6284 1.33544 47.8849C2.48875 57.3033 9.63523 63.5033 23.1875 66.8247C33.9732 69.4715 45.2864 69.3531 47.4307 69.3067C47.6911 69.3067 48.2627 69.3067 49.0846 69.3067C52.805 69.3067 62.4948 69.0596 71.6875 66.8041C85.2398 63.4827 92.3862 57.2827 93.5396 47.8746C93.7087 46.6285 97.5541 16.71 83.2172 7.75506Z" fill="#BCBCBF" />

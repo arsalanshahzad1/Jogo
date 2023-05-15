@@ -55,7 +55,7 @@ const CardOne = ({ style , content }) => {
                     in the development of the AIM ecosystem.
                     </p>
                 </div> */}
-            </Carousel>;
+            </Carousel>
             
         </div>
     )

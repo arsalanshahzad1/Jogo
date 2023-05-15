@@ -21,7 +21,7 @@ const PreSales = () => {
                                         <div className="sec-right-wrap">
                                             <div className="left">
                                                 <Link to={'/'}>
-                                                <svg width="52" height="41" viewBox="0 0 52 41" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <svg width="52" height="41" viewBox="0 0 52 41" fill="none" xmlns="http://www.w3.org/2000/svg" className='pre-sale-back'>
                                                     <g clipPath="url(#clip0_275_2)">
                                                         <path d="M27.6345 40.4722C28.768 40.4737 29.8674 40.0847 30.7476 39.3706C31.6279 38.6565 32.2352 37.661 32.4674 36.5515C32.9093 34.7056 33.2357 32.834 33.4449 30.9475H44.9624C46.8346 30.9475 48.6302 30.2038 49.9541 28.8799C51.278 27.556 52.0217 25.7605 52.0217 23.8882V17.7032C52.0217 15.8309 51.278 14.0353 49.9541 12.7115C48.6302 11.3876 46.8346 10.6438 44.9624 10.6438H33.787C33.6448 8.37089 33.2977 6.11543 32.7498 3.90493C32.4838 2.8127 31.8561 1.84261 30.9688 1.15245C30.0814 0.462296 28.9867 0.092682 27.8626 0.103757C27.0842 0.108935 26.314 0.261891 25.5927 0.554477C19.0276 3.17728 11.094 8.82473 8.82413 10.4918C7.08102 11.7625 2.85087 14.9446 1.26524 16.9484C0.791564 17.5019 0.441058 18.1498 0.236961 18.8492C0.0328631 19.5486 -0.0201534 20.2833 0.0814509 21.0048C0.235768 21.9654 0.634019 22.8703 1.2381 23.633C3.46449 26.5545 9.66583 30.8172 13.1846 33.0925C17.5288 35.9271 23.0948 39.1961 25.7502 40.1192C26.3544 40.3404 26.9912 40.4596 27.6345 40.4722Z" fill="#A5A5A5" />
                                                         <mask id="mask0_275_2" style={{ maskType: 'luminance' }} maskUnits="userSpaceOnUse" x="2" y="2" width="48" height="36">
@@ -62,7 +62,7 @@ const PreSales = () => {
                                             <section className='sale-section'>
                                                 <div className="wrap">
                                                     <div className="row">
-                                                        <div className="col-lg-7">
+                                                        <div className="col-lg-7 col-md-7">
                                                         <div className="left-wrap">
                                                             <div className='detail-wrap'>
                                                                 <h2>Round 1</h2>
@@ -92,35 +92,35 @@ const PreSales = () => {
                                                             </div>
 
                                                         </div>
-                                                        <div className="col-lg-5">
+                                                        <div className="col-lg-5 col-md-5">
                                                             
                                                             <div className="right-wrap">
                                                             <img src="/assets/images/nft.png" alt=""  width={'60%'}/>
                                                             <p><span>USDT Raised </span><span>$35,509.025.20 / $38,824.697.12</span></p>
                                                             <h2>Amount raised</h2>
-                                                            <div class="loader-root">
-                                                                <div class="loader-inner" style={{ width: 'max(min(25.5rem, 100% - 0.75rem), 3.375rem)' }}>
-                                                                    <div class="loader-bar-container">
-                                                                        <div class="loader-bar" style={{ display: 'block' }}></div>
-                                                                        <div class="loader-bar" style={{ display: 'block' }}></div>
-                                                                        <div class="loader-bar" style={{ display: 'block' }}></div>
-                                                                        <div class="loader-bar" style={{ display: 'block' }}></div>
-                                                                        <div class="loader-bar" style={{ display: 'block' }}></div>
-                                                                        <div class="loader-bar" style={{ display: 'block' }}></div>
-                                                                        <div class="loader-bar" style={{ display: 'block' }}></div>
-                                                                        <div class="loader-bar" style={{ display: 'block' }}></div>
-                                                                        <div class="loader-bar" style={{ display: 'block' }}></div>
-                                                                        <div class="loader-bar" style={{ display: 'block' }}></div>
-                                                                        <div class="loader-bar" style={{ display: 'block' }}></div>
-                                                                        <div class="loader-bar" style={{ display: 'block' }}></div>
-                                                                        <div class="loader-bar last" style={{ display: 'block' }}></div>
-                                                                        <div class="loader-bar-black" style={{ display: 'block' }}></div>
-                                                                        <div class="loader-bar-black" style={{ display: 'block' }}></div>
-                                                                        <div class="loader-bar-black" style={{ display: 'block' }}></div>
-                                                                        <div class="loader-bar-black" style={{ display: 'block' }}></div>
-                                                                        <div class="loader-bar-black" style={{ display: 'block' }}></div>
-                                                                        <div class="loader-bar-black" style={{ display: 'block' }}></div> 
-                                                                        <div class="loader-bar-black" style={{ display: 'block' }}></div> 
+                                                            <div className="loader-root">
+                                                                <div className="loader-inner" style={{ width: 'max(min(25.5rem, 100% - 0.75rem), 3.375rem)' }}>
+                                                                    <div className="loader-bar-container">
+                                                                        <div className="loader-bar" style={{ display: 'block' }}></div>
+                                                                        <div className="loader-bar" style={{ display: 'block' }}></div>
+                                                                        <div className="loader-bar" style={{ display: 'block' }}></div>
+                                                                        <div className="loader-bar" style={{ display: 'block' }}></div>
+                                                                        <div className="loader-bar" style={{ display: 'block' }}></div>
+                                                                        <div className="loader-bar" style={{ display: 'block' }}></div>
+                                                                        <div className="loader-bar" style={{ display: 'block' }}></div>
+                                                                        <div className="loader-bar" style={{ display: 'block' }}></div>
+                                                                        <div className="loader-bar" style={{ display: 'block' }}></div>
+                                                                        <div className="loader-bar" style={{ display: 'block' }}></div>
+                                                                        <div className="loader-bar" style={{ display: 'block' }}></div>
+                                                                        <div className="loader-bar" style={{ display: 'block' }}></div>
+                                                                        <div className="loader-bar last" style={{ display: 'block' }}></div>
+                                                                        <div className="loader-bar-black" style={{ display: 'block' }}></div>
+                                                                        <div className="loader-bar-black" style={{ display: 'block' }}></div>
+                                                                        <div className="loader-bar-black" style={{ display: 'block' }}></div>
+                                                                        <div className="loader-bar-black" style={{ display: 'block' }}></div>
+                                                                        <div className="loader-bar-black" style={{ display: 'block' }}></div>
+                                                                        <div className="loader-bar-black" style={{ display: 'block' }}></div> 
+                                                                        <div className="loader-bar-black" style={{ display: 'block' }}></div> 
                                                                         
                                                                     </div>
                                                                 </div>

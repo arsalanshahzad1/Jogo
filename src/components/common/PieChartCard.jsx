@@ -4,8 +4,8 @@ import './Common.css'
 const PieChartCard = ( {style , index , setIndex , content}) => {
   
   return (
-    <div className="pie-chart-mgs" style={{ top: style?.top, left: style?.left }}>
-  <div className="pie-wrap">
+    <div className="pie-chart-mgs" style={{ top: style?.top, left: style?.left , width : style?.width , height : style?.height }}>
+  <div className="pie-wrap" style={{ padding : style?.padding }}>
     <img src="/assets/images/pie.png" alt="" />
     <div className="data-wrap">
       

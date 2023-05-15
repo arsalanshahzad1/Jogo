@@ -26,7 +26,7 @@ const Team = () => {
   return (
     <>
          <section className="home-section-six" id='team'>
-        <div className="row">
+
           <Carousel
             swipeable={false}
             draggable={false}
@@ -64,10 +64,14 @@ const Team = () => {
                 <img src="/assets/images/section-last/last-4.png" alt="" width={'65%'}/>
                 <p>PEPE</p>
               </div>
+              <div className="last-sec-wrap">
+                <img src="/assets/images/section-last/last-5.png" alt="" width={'65%'}/>
+                <p>Shiba Ai</p>
+              </div>
           
           </Carousel>
 
-        </div>
+
         </section>
     </>
   )
