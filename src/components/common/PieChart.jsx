@@ -53,9 +53,6 @@ const PieChart = (index, setIndex) => {
     return (
         <>
             <div className="pirchart" style={{ position: 'relative' }}>
-
-
-
                 <div className="chartwrap">
 
                     <div className="part-one"

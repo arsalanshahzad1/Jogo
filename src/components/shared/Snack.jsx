@@ -13,7 +13,7 @@ const Snack = ({close}) => {
     const data = {
         q2 : [
             {
-                heading : 'Lauch of the Myme coin.',
+                heading : 'Lauch of AIM coin.',
                 desc : 'The Q2 launch of the AI Meme Coin project with pre-selling of AIM tokens through a 5-stage process is the first major milestone in the development of the AIM ecosystem.'
 
             } ,

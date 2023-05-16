@@ -7,17 +7,20 @@ const responsive = {
   desktop: {
     breakpoint: { max: 3000, min: 1024 },
     items: 3,
-    slidesToSlide: 1 // optional, default to 1.
+    slidesToSlide: 1,
+    partialVisibilityGutter: 40,
   },
   tablet: {
     breakpoint: { max: 1024, min: 464 },
     items: 2,
-    slidesToSlide: 1 // optional, default to 1.
+    slidesToSlide: 1,
+    partialVisibilityGutter: 40,
   },
   mobile: {
     breakpoint: { max: 464, min: 0 },
     items: 1,
-    slidesToSlide: 1 // optional, default to 1.
+    slidesToSlide: 1,
+    partialVisibilityGutter: 40,
   }
 };
 
@@ -39,7 +42,7 @@ const Team = () => {
             autoPlaySpeed={3000}
             keyBoardControl={true}
             customTransition="all .5"
-            transitionDuration={500}
+            transitionDuration={200}
           >
             
               <div className="last-sec-wrap">
@@ -61,11 +64,11 @@ const Team = () => {
           
             
               <div className="last-sec-wrap">
-                <img src="/assets/images/section-last/last-4.png" alt="" width={'65%'}/>
+                <img src="/assets/images/section-last/last-4.png" alt=""/>
                 <p>PEPE</p>
               </div>
               <div className="last-sec-wrap">
-                <img src="/assets/images/section-last/last-5.png" alt="" width={'65%'}/>
+                <img src="/assets/images/section-last/last-5.png" alt=""/>
                 <p>Shiba Ai</p>
               </div>
           

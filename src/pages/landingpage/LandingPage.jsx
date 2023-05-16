@@ -88,9 +88,9 @@ const LandingPage = ({ state, setState, index, setIndex }) => {
                           <div className="home-wrap">
                             <div className="row">
                               <div className="col-lg-6">
+                                  <h2 className="first-sec-title">Join the AI meme revolution<br/>with AIM! </h2>
                                 <div className="detail">
-                                  {/* <h2>The First Web 3.0 <br /> Meme Platform</h2> */}
-                                  <p>Join the AI meme revolution with AIM that blends the power of AI with the humor of memes, providing a new and innovative way for users to interact with this exciting technology. AIM is poised to become a leader in this space. Don't miss out on the opportunity to be a part of this game-changing platform!</p>
+                                  <p>It blends the power of AI with the humor of memes, providing a new and innovative way for users to interact with this exciting technology. AIM is poised to become a leader in this space. Don't miss out on the opportunity to be a part of this game-changing platform!</p>
                                   {/* <p>Create Browse. Vote. <br /> The Future of meme sharing is here.</p> */}
                                 </div>
                               </div>
