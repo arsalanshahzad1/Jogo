@@ -2,6 +2,7 @@ import React from 'react'
 import FirstPieChart from './mobileContent/FirstPieChart'
 import SecondPieChart from './mobileContent/SecondPieChart'
 import Team from './Team'
+import MobileRoadmap from './mobileContent/MobileRoadmap'
 
 const MobileLayout = () => {
     return (
@@ -12,9 +13,11 @@ const MobileLayout = () => {
                     <div className="row">
                         <div className="col-lg-6">
                             <div className="detail">
-                                <h2></h2>
-                                <h2>The First Web 3.0 <br /> Meme Platform</h2>
-                                <p>Create Browse. Vote. <br /> The Future of meme sharing is here.</p>
+                                <p>Join the AI meme revolution with AIM that blends the power of AI
+                                    with the humor of memes, providing a new and innovative way for
+                                    users to interact with this exciting technology. AIM is poised to
+                                    become a leader in this space. Don't miss out on the opportunity
+                                    to be a part of this game-changing platform!</p>
                             </div>
                         </div>
                         <div className="col-lg-6"></div>
@@ -30,26 +33,47 @@ const MobileLayout = () => {
             <section className="home-section-two">
                 <img className="play-btn" src="/assets/images/play-btn.png" alt="" />
             </section>
-            <FirstPieChart/>
+            <section className="titleOfSection">
+                <h2>Token Economics</h2>
+            </section>
+
+            <FirstPieChart />
             <div className="home-section-four">
-        <div className="detail">
-          <h2>How to participate in presale?</h2>
-          <p>If you are using mobile phone then we recommend you to use trust wallet browser.
-            Make sure you have 30 USDT before you start trading.
-            Once the presale ends you will be able to claim your tokens.</p>
-        </div>
-      </div>
-      <div className="home-section-four">
-        <div className="detail">
-          <h2>Token Economy.</h2>
-          <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy
-            nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut
-            wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit
-            lobortis nisl ut aliquip.</p>
-        </div>
-      </div>
-            <SecondPieChart/>
-            <Team/>
+                <div className="detail">
+                    <h2>How to participate in presale?</h2>
+                    <p>1. Connect Wallet <br />2. Select Either to buy with ETH or USDT<br />
+                        Note : If you are using mobile phone then we recommend you to use trust wallet browser.
+                        Make sure you have 30 USDT before you start trading.
+                        Once the presale ends you will be able to claim your tokens</p>
+                </div>
+            </div>
+            <div className="home-section-four">
+                <div className="detail">
+                    <h2>Token Economy.</h2>
+                    <p>Deflationary Mechanism:
+                        The deflationary mechanism involves burning tokens used to purchase AI NFTs, accessories, and
+                        other utilities in the virtual world of meme AIs.<br /><br/>
+                        Governance:
+                        AIM will be using a decentralized autonomous
+                        organization (DAO) model for governance. The DAO
+                        will be composed of token holders who will have the
+                        power to propose, vote, and execute changes within
+                        the project ecosystem</p>
+                </div>
+            </div>
+            <section className="titleOfSection">
+                <h2>Fund Allocation</h2>
+            </section>
+            <SecondPieChart />
+            <section className="titleOfSection">
+                <h2>Roadmap</h2>
+            </section>
+            <MobileRoadmap />
+            <section className="titleOfSection">
+                <h2>Teams</h2>
+            </section>
+
+            <Team />
         </div>
     )
 }

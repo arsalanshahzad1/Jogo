@@ -147,24 +147,24 @@ const Snack = ({close}) => {
                             <p className="p1">2023</p>
                             </>
                             } 
-                            {tab === 'q2' ? <CardOne content={data.q2} style={{bottom : '-300px' , left : '60px'}}/> : ''}
+                            {tab === 'q2' ? <CardOne content={data.q2} style={{bottom : '-285px' , left : '-120px'}}/> : ''}
                         </div>
 
 
                         <div className="q3" onClick={() =>{setTab('q3')}}> 
 
-                        {tab === 'q4' || tab === 'q5' || tab === 'q6' || tab === 'q12'  ? '' : 
+                        {tab === 'q4' || tab === 'q5' || tab === 'q12'  ? '' : 
                             <>
                             <div className='count'> Q3</div>
                             </>
                             } 
 
-                            {tab === 'q3' ? <CardOne content={data.q3} style={{bottom : '-300px' , left : '70px'}}/> : ''}
+                            {tab === 'q3' ? <CardOne content={data.q3} style={{bottom : '-315px' , left : '-130px'}}/> : ''}
                         </div>
 
 
                         <div className="q4" onClick={() =>{setTab('q4')}}> 
-                        { tab === 'q5' || tab === 'q8' || tab === 'q6' || tab === 'q7' || tab === 'q12' || tab === 'q11' || tab === 'q10'   ? '' : 
+                        { tab === 'q5' || tab === 'q8' || tab === 'q7' || tab === 'q12' || tab === 'q11' || tab === 'q10'   ? '' : 
                             <>
                              <div className='count'> Q4</div>
                             </>
@@ -195,7 +195,7 @@ const Snack = ({close}) => {
                             </>
                             } 
                            
-                            {tab === 'q6' ? <CardOne content={data.q6} style={{bottom : '-205px' , left : '-345px'}}/> : ''}
+                            {tab === 'q6' ? <CardOne content={data.q6} style={{bottom : '-215px' , left : '-345px'}}/> : ''}
                         </div>
 
 
@@ -238,7 +238,7 @@ const Snack = ({close}) => {
 
 
                         <div className="q10" onClick={() =>{setTab('q10')}}>
-                        {  tab === 'q11' || tab === 'q9'   ? '' : 
+                        {  tab === 'q11' || tab === 'q9' || tab === 'q8'   ? '' : 
                             <>
                                 <div className='count'> Q2</div>
                             </>
