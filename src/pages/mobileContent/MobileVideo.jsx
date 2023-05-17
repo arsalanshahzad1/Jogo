@@ -15,7 +15,7 @@ const MobileVideo = () => {
     //   height: '200',
       // width: '640',
       playerVars: {
-          autoplay: 1,
+          // autoplay: 1,
       },
     };
       return (

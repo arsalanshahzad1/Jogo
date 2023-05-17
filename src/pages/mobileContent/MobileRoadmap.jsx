@@ -144,7 +144,8 @@ const MobileRoadmap = () => {
   
     return (
         <div className="roadmap-section-mobile">
-            <h2 className='map-sec-title'>Q2 2023</h2>
+            <h2 className='map-sec-title' style={{border : 'none'}}>2023</h2>
+            <h2 className='map-sec-title'>Q2</h2>
             <div>
             <Carousel showDots={false} responsive={responsive} infinite={false} autoPlaySpeed={1000} transitionDuration={500}>
                 {data.q2.map((e, index) => {
@@ -176,7 +177,8 @@ const MobileRoadmap = () => {
                         </div>)
                 })}
             </Carousel>
-            <h2 className='map-sec-title'>Q1 2024</h2>
+            <h2 className='map-sec-title' style={{border : 'none'}}>2024</h2>
+            <h2 className='map-sec-title'>Q1</h2>
             <Carousel showDots={false} responsive={responsive} infinite={false} autoPlaySpeed={1000} transitionDuration={500}>
                 {data.q5.map((e, index) => {
                     return (
@@ -216,7 +218,8 @@ const MobileRoadmap = () => {
                         </div>)
                 })}
             </Carousel>
-            <h2 className='map-sec-title'>Q1 2025</h2>
+            <h2 className='map-sec-title' style={{border : 'none'}}>2025</h2>
+            <h2 className='map-sec-title'>Q1</h2>
             <Carousel showDots={false} responsive={responsive} infinite={false} autoPlaySpeed={1000} transitionDuration={500}>
                 {data.q9.map((e, index) => {
                     return (

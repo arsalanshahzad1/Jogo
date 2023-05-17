@@ -111,8 +111,6 @@ const Header = ({ state , setState , activeSection}) => {
             </clipPath>
           </defs>
         </svg>
-
-        <span>TEAM</span>
       </Link>
 
     </>

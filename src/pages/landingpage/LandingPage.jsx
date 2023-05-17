@@ -14,10 +14,13 @@ import Circles from "../../components/svg/Circles";
 import MobileLayout from "../MobileLayout";
 import Telegram from "../../components/svg/Telegram";
 import Video from "../../components/shared/Video";
+import { useLocation, useParams } from 'react-router-dom';
 
 const LandingPage = ({ state, setState, index, setIndex }) => {
 
   const [close, setClose] = useState('')
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
 
 
   const openPdfInNewTab = () => {
@@ -26,7 +29,14 @@ const LandingPage = ({ state, setState, index, setIndex }) => {
 
   const [activeSection, setActiveSection] = useState('home');
 
+  const [query, setQuery] = useState(searchParams.get('section'));
+
+
   useEffect(() => {
+   if(query)
+   {
+    setState(query)
+   }
     window.scrollTo({ top: 0 });
     document
       .getElementById(state)
@@ -48,7 +58,9 @@ const LandingPage = ({ state, setState, index, setIndex }) => {
     });
 
     return () => observer.disconnect();
-  }, [state]);
+  }, [state,query]);
+
+
 
   return (
     <>
@@ -59,12 +71,24 @@ const LandingPage = ({ state, setState, index, setIndex }) => {
               <div className="row">
                 <div className="col-lg-12">
                   <div className="top-bar">
-                    <div className="sec-left-wrap"></div>
-                    <div className="sec-right-wrap">
-                      <div className="left"><Wallet classes={"wallet-btn"} /></div>
+                    <div className="sec-left-wrap "></div>
+                    <div className="sec-right-wrap hide-on-mobile">
+                      <div className="left hide"><Wallet classes={"wallet-btn"} /></div>
                       <div className="right">
                         <Link to={'/pre-sale'}><Presale classes={"sale-btn"} /></Link>
                         <ul className="social-icons">
+                          <li><Link onClick={openPdfInNewTab}> <Doc /></Link></li>
+                          <li><a href="https://twitter.com/JogoAimeme" target="_blank" ><Twiitter /></a></li>
+                          <li><a href="https://t.me/JogoAimeme" target="_blank" ><Telegram /></a> </li>
+                        </ul>
+                      </div>
+                    </div>
+                    <div className="sec-right-wrap mobile-icon-links">
+                      <div style={{display : 'flex' , justifyContent : 'space-between'}}>
+                      <div className="left hide"> <Link to={'/pre-sale'}><Presale classes={"sale-btn"} /></Link></div>
+                      <div className="right">
+                      </div>
+                        <ul className="social-icons" style={{display: 'flex', listStyle: 'none' , gap: '15px'}}>
                           <li><Link onClick={openPdfInNewTab}> <Doc /></Link></li>
                           <li><a href="https://twitter.com/JogoAimeme" target="_blank" ><Twiitter /></a></li>
                           <li><a href="https://t.me/JogoAimeme" target="_blank" ><Telegram /></a> </li>
@@ -100,7 +124,7 @@ const LandingPage = ({ state, setState, index, setIndex }) => {
                             <img className="image-six" src="/assets/images/section-one/sec-6.png" alt="" />
                           </div>
                         </section>
-                       <Video/>
+                        <Video />
                         <div className="sticky-background">
                           <div className="bg-fixed-img" onClick={() => setClose('')}>
                             <img src="assets/images/sticky.png" alt="" width={'100%'} height={'100%'} />

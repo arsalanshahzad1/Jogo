@@ -14,30 +14,28 @@ const Video = () => {
     // height: '100%',
     // width: '640',
     playerVars: {
-        autoplay: 1,
+        // autoplay: 1,
     },
   };
     return (
         <div className="home-section-two desktop">
-             {!showVideo && (
-        // <button onClick={onPlayButtonClick}>Play Video</button>
-        <img className="play-btn" src="/assets/images/play-btn.png" alt="" onClick={onPlayButtonClick}/>
-      )}
-            {/* <img className="play-btn" src="/assets/images/play-btn.png" alt="" /> */}
-            <div>
-      {/* {!showVideo && (
+             {/* {!showVideo && (
         <button onClick={onPlayButtonClick}>Play Video</button>
+        <img className="play-btn" src="/assets/images/play-btn.png" alt="" onClick={onPlayButtonClick}/>
       )} */}
+          
+            <div>
+   
 
-      {showVideo && (
+      {/* {showVideo && ( */}
         <div style={{position : 'relative' , zIndex : '1'}}>
           <YouTube
             videoId="KcnPa-hIMSw"
             opts={videoOpts}
-            onEnd={onVideoEnd}
+            // onEnd={onVideoEnd}
           />
         </div>
-      )}
+      {/* )} */}
     </div>
         </div>
     )

@@ -23,8 +23,9 @@ const [activeSection, setActiveSection] = useState(null);
         setActiveSection={setActiveSection}
         />
         } />
-        <Route path='*' element={<LandingPage/>} />
         <Route path='/pre-sale'  element={<PreSales/>} />
+      
+        <Route path='*' element={<LandingPage/>} />
       </Routes>
     </Router>
 
