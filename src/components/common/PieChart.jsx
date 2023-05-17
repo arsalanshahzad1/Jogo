@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import ApexCharts from 'react-apexcharts';
 import PieChartCard from './PieChartCard';
 import './Common.css'
 

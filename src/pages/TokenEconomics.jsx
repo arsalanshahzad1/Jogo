@@ -14,7 +14,10 @@ const TokenEconomics = (index, setIndex) => {
         <div className="home-section-four">
           <div className="detail">
             <h2>How to participate in presale?</h2>
-            <p><span style={{color : '#ffc107'}}> 1. Connect Wallet</span> <br /><span style={{color : '#ffc107'}}> 2. Select Either to buy with ETH or USDT</span><br />
+            <p>
+              <span style={{display : 'inline-block' , textAlign : 'left' , paddingBlock : '10px'}}>
+                <span> 1. Connect Wallet</span>
+                <br/><span>2. Select Either to buy with ETH or USDT</span></span><br />
             Note : If you are using mobile phone then we recommend you to use trust wallet browser.
               Make sure you have 30 USDT before you start trading.
               Once the presale ends you will be able to claim your tokens</p>
@@ -22,28 +25,28 @@ const TokenEconomics = (index, setIndex) => {
           <div className="round-section">
            <div className='wrap active'>
             <h2>Stage 1</h2>
-            <p>100,000,000 <br/> Aim <br/> x 0.005</p>
-            <h2>=$5,000,000</h2>
+            <p>100,000,000 <br/> AIM <br/> x 0.005</p>
+            <h2>=$500,000</h2>
            </div>
            <div className='wrap'>
             <h2>Stage 2</h2>
-            <p>100,000,000 Aim x 0.005</p>
-            <h2>=$5,000,000</h2>
+            <p>100,000,000 <br/> AIM <br/> x 0.01</p>
+            <h2>=$1,000,000</h2>
            </div>
            <div className='wrap'>
             <h2>Stage 3</h2>
-            <p>100,000,000 Aim x 0.005</p>
-            <h2>=$5,000,000</h2>
+            <p>100,000,000 <br/> AIM <br/> x 0.02</p>
+            <h2>=$2,000,000</h2>
            </div>
            <div className='wrap'>
             <h2>Stage 4</h2>
-            <p>100,000,000 Aim x 0.005</p>
-            <h2>=$5,000,000</h2>
+            <p>100,000,000 <br/> AIM <br/> x 0.04</p>
+            <h2>=$4,000,000</h2>
            </div>
            <div className='wrap'>
             <h2>Stage 5</h2>
-            <p>100,000,000 Aim x 0.005</p>
-            <h2>=$5,000,000</h2>
+            <p>100,000,000 <br/> AIM <br/> x 0.08</p>
+            <h2>=$8,000,000</h2>
            </div>
           </div>
         </div>

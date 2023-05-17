@@ -42,7 +42,7 @@ const Team = () => {
             autoPlaySpeed={3000}
             keyBoardControl={true}
             customTransition="all .5"
-            transitionDuration={200}
+            transitionDuration={1000}
           >
             
               <div className="last-sec-wrap">

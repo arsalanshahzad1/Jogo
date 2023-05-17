@@ -12,20 +12,17 @@ import Discord from "../../components/svg/Discord";
 import Twiitter from "../../components/svg/Twiitter";
 import Circles from "../../components/svg/Circles";
 import MobileLayout from "../MobileLayout";
+import Telegram from "../../components/svg/Telegram";
+import Video from "../../components/shared/Video";
 
 const LandingPage = ({ state, setState, index, setIndex }) => {
 
   const [close, setClose] = useState('')
 
 
-
-  // useEffect(() => {
-  //   window.scrollTo({ top: 0 });
-  //   document
-  //     .getElementById(state)
-  //     ?.scrollIntoView?.({ block: "start", behavior: "smooth" });
-
-  // }, [state]);
+  const openPdfInNewTab = () => {
+    window.open('/assets/docs/Jogo-Media-whitepaper.pdf', '_blank');
+  }
 
   const [activeSection, setActiveSection] = useState('home');
 
@@ -64,14 +61,13 @@ const LandingPage = ({ state, setState, index, setIndex }) => {
                   <div className="top-bar">
                     <div className="sec-left-wrap"></div>
                     <div className="sec-right-wrap">
-                      <div className="left"><Wallet classes={"wallet-btn"}/></div>
+                      <div className="left"><Wallet classes={"wallet-btn"} /></div>
                       <div className="right">
-                        <Link to={'/pre-sale'}><Presale classes={"sale-btn"}/></Link>
+                        <Link to={'/pre-sale'}><Presale classes={"sale-btn"} /></Link>
                         <ul className="social-icons">
-                          <li><Doc/></li>
-                          <li> <Twiitter/></li>
-                          <li><Discord/> </li>
-                          <li><Circles/></li>
+                          <li><Link onClick={openPdfInNewTab}> <Doc /></Link></li>
+                          <li><a href="https://twitter.com/JogoAimeme" target="_blank" ><Twiitter /></a></li>
+                          <li><a href="https://t.me/JogoAimeme" target="_blank" ><Telegram /></a> </li>
                         </ul>
                       </div>
                     </div>
@@ -88,7 +84,7 @@ const LandingPage = ({ state, setState, index, setIndex }) => {
                           <div className="home-wrap">
                             <div className="row">
                               <div className="col-lg-6">
-                                  <h2 className="first-sec-title">Join the AI meme revolution<br/>with AIM! </h2>
+                                <h2 className="first-sec-title">Join the AI meme revolution<br />with AIM! </h2>
                                 <div className="detail">
                                   <p>It blends the power of AI with the humor of memes, providing a new and innovative way for users to interact with this exciting technology. AIM is poised to become a leader in this space. Don't miss out on the opportunity to be a part of this game-changing platform!</p>
                                   {/* <p>Create Browse. Vote. <br /> The Future of meme sharing is here.</p> */}
@@ -104,16 +100,14 @@ const LandingPage = ({ state, setState, index, setIndex }) => {
                             <img className="image-six" src="/assets/images/section-one/sec-6.png" alt="" />
                           </div>
                         </section>
-                        <div className="home-section-two">
-                          <img className="play-btn" src="/assets/images/play-btn.png" alt="" />
-                        </div>
+                       <Video/>
                         <div className="sticky-background">
                           <div className="bg-fixed-img" onClick={() => setClose('')}>
                             <img src="assets/images/sticky.png" alt="" width={'100%'} height={'100%'} />
                           </div>
                           <div className="sec-absolute">
 
-                            <TokenEconomics index={index} setIndex={setIndex} id='token'/>
+                            <TokenEconomics index={index} setIndex={setIndex} id='token' />
 
                             <FundAllocation index={index} setIndex={setIndex} />
 
@@ -130,7 +124,7 @@ const LandingPage = ({ state, setState, index, setIndex }) => {
                   </div>
 
                 </div>
-                <MobileLayout/>
+                <MobileLayout />
               </div>
 
 
