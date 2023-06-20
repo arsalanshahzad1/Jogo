@@ -3,10 +3,10 @@ import PieChartCard from './PieChartCard'
 
 const PirChartTwo = (index, setIndex) => {
     // const [index, setIndex] = useState(0)
-    const [lineOne, setLineOne] = useState(false)
-    const [lineTwo, setLineTwo] = useState(false)
-    const [lineThree, setLineThree] = useState(false)
-    const [lineFour, setLineFour] = useState(false)
+    const [lineOne, setLineOne] = useState(true)
+    const [lineTwo, setLineTwo] = useState(true)
+    const [lineThree, setLineThree] = useState(true)
+    const [lineFour, setLineFour] = useState(true)
 
     const data = {
 
@@ -49,25 +49,25 @@ const PirChartTwo = (index, setIndex) => {
             <div className="chartwrap">
 
                 <div className="part-one"
-                    onMouseEnter={() => setLineOne(true)}
-                    onMouseLeave={() => setLineOne(false)}
+                    // onMouseEnter={() => setLineOne(true)}
+                    // onMouseLeave={() => setLineOne(false)}
                     onClick={() => index.index.setIndex(1)}></div>
 
                 <div className="part-two"
-                    onMouseEnter={() => setLineTwo(true)}
-                    onMouseLeave={() => setLineTwo(false)}
+                    // onMouseEnter={() => setLineTwo(true)}
+                    // onMouseLeave={() => setLineTwo(false)}
                     onClick={() => index.index.setIndex(2)}
                 ></div>
 
                 <div className="part-three"
-                    onMouseEnter={() => setLineThree(true)}
-                    onMouseLeave={() => setLineThree(false)}
+                    // onMouseEnter={() => setLineThree(true)}
+                    // onMouseLeave={() => setLineThree(false)}
                     onClick={() => index.index.setIndex(3)}
                 ></div>
 
                 <div className="part-four"
-                    onMouseEnter={() => setLineFour(true)}
-                    onMouseLeave={() => setLineFour(false)}
+                    // onMouseEnter={() => setLineFour(true)}
+                    // onMouseLeave={() => setLineFour(false)}
                     onClick={() => index.index.setIndex(4)}
                 ></div>
 

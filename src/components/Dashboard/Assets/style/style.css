@@ -1,0 +1,375 @@
+:root {
+    --yellow: #FFC107;
+    --orange: #FF6347;
+    --white: #FFFFFF;
+    --grey: #272727;
+}
+
+
+
+
+@font-face {
+    font-family: 'heading';
+    src: url('../font/olive_mn_bold.ttf');
+}
+
+@font-face {
+    font-family: 'content';
+    src: url('../font/TodaySansNowPro-Regular.ttf');
+}
+
+@font-face {
+    font-family: 'subheading';
+    src: url('../font/Blacker\ Sans\ Text\ Medium.ttf');
+}
+
+
+* {
+    font-family: 'heading', sans-serif;
+    color: white;
+}
+
+.MainApp {
+    width: 100%;
+    min-height: 100vh;
+    max-height: 100%;
+    display: flex;
+}
+
+.SidebarMain {
+    flex: 20%;
+    /* height: 100vh; */
+    background-color: var(--grey);
+    padding: 4px;
+    z-index: 9999;
+
+
+}
+
+.SidebarResponsive {
+    flex: 0% 0;
+}
+
+.dashboardResponsive {
+    flex: 95%;
+}
+
+.hide {
+    display: none !important;
+}
+
+.DashboardCollapseBtnDiv {
+    display: flex;
+    justify-content: end;
+    padding: 10px;
+}
+
+.SidebarMain-inner {
+    margin: 100px auto !important;
+    width: 100%;
+}
+
+.AvatarHolder {
+    width: 130px;
+    height: auto;
+    margin-inline: auto;
+
+}
+
+.AvatarHolder img {
+    width: 100%;
+
+
+}
+
+.UserName {
+    font-size: 18px;
+    font-weight: 400;
+    text-align: center;
+    color: #FFC107;
+    font-family: 'heading' !important;
+}
+
+.SidebarMain-inner-2 {
+    margin-top: 50px;
+}
+
+.SidebarMain-inner-2-items {
+    text-align: center;
+    font-size: 26px;
+    font-weight: 400;
+    color: white;
+    padding-bottom: 10px;
+    border-bottom: #484848 1px solid;
+    margin: 10px 0px;
+    font-family: 'heading' !important;
+}
+
+.activelink p {
+    color: #FF6347 !important ;
+}
+
+.DashboardMain {
+
+    flex: 80%;
+    overflow-y: auto;
+    height: 100vh;
+    background-image: url("../images/background.png");
+    background-size: cover;
+    /* Adjust as needed */
+    background-position: center;
+    /* Adjust as needed */
+    align-items: center;
+    justify-content: center;
+
+}
+
+.DashboardMain {
+    /* Other styles for the div */
+    overflow: auto;
+    /* Enable scrolling */
+    scrollbar-width: thin;
+    /* Specify the width of the scrollbar */
+    scrollbar-color: #333333 #dddddd;
+    /* Specify the color of the scrollbar */
+}
+
+/* Track */
+.DashboardMain::-webkit-scrollbar {
+    width: 4px;
+    /* Specify the width of the scrollbar */
+}
+
+/* Handle */
+.DashboardMain::-webkit-scrollbar-thumb {
+    background-color: #FFC107;
+    /* Specify the color of the scrollbar thumb */
+    border-radius: 2px;
+    /* Specify the border radius of the scrollbar thumb */
+}
+
+/* Handle on hover */
+.DashboardMain::-webkit-scrollbar-thumb:hover {
+    background-color: #555555;
+    /* Specify the color of the scrollbar thumb on hover */
+}
+
+/* Track background */
+.DashboardMain::-webkit-scrollbar-track {
+    background-color: white;
+    /* Specify the color of the scrollbar track */
+}
+
+/* Track background on hover */
+.DashboardMain::-webkit-scrollbar-track:hover {
+    background-color: #eeeeee;
+    /* Specify the color of the scrollbar track on hover */
+}
+
+
+.DashboardInner {
+    padding: 4%;
+
+}
+
+.DashboardMainHeading {
+    font-size: 40px;
+    color: white;
+    padding-left: 5px;
+    font-family: 'heading';
+}
+
+.DashboardContentHolder {
+    padding: 10px 0;
+    border-radius: 25px;
+    background-color: #272727;
+    background-image: url('../images/DashboardBackgroundDiv.png');
+    background-size: cover;
+    background-position: center;
+    height: 100%;
+    width: 100%;
+    margin-top: 20px;
+}
+.ChangeroundButton {
+    gap: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: end;
+  }
+
+.ComponentHolder {
+    margin: 20px;
+}
+
+.NoStyle {
+    text-decoration: none;
+}
+
+.ButtonDropDown {
+    text-align: center;
+    border: 3px #FF6347 solid;
+    width: max-content;
+    padding: 10px 15px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'heading';
+
+}
+
+.D-one-holder {
+    display: flex;
+    align-items: center;
+    margin-top: 4%;
+    flex-wrap: wrap;
+}
+
+
+.D-one-holder-inner-1 {
+    display: flex;
+    flex: 1;
+    flex-wrap: wrap;
+    justify-content: left;
+}
+
+.D-one-holder-inner-2 {
+    display: flex;
+    align-items: center;
+    flex: 1;
+    justify-content: center;
+
+}
+
+.CardsForData {
+    padding: 10px;
+    border: grey 3px solid;
+    border-radius: 10px;
+    margin: 10px;
+
+}
+
+.Card-text-one {
+    font-size: 18px;
+    font-weight: 400;
+    margin: 0;
+}
+
+.Card-text-two {
+    font-size: 32px;
+    font-weight: 400;
+    margin: 0;
+
+}
+
+.DropHolder {
+    position: relative;
+    z-index: 100;
+}
+
+.dropdowndiv {
+    position: absolute;
+    top: 45px;
+    left: -2px;
+    background-color: #FF6347;
+    padding: 10px 30px;
+    justify-content: center;
+    text-align: center;
+    width: max-content;
+    border-radius: 10px;
+}
+
+.hideDropdown {
+    display: none;
+}
+
+.dropdowndiv p {
+    margin: 5px 0;
+    text-align: center;
+    font-size: 18px;
+    font-family: 'heading';
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.dropdowndiv p:hover {
+    color: white;
+    cursor: pointer;
+}
+
+.borderyellow {
+    border-color: #FFC107 !important;
+}
+
+.width225 {
+    width: 270px !important;
+}
+
+@media(max-width:1024px) {
+    .MainApp {
+        height: 100vh;
+    }
+}
+
+
+.divForChart2 {
+    border-radius: 10px;
+    border: 3px solid #FFC107;
+    width: 100%;
+    margin-inline: auto;
+    padding-top: 2%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.Font-24 {
+    font-size: 24px;
+}
+
+.Chart2-title-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 90%;
+    flex-wrap: wrap;
+
+}
+
+.chart-container {
+    width: 75%;
+}
+
+@media(max-width:767px) {
+    .SidebarMain {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100vh;
+        padding-inline: 10px;
+
+        box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.603);
+    }
+
+    .DashboardMain {
+        margin-left: 50px;
+        flex: 100%;
+        /* Adjust the height as needed */
+
+        /* Enable vertical scrolling */
+    }
+}
+
+@media(max-width:526px) {
+    .DropHolder {
+        margin-top: 10px;
+    }
+
+    .chart-container {
+        width: 100%;
+    }
+
+    .SidebarMain {
+        padding: 0px 4px 0 4px !important;
+    }
+}

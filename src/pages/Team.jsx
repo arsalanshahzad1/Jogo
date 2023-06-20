@@ -28,54 +28,60 @@ const responsive = {
 const Team = () => {
   return (
     <>
-         <section className="home-section-six" id='team'>
+      <section className="home-section-six" id='team'>
 
-          <Carousel
-            swipeable={false}
-            draggable={false}
-            showDots={false}
-            arrows={false}
-            responsive={responsive}
-            ssr={true} // means to render carousel on server-side.
-            infinite={true}
-            autoPlay={true}
-            autoPlaySpeed={3000}
-            keyBoardControl={true}
-            customTransition="all .5"
-            transitionDuration={1000}
-          >
-            
-              <div className="last-sec-wrap">
-                <img src="/assets/images/section-last/last-1.png" alt="" />
-                <p>APE</p>
-              </div>
-          
-            
-              <div className="last-sec-wrap">
-                <img src="/assets/images/section-last/last-2.png" alt="" />
-                <p>BIG EYE</p>
-              </div>
-            
-            
-              <div className="last-sec-wrap">
-                <img src="/assets/images/section-last/last-3.png" alt="" />
-                <p>ELON</p>
-              </div>
-          
-            
-              <div className="last-sec-wrap">
-                <img src="/assets/images/section-last/last-4.png" alt=""/>
-                <p>PEPE</p>
-              </div>
-              <div className="last-sec-wrap">
-                <img src="/assets/images/section-last/last-5.png" alt=""/>
-                <p>Shiba Ai</p>
-              </div>
-          
-          </Carousel>
+        <Carousel
+          swipeable={false}
+          draggable={false}
+          showDots={false}
+          arrows={false}
+          responsive={responsive}
+          ssr={true} // means to render carousel on server-side.
+          infinite={true}
+          autoPlay={true}
+          autoPlaySpeed={3000}
+          keyBoardControl={true}
+          customTransition="all .5"
+          transitionDuration={1000}
+        >
+
+          <div className="last-sec-wrap">
+            <img src="/assets/images/Chingiz.png" alt="" />
+            <p>Chingiz Ianda</p>
+          </div>
 
 
-        </section>
+          <div className="last-sec-wrap">
+            <img src="/assets/images/section-last/last-1.png" alt="" />
+            <p>APE</p>
+          </div>
+
+
+          <div className="last-sec-wrap">
+            <img src="/assets/images/section-last/last-2.png" alt="" />
+            <p>BIG EYE</p>
+          </div>
+
+
+          <div className="last-sec-wrap">
+            <img src="/assets/images/section-last/last-3.png" alt="" />
+            <p>ELON</p>
+          </div>
+
+
+          <div className="last-sec-wrap">
+            <img src="/assets/images/section-last/last-4.png" alt="" />
+            <p>PEPE</p>
+          </div>
+          <div className="last-sec-wrap">
+            <img src="/assets/images/section-last/last-5.png" alt="" />
+            <p>Shiba Ai</p>
+          </div>
+
+        </Carousel>
+
+
+      </section>
     </>
   )
 }

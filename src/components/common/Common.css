@@ -1,3 +1,18 @@
+@font-face {
+  font-family: 'heading';
+  src: url('../../assets/fonts/ravenna-bold/ravenna.ttf');
+}
+
+@font-face {
+  font-family: 'sub-heading';
+  src: url('../src/assets/fonts/newFonts/Blacker-Sans-Medium-sub-heading.ttf');
+}
+
+@font-face {
+  font-family: 'sub-content';
+  src: url('../src/assets/fonts/newFonts/TodaySansNowPro-Regular-sub-content.ttf');
+}
+
 .pirchart {
     position: relative;
     margin: 20px 60px;
@@ -162,6 +177,7 @@
     right: -256%;
     top: -60%;
     color: #fff;
+    font-family: 'heading';
   }
   
   
@@ -188,6 +204,7 @@
     right: -500%;
     top: 36%;
     color: #fff;
+    font-family: 'heading';
   }
   
   .pirchart  .line-three {
@@ -212,6 +229,7 @@
     top: 40%;
     color: #fff;
     word-wrap: unset;
+    font-family: 'heading';
   }
   
   
@@ -221,7 +239,7 @@
     border-bottom: 1px solid #fff;
     /* border-left: 1px solid #fff; */
     position: absolute;
-    left: -2%;
+    left: -15%;
     bottom: 49%;
   }
   
@@ -236,6 +254,7 @@
     left: -200%;
     bottom: -41%;
     color: #fff;
+    font-family: 'heading';
   }
   
   
@@ -261,6 +280,7 @@
     left: -215%;
     bottom: 57%;
     color: #fff;
+    font-family: 'heading';
   }
   
   
@@ -287,6 +307,7 @@
     left: -26%;
     bottom: -37%;
     color: #fff;
+    font-family: 'heading';
   }
   
   .pirchart .line-seven {
@@ -312,6 +333,7 @@
     left: -33%;
     top: -44%;
     color: #fff;
+    font-family: 'heading';
   }
   
   /* pie */
@@ -346,7 +368,7 @@
   
   .pie-chart-mgs .pie-wrap .data-wrap p {
     color: #fff;
-    font-family: 'Kidspace';
+    font-family: 'sub-content';
     font-size: 14px;
     font-weight: 400;
     line-height: 20px;
@@ -367,6 +389,7 @@
     padding: 5px 10px 10px 10px;
     display: flex;
     justify-content: space-between;
+    font-family: 'heading';
   
   
   }
@@ -497,6 +520,7 @@
     right: -50%;
     top: -61%;
     color: #fff;
+    font-family: 'heading';
   }
   
   
@@ -523,6 +547,7 @@
     left: -229%;
     bottom: -40%;
     color: #fff;
+    font-family: 'heading';
   }
   
   .pirchart-two  .line-three {
@@ -545,6 +570,7 @@
     left: -68%;
     top: -60%;
     color: #fff;
+    font-family: 'heading';
   }
   
   
@@ -569,6 +595,7 @@
     left: -75%;
     top: -59%;
     color: #fff;
+    font-family: 'heading';
   }
 
   .show-mobile{

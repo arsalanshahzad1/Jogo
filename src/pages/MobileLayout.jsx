@@ -4,6 +4,8 @@ import SecondPieChart from './mobileContent/SecondPieChart'
 import Team from './Team'
 import MobileRoadmap from './mobileContent/MobileRoadmap'
 import MobileVideo from './mobileContent/MobileVideo'
+import BillGates from './landingpage/BillGates'
+import PreSales from './PreSales'
 
 const MobileLayout = () => {
     return (
@@ -14,12 +16,8 @@ const MobileLayout = () => {
                     <div className="row">
                         <div className="col-lg-6">
                             <div className="detail">
-                                <p style={{color: '#e4513b' , paddingBottom : '10px'}}>Join the AI meme revolution with AIM</p>
-                                <p>It blends the power of AI
-                                    with the humor of memes, providing a new and innovative way for
-                                    users to interact with this exciting technology. AIM is poised to
-                                    become a leader in this space. Don't miss out on the opportunity
-                                    to be a part of this game-changing platform!</p>
+                                <p style={{ color: '#e4513b', paddingBottom: '10px' }}>Join the AI meme revolution with AIM</p>
+                                <p>Welcome to AIM - the future of AI personal agents! Infusing cutting-edge AI with the humor of memes, we're pioneering an engaging digital experience. Join us, invest in innovation, and be part of this game-changing platform poised for industry leadership.</p>
                             </div>
                         </div>
                         <div className="col-lg-6"></div>
@@ -32,10 +30,12 @@ const MobileLayout = () => {
                     <img className="image-six" src="/assets/images/section-one/sec-6.png" alt="" />
                 </div>
             </section>
+            <BillGates />
             <section className="home-section-two">
                 {/* <img className="play-btn" src="/assets/images/play-btn.png" alt="" /> */}
                 <MobileVideo />
             </section>
+            <PreSales />
             <section className="titleOfSection">
                 <h2>Token Economics</h2>
             </section>
@@ -44,7 +44,7 @@ const MobileLayout = () => {
             <div className="home-section-four">
                 <div className="detail">
                     <h2>How to participate in presale?</h2>
-                    <p><span style={{textAlign : 'left' , display : 'inline-block' , paddingBottom : '15px'}}>1. Connect Wallet <br />2. Select Either to buy with ETH or USDT</span><br />
+                    <p><span style={{ textAlign: 'left', display: 'inline-block', paddingBottom: '15px' }}>1. Connect Wallet <br />2. Select Either to buy with ETH or USDT</span><br />
                         Note : If you are using mobile phone then we recommend you to use trust wallet browser.
                         Make sure you have 30 USDT before you start trading.
                         Once the presale ends you will be able to claim your tokens</p>
@@ -81,13 +81,13 @@ const MobileLayout = () => {
                 <div className="detail">
                     <h2>Token Economy.</h2>
                     <p>
-                        <span style={{color : '#ffc107'}}>Utility : </span>
+                        <span style={{ color: '#ffc107' }}>Utility : </span>
                         The AIM token will serve as the primary currency for all
                         transactions within the virtual world of meme AIs <br /><br />
-                        <span style={{color : '#ffc107'}}>Deflationary Mechanism : </span>
+                        <span style={{ color: '#ffc107' }}>Deflationary Mechanism : </span>
                         The deflationary mechanism involves burning tokens used to purchase AI NFTs, accessories, and
                         other utilities in the virtual world of meme AIs.<br /><br />
-                        <span style={{color : '#ffc107'}}>Governance : </span>
+                        <span style={{ color: '#ffc107' }}>Governance : </span>
                         AIM will be using a decentralized autonomous
                         organization (DAO) model for governance. The DAO
                         will be composed of token holders who will have the
