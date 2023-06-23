@@ -23,6 +23,7 @@ import BillGates from "./BillGates";
 import FAQ from "./FAQ";
 import BuyNow from "../../components/svg/BuyNow";
 import LinkedIn from "../../components/svg/LinkedIn";
+import { Loader } from "../../assets/Loader/Loader";
 
 
 const LandingPage = ({ state, setState, index, setIndex , }) => {

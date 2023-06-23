@@ -8,6 +8,7 @@ import { ethers, utils } from 'ethers';
 import { Link } from 'react-router-dom';
 import ChangeRound from '../../svg/ChangeRound';
 import WalletConnect from '../../svg/WalletConnect';
+import apis from '../../../Services';
 
 
 
@@ -179,7 +180,11 @@ function DashboardOne({ checkIsWalletConnected, changeNetwork, account, setAccou
     //    setCheckData(result)
     // }
 
-
+    // useEffect(async()=>{
+    
+    //     const response = await apis.getToday();
+    //     console.log("response2", response);
+    // },[])
 
 
     const handleRoundSelect = (round) => {

@@ -7,6 +7,7 @@ import MobileVideo from './mobileContent/MobileVideo'
 import BillGates from './landingpage/BillGates'
 import PreSales from './PreSales'
 import About from './landingpage/About'
+import { Loader } from '../assets/Loader/Loader'
 
 const MobileLayout = () => {
     return (

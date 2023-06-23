@@ -8,6 +8,7 @@ import Disconnect from "../components/svg/Disconnect";
 import { Link } from "react-router-dom";
 import BackButton from "../components/svg/BackButton";
 import Wallet from "../components/svg/Wallet";
+import apis from "../Services";
 import Web3Modal from "web3modal";
 import { BigNumber, Contract, ethers, providers, utils } from "ethers";
 import Button from "react-bootstrap/Button";
@@ -161,26 +162,7 @@ const PreSales = () => {
     }
   };
 
-  // const numberOFICOTokens = async () => {
-  //   try {
-  //     const provider = await getProviderOrSigner();
-
-  //     const tokenContract = new Contract(
-  //       AIMTOKEN_CONTRACT_ADDRESS.address,
-  //       AIMTOKEN_CONTRACT_ABI.abi,
-  //       provider
-  //     );
-  //     // Get the number of round
-  //     const numberOfTokens = await tokenContract.soldTokens(userAddress);
-
-  //     setUsersTokens(numberOfTokens.toString());
-  //     // console.log("roundNumber", _roundNumber.toString());
-
-  //     // return _roundNumber.toString();
-  //   } catch (err) {
-  //     console.error(err);
-  //   }
-  // };
+ 
 
   const getCoinsPerDollar = async () => {
     if (roundPrice > 0) {
@@ -218,11 +200,7 @@ const PreSales = () => {
     setRoundPrice(_roundPrice.toString());
   };
 
-  // const getPayableAmountInUSDT = async () => {
-  //   const _amount = Number(document.getElementById("usdtInput").value);
 
-  //   return _amount * roundPrice * 10 * 10 ** 6;
-  // };
 
   const getCurrentUser = async () => {
     const web3 = new Web3(window.ethereum);
@@ -237,155 +215,51 @@ const PreSales = () => {
     const userAddress = setUserAddress(accounts[0]);
   };
 
-  // const sendUSDT = async () => {
-  //   const signer = await getProviderOrSigner(true);
-
-  //   // Load the USDT contract
-  //   const usdtContract = new Contract(
-  //     TETHER_TOKEN_CONTRACT_ADDRESS,
-  //     TETHER_TOKEN_CONTRACT_ABI,
-  //     signer
-  //   );
-
-  //   const tokenContract = new Contract(
-  //     AIMTOKEN_CONTRACT_ADDRESS,
-  //     AIMTOKEN_CONTRACT_ABI,
-  //     signer
-  //   );
-
-  //   // Prompt the user for the token amount using MetaMask
-  //   const _amount = Number(
-  //     await window.ethereum.request({
-  //       method: "eth_sendTransaction",
-  //       params: [
-  //         {
-  //           from: userAddress,
-  //           to: TETHER_TOKEN_CONTRACT_ADDRESS,
-  //           // data: "0x", // Optional contract data if needed
-  //         },
-  //       ],
-  //     })
-  //   );
-
-  //   console.log("_amount", _amount);
-
-  //   console.log("tokenContract", tokenContract.address);
-  //   console.log("usdtContract", usdtContract.address);
-
-  //   const approveTokens = 10 * 10 ** 6;
-  //   const approval = await usdtContract.approve(
-  //     AIMTOKEN_CONTRACT_ADDRESS,
-  //     approveTokens
-  //   );
-
-  //   await approval.wait();
-
-  //   const tokensPurchase = ethers.utils.parseEther(_amount.toString());
-  //   console.log("tokensPurchase", tokensPurchase.toString());
-  //   await tokenContract.mintByUSDT(tokensPurchase.toString());
-  // };
-
+ 
   const sendUSDT = async () => {
-    const signer = await getProviderOrSigner(true);
+    try {const signer = await getProviderOrSigner(true);
 
-    // Load the USDT contract
-    const usdtContract = new Contract(
-      TETHER_TOKEN_CONTRACT_ADDRESS.address,
-      TETHER_TOKEN_CONTRACT_ABI.abi,
-      signer
-    );
+      // Load the USDT contract
+      const usdtContract = new Contract(
+        TETHER_TOKEN_CONTRACT_ADDRESS.address,
+        TETHER_TOKEN_CONTRACT_ABI.abi,
+        signer
+      );
+  
+      const tokenContract = new Contract(
+        AIMTOKEN_CONTRACT_ADDRESS.address,
+        AIMTOKEN_CONTRACT_ABI.abi,
+        signer
+      );
+  
+      const _amount = Number(document.getElementById("usdtInput").value);
+      const tokensPurchase = ethers.utils.parseEther(_amount.toString());
+  
+      const amountUSDT = await tokenContract.sellTokenInUDSTPrice(
+        tokensPurchase.toString(),
+        roundPrice * 10 ** 6
+      );
 
-    const tokenContract = new Contract(
-      AIMTOKEN_CONTRACT_ADDRESS.address,
-      AIMTOKEN_CONTRACT_ABI.abi,
-      signer
-    );
+      const appprove = await usdtContract.approve(
+        AIMTOKEN_CONTRACT_ADDRESS.address,
+        amountUSDT
+      );
+  
+      appprove.wait();
+  
+      let tx = await tokenContract.mintByUSDT(tokensPurchase.toString());
+  
+      await tx.wait();
+      await tokenContract.on("RoundData",handleEvent);
+      sendUSDTBox(false)
+      window.alert("Successfully minted Crypto Dev Tokens");
+      
+    } catch (error) {
+      console.log(error);
+    }
 
-    const _amount = Number(document.getElementById("usdtInput").value);
-    const tokensPurchase = ethers.utils.parseEther(_amount.toString());
 
-    const amountUSDT = await tokenContract.sellTokenInUDSTPrice(
-      tokensPurchase.toString(),
-      roundPrice * 10 ** 6
-    );
-
-
-    // await tokenContract.startTheSale();
-
-    const appprove = await usdtContract.approve(
-      AIMTOKEN_CONTRACT_ADDRESS.address,
-      amountUSDT
-    );
-
-    appprove.wait();
-
-    await tokenContract.mintByUSDT(tokensPurchase.toString());
-
-    //
-    //
-    //
-    //
-    //
-    //
-    //
-
-    // let amountToSend = await getPayableAmountInUSDT();
-    // console.log("CHECK1");
-    // console.log("TETHER_TOKEN_CONTRACT_ABI", TETHER_TOKEN_CONTRACT_ABI);
-    // console.log("TETHER_TOKEN_CONTRACT_ADDRESS", TETHER_TOKEN_CONTRACT_ADDRESS);
-    // console.log("signer", usdtabi.abi, usdtAddress.address);
-
-    // console.log("tokenContractusdt", usdtContract.address);
-    // await tokenContract.startTheSale();
-
-    // console.log("CHECK2");
-
-    // // Approve the contract to spend the USDT tokens on behalf of the user
-    // await usdtContract
-    //   .approve(AIMTOKEN_CONTRACT_ADDRESS, amountToSend)
-    //   .send({ from: userAddress });
-    // console.log("CHECK3");
-
-    // // Call the mintByUSDT function in your contract
-    // await AIMTOKEN_CONTRACT_ADDRESS.methods
-    //   .mintByUSDT(amountToSend)
-    //   .send({ from: userAddress });
-    // console.log("CHECK4");
-
-    /*
-      This is throwing an error
-      */
-
-    // console.log("USDT tokens sent successfully!");
-
-    // try {
-    //   const signer = await getProviderOrSigner(true);
-
-    //   const tokenContract = new Contract(
-    //     AIMTOKEN_CONTRACT_ADDRESS,
-    //     AIMTOKEN_CONTRACT_ABI,
-    //     signer
-    //   );
-
-    //   // let value = roundPrice * usdtPrice * amount;
-    //   let payment = utils.parseEther("0.1");
-    //   // console.log("round", round);
-    //   console.log("roundPrice", roundPrice);
-    //   // console.log("amount", amount);
-    //   // console.log("value", value);
-
-    //   const tx = await tokenContract.mint(payment, {
-    //     value: utils.parseEther(payment),
-    //   });
-
-    //   setLoading(true);
-    //   // wait for the transaction to get mined
-    //   await tx.wait();
-    //   setLoading(false);
-    //   window.alert("Successfully minted the Tokens");
-    // } catch (err) {
-    //   console.error(err);
-    // }
+    
   };
 
   const sendETH = async () => {
@@ -414,11 +288,14 @@ const PreSales = () => {
         value: amountValue.toString(),
       });
 
-      setLoading(true);
+  
       // wait for the transaction to get mined
       await tx.wait();
-      setLoading(false);
+     
+      await tokenContract.on("RoundData",handleEvent);
+      sendUSDTBox(false)
       window.alert("Successfully minted Crypto Dev Tokens");
+    
     } catch (err) {
     }
   };
@@ -609,6 +486,51 @@ const PreSales = () => {
     // console.log("_offBars here", _offBars);
     setOffBars(_offBars);
   };
+
+
+  const handleEvent = async (_round, _user, _soldToken, _BuywithEth, _BuywithUSDT) => {
+    // console.log("call");
+    // console.log('data', {
+    //   round: _round.toString(),
+    //   user: _user.toString(),
+    //   soldToken: _soldToken.toString(),
+    //   eth_amount: _BuywithEth.toString(),
+    //   buyWithUSDT: _BuywithUSDT.toString()
+    // })
+
+
+
+    const data = {
+      round: _round.toString(),
+      user_address: _user.toString(),
+      token_sale: _soldToken.toString(),
+      eth_amount: _BuywithEth.toString(),
+      usdt_amount: _BuywithUSDT.toString()
+    }
+
+    const response = await apis.addUser(data);
+    console.log("response", response);
+
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   useEffect(() => {
     // if wallet is not connected, create a new instance of Web3Modal and connect the MetaMask wallet
