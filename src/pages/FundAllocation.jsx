@@ -7,8 +7,6 @@ const FundAllocation = (index, setIndex) => {
     <section className="home-section-five" id="fund">
       <div className="sec-image">
       <h2>Fund Allocation</h2>
-      <br />
-      <br />
         <PieChart index={index} setIndex={setIndex} />
       </div>
     </section>

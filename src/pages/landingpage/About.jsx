@@ -1,11 +1,8 @@
 import React from 'react'
 
-function About() {
+const About = () => {
     return (
-        <div className='About-section'>
-            <div className='About-background'>
-                <img src="" alt="" />
-            </div>
+        <section className='About-section' id='aboutus'>
             <div className='About-inner'>
                 <p className='About-heading'>
                     About Us
@@ -22,7 +19,7 @@ function About() {
                     If you're a large or medium-sized commercial entity looking for a reliable digital marketing partner, we invite you to contact us and learn more about how we can help your business succeed."
                 </p>
             </div>
-        </div>
+        </section>
     )
 }
 

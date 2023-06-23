@@ -2,10 +2,7 @@ import React from 'react'
 
 function FAQ() {
     return (
-        <div className='FAQ-section'>
-            <div className='FAQ-background'>
-                <img src="" alt="" />
-            </div>
+        <section className='FAQ-section' id='faqs'>
             <div className='FAQ-inner'>
                 <p className='FAQ-heading'>
                     Frequently Asked Questions
@@ -43,7 +40,7 @@ function FAQ() {
                     </p>
                 </div>
             </div>
-        </div>
+        </section>
     )
 }
 

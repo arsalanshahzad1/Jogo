@@ -8,9 +8,7 @@ import FundAllocation from "../FundAllocation";
 import Wallet from "../../components/svg/Wallet";
 import Presale from "../../components/svg/Presale";
 import Doc from "../../components/svg/Doc";
-import Discord from "../../components/svg/Discord";
 import Twiitter from "../../components/svg/Twiitter";
-import Circles from "../../components/svg/Circles";
 import MobileLayout from "../MobileLayout";
 import Telegram from "../../components/svg/Telegram";
 import Video from "../../components/shared/Video";
@@ -21,29 +19,23 @@ import About from './About'
 import AIMTOKEN_CONTRACT_ABI from '../../contractsData/AIMToken.json'
 import AIMTOKEN_CONTRACT_ADDRESS from '../../contractsData/AIMToken-address.json'
 import PreSales from "../PreSales";
-import Buy from "../../components/svg/Buy";
 import BillGates from "./BillGates";
 import FAQ from "./FAQ";
 import BuyNow from "../../components/svg/BuyNow";
 import LinkedIn from "../../components/svg/LinkedIn";
 
-// import {
-//   AIMTOKEN_CONTRACT_ABI,
-//   AIMTOKEN_CONTRACT_ADDRESS,
-//   TETHER_TOKEN_CONTRACT_ABI,
-//   TETHER_TOKEN_CONTRACT_ADDRESS,
-// } from "../../.././constants/constants";
 
-const LandingPage = ({ state, setState, index, setIndex }) => {
+const LandingPage = ({ state, setState, index, setIndex , }) => {
   const zero = BigNumber.from(0);
-
   const [walletConnected, setWalletConnected] = useState(false);
-
-  const [loading, setLoading] = useState(false);
-
   const [roundNumber, setRoundNumber] = useState(zero);
-
   const web3ModalRef = useRef();
+  const [close, setClose] = useState("");
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+  const [activeSection, setActiveSection] = useState("home");
+
+
 
   const getProviderOrSigner = async (needSigner = false) => {
     // Connect to Metamask
@@ -123,17 +115,11 @@ const LandingPage = ({ state, setState, index, setIndex }) => {
     }
   };
 
-  const [close, setClose] = useState("");
-  const location = useLocation();
-  const searchParams = new URLSearchParams(location.search);
+
 
   const openPdfInNewTab = () => {
     window.open("/assets/docs/Jogo-Media-whitepaper.pdf", "_blank");
   };
-
-  const [activeSection, setActiveSection] = useState("home");
-
-  const [query, setQuery] = useState(searchParams.get("section"));
 
   useEffect(() => {
     // if wallet is not connected, create a new instance of Web3Modal and connect the MetaMask wallet
@@ -151,11 +137,10 @@ const LandingPage = ({ state, setState, index, setIndex }) => {
     }
   }, [walletConnected]);
 
+  
+
   useEffect(() => {
-    if (query) {
-      setState(query);
-      setQuery('')
-    }
+  
     window.scrollTo({ top: 0 });
     document
       .getElementById(state)
@@ -167,7 +152,7 @@ const LandingPage = ({ state, setState, index, setIndex }) => {
         if (sectionId && entry.isIntersecting) {
           setActiveSection(sectionId);
           // setState(sectionId)
-          // console.log(activeSection);
+          console.log(activeSection);
         }
       });
     });
@@ -176,15 +161,15 @@ const LandingPage = ({ state, setState, index, setIndex }) => {
     });
 
     return () => observer.disconnect();
-  }, [state, query]);
+  }, [state]);
 
 
-  const scrollToPresale = () => {
-    document
-      .getElementById('presale-section')
-      ?.scrollIntoView?.({ block: "start", behavior: "smooth" });
+  // const scrollToPresale = () => {
+  //   document
+  //     .getElementById('presale-section')
+  //     ?.scrollIntoView?.({ block: "start", behavior: "smooth" });
 
-  }
+  // }
 
   return (
     <>
@@ -205,37 +190,23 @@ const LandingPage = ({ state, setState, index, setIndex }) => {
                       </div>
                       <div className="right">
                         <Link >
-                          {/* <Presale classes={"sale-btn"} /> */}
-                          <span onClick={scrollToPresale}>
-
-                            {/* <Buy classes={"sale-btn"} /> */}
-                            <BuyNow />
+                          <span onClick={() =>setState('presale-section')}>
+                            <BuyNow activeSection={activeSection} />
                           </span>
                         </Link>
                         <ul className="social-icons">
                           <li>
-                            <Link onClick={openPdfInNewTab}>
-                              {" "}
-                              <Doc />
+                            <Link onClick={openPdfInNewTab}>{" "}<Doc />
                             </Link>
                           </li>
                           <li>
-                            <a
-                              href="https://twitter.com/JogoAimeme"
-                              target="_blank"
-                            >
-                              <Twiitter />
-                            </a>
+                            <a href="https://twitter.com/JogoAimeme" target="_blank"><Twiitter/></a>
                           </li>
                           <li>
-                            <a href="https://t.me/JogoAimeme" target="_blank">
-                              <Telegram />
-                            </a>{" "}
+                            <a href="https://t.me/JogoAimeme" target="_blank"><Telegram /></a>{" "}
                           </li>
                           <li>
-                            <a href="https://www.linkedin.com/in/jogo-media-2541501b5/" target="_blank">
-                              <LinkedIn />
-                            </a>{" "}
+                            <a href="https://www.linkedin.com/in/jogo-media-2541501b5/" target="_blank"><LinkedIn /></a>{" "}
                           </li>
                         </ul>
                       </div>
@@ -249,9 +220,7 @@ const LandingPage = ({ state, setState, index, setIndex }) => {
                       >
                         <div className="left hide">
                           {" "}
-                          <Link to={"/pre-sale"}>
-                            <Presale classes={"sale-btn"} />
-                          </Link>
+                          <Link to={"/pre-sale"}><Presale classes={"sale-btn"} /></Link>
                         </div>
                         <div className="right"></div>
                         <ul
@@ -357,8 +326,6 @@ const LandingPage = ({ state, setState, index, setIndex }) => {
                           </div>
                         </section>
                         <BillGates />
-                        <About />
-                        <FAQ />
                         <Video />
                         <PreSales />
                         <div className="sticky-background">
@@ -387,6 +354,9 @@ const LandingPage = ({ state, setState, index, setIndex }) => {
                             <Snack close={close} />
 
                             <Team />
+
+                            <About />
+                            <FAQ />
                           </div>
                         </div>
                       </div>

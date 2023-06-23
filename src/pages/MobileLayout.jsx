@@ -6,6 +6,7 @@ import MobileRoadmap from './mobileContent/MobileRoadmap'
 import MobileVideo from './mobileContent/MobileVideo'
 import BillGates from './landingpage/BillGates'
 import PreSales from './PreSales'
+import About from './landingpage/About'
 
 const MobileLayout = () => {
     return (
@@ -32,7 +33,6 @@ const MobileLayout = () => {
             </section>
             <BillGates />
             <section className="home-section-two">
-                {/* <img className="play-btn" src="/assets/images/play-btn.png" alt="" /> */}
                 <MobileVideo />
             </section>
             <PreSales />
@@ -106,8 +106,65 @@ const MobileLayout = () => {
             <section className="titleOfSection">
                 <h2>Teams</h2>
             </section>
-
             <Team />
+            <section className="titleOfSection">
+                <h2>About us</h2>
+            </section>
+            <section className='About-section' id='aboutus'>
+                <p className='About-desc'>
+                    "JogoMedia, a leading digital marketing agency, boasts three years of proven experience working with large and medium-sized commercial entities. Our expert team has a demonstrated history of developing and implementing effective marketing strategies tailored to our clients' unique needs.
+
+                    Our diverse range of services includes developing applications for iOS and Android, creating custom software solutions, and working with blockchain technology. We have successfully launched several blockchain projects in collaboration with our clients.
+
+                    As a full-service digital marketing agency, our commitment is to help our clients achieve their business goals across various marketing channels. These services include SEO, SEM, social media marketing, content marketing, and pay-per-click advertising.
+
+                    At JogoMedia, we consistently strive to stay at the forefront of emerging technologies, including artificial intelligence and machine learning. We are proud to have worked with numerous clients, including some of the tech industry's biggest names.
+
+                    If you're a large or medium-sized commercial entity looking for a reliable digital marketing partner, we invite you to contact us and learn more about how we can help your business succeed."
+                </p>
+            </section>
+            <section className="titleOfSection">
+                <h2>FAQs</h2>
+            </section>
+            <section className='FAQ-section' id='faqs'>
+            <div className='FAQ-inner'>
+                <p className='FAQ-heading'>
+                    Frequently Asked Questions
+                </p>
+                <div>
+                    <p className='FAQ-question'>
+                        Question 1
+                    </p>
+                    <p className='FAQ-Answer'>
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae, quos laudantium! Aut eligendi iste incidunt error hic amet exercitationem, commodi recusandae alias cum perspiciatis maiores numquam, iure nostrum fuga eaque!
+                    </p>
+                    <p className='FAQ-question'>
+                        Question 1
+                    </p>
+                    <p className='FAQ-Answer'>
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae, quos laudantium! Aut eligendi iste incidunt error hic amet exercitationem, commodi recusandae alias cum perspiciatis maiores numquam, iure nostrum fuga eaque!
+                    </p>
+                    <p className='FAQ-question'>
+                        Question 1
+                    </p>
+                    <p className='FAQ-Answer'>
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae, quos laudantium! Aut eligendi iste incidunt error hic amet exercitationem, commodi recusandae alias cum perspiciatis maiores numquam, iure nostrum fuga eaque!
+                    </p>
+                    <p className='FAQ-question'>
+                        Question 1
+                    </p>
+                    <p className='FAQ-Answer'>
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae, quos laudantium! Aut eligendi iste incidunt error hic amet exercitationem, commodi recusandae alias cum perspiciatis maiores numquam, iure nostrum fuga eaque!
+                    </p>
+                    <p className='FAQ-question'>
+                        Question 1
+                    </p>
+                    <p className='FAQ-Answer'>
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae, quos laudantium! Aut eligendi iste incidunt error hic amet exercitationem, commodi recusandae alias cum perspiciatis maiores numquam, iure nostrum fuga eaque!
+                    </p>
+                </div>
+            </div>
+        </section>
         </div>
     )
 }

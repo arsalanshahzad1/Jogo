@@ -106,15 +106,11 @@ const PreSales = () => {
 
 
   const checkActiveRound = async () => {
-    console.log("checkActiveRound HEREEEEEEEEE");
     const _round = Number(roundNumber);
-    console.log("roundNumber", roundNumber);
 
     if (_round > 0 || _round > 6) {
-      console.log("Round Status", _round);
       setRoundStatus(true);
     } else {
-      console.log("Round Status", _round);
       setRoundStatus(false);
     }
   };
@@ -131,15 +127,12 @@ const PreSales = () => {
         provider
       );
       // Get the number of round
-      console.log(tokenContract, "tokenCOntract")
       const _roundNumber = await tokenContract.round();
 
       setRoundNumber(_roundNumber.toString());
-      console.log("roundNumber", _roundNumber.toString());
 
       // return _roundNumber.toString();
     } catch (err) {
-      console.error(err);
     }
   };
 
@@ -192,9 +185,6 @@ const PreSales = () => {
   const getCoinsPerDollar = async () => {
     if (roundPrice > 0) {
       const coins = 1 / roundPrice;
-      // console.log("roundPrice", roundPrice);
-      // console.log("1 / roundPrice", 1 / roundPrice);
-      console.log("coins", coins);
       setCoinsPerDollar(coins);
     }
   };
@@ -245,7 +235,6 @@ const PreSales = () => {
 
     // Retrieve the user's address
     const userAddress = setUserAddress(accounts[0]);
-    // console.log("userAddress", accounts[0]);
   };
 
   // const sendUSDT = async () => {
@@ -315,14 +304,11 @@ const PreSales = () => {
     const _amount = Number(document.getElementById("usdtInput").value);
     const tokensPurchase = ethers.utils.parseEther(_amount.toString());
 
-    console.log("tokensPurchase", tokensPurchase.toString(), roundPrice);
-
     const amountUSDT = await tokenContract.sellTokenInUDSTPrice(
       tokensPurchase.toString(),
       roundPrice * 10 ** 6
     );
 
-    console.log("amountUSDT", amountUSDT.toString());
 
     // await tokenContract.startTheSale();
 
@@ -333,7 +319,6 @@ const PreSales = () => {
 
     appprove.wait();
 
-    console.log("tokensPurchase", tokensPurchase.toString());
     await tokenContract.mintByUSDT(tokensPurchase.toString());
 
     //
@@ -407,7 +392,6 @@ const PreSales = () => {
     try {
       const signer = await getProviderOrSigner(true);
 
-      // console.log("signer", signer.address);
 
       const tokenContract = new Contract(
         AIMTOKEN_CONTRACT_ADDRESS.address,
@@ -419,12 +403,10 @@ const PreSales = () => {
 
       let tokenEth = ethers.utils.parseEther(_amount.toString())
 
-      console.log("Tokensssssssss", tokenEth?.toString(), roundPrice?.toString() * 10 ** 6)
 
 
 
       const amountValue = await tokenContract.sellTokenInETHPrice(tokenEth?.toString(), roundPrice * 10 ** 6);
-      console.log("Tokensssssssss1", amountValue.toString())
 
       const tx = await tokenContract.mintByEth(tokenEth.toString(), {
         // value signifies the cost of one crypto dev token which is "0.001" eth.
@@ -438,7 +420,6 @@ const PreSales = () => {
       setLoading(false);
       window.alert("Successfully minted Crypto Dev Tokens");
     } catch (err) {
-      console.error(err);
     }
   };
 
@@ -455,13 +436,10 @@ const PreSales = () => {
         AIMTOKEN_CONTRACT_ABI.abi,
         provider
       );
-
-      console.log("tokensOfUser1", userAddress);
       // Get the number of round
       const tokensOfUser = await tokenContract.soldTokens(userAddress);
 
       // setRoundNumber(tokensOfUser.toString());
-      console.log("tokensOfUser", tokensOfUser.toString());
 
 
 
@@ -480,7 +458,6 @@ const PreSales = () => {
 
       // return _roundNumber.toString();
     } catch (err) {
-      console.error(err);
     }
   };
 
@@ -499,21 +476,16 @@ const PreSales = () => {
       await getProviderOrSigner();
       setWalletConnected(true);
     } catch (err) {
-      console.error(err);
     }
   };
 
   const disConnectWallet = async () => {
     try {
-      console.log("DISCONNECT IN TRY");
 
       web3ModalRef.current.clearCachedProvider();
       window.localStorage.clear();
       setWalletConnected(false);
-      console.log("walletConnected after button pressed ", walletConnected);
     } catch (err) {
-      console.log("DISCONNECT IN CATCH");
-      console.error(err);
     }
   };
 
@@ -535,7 +507,6 @@ const PreSales = () => {
 
       return usdPrice.toString();
     } catch (err) {
-      console.error(err);
     }
   };
 
@@ -551,13 +522,10 @@ const PreSales = () => {
       // Get the number of round
       // const _roundNumber = await tokenContract.round();
       const _totalSupply = (await tokenContract.totalSupply()) / 10 ** 18;
-      // console.log("totalSupply", _totalSupply.toString());
       setTotalSupply(_totalSupply.toString());
-      // console.log("roundNumber", _roundNumber.toString());
 
       // return totalSupply.toString();
     } catch (err) {
-      console.error(err);
     }
   };
 
@@ -606,9 +574,6 @@ const PreSales = () => {
       const ethToUSDT = (balanceOfETH / priceUSDT);
 
       // const ethToUSDT = balanceOfETH/1*10**18 * priceUSDT/1*10**18;
-      console.log("ethToUSDT", ethToUSDT);
-      console.log("balanceOfETH", balanceOfETH);
-      console.log("priceUSDT", priceUSDT);
       // console.log("priceUSDT", typeof priceUSDT);
 
       // Add both the amounts of USDT
@@ -619,14 +584,12 @@ const PreSales = () => {
       // console.log("balanceOfUSDT", typeof balanceOfUSDT);
       // console.log("balanceOfUSDT", balanceOfUSDT.toString());
 
-      console.log("totalUSDT", totalUSDT);
 
       // console.log("totalUSDT.toFixed", parseFloat(totalUSDT.toFixed(2)));
       // console.log("typeof totalUSDT", typeof totalUSDT);
 
       setRaisedAmount(totalUSDT);
     } catch (err) {
-      console.error(err);
     }
   };
 
@@ -664,7 +627,6 @@ const PreSales = () => {
   }, [walletConnected]);
 
   useEffect(() => {
-    console.log('CALLL')
 
   }, [roundNumber]);
 
@@ -695,8 +657,8 @@ const PreSales = () => {
 
   return (
     <>
-      <section className="sale-section">
-        <div className="wrap" id="presale-section">
+      <section className="sale-section" id="presale-section">
+        <div className="wrap" >
           <div className="row">
             <div className="col-lg-7 col-md-7">
               <div className="left-wrap">

@@ -15,7 +15,7 @@
 
 .pirchart {
     position: relative;
-    margin: 20px 60px;
+    margin: 30px 60px 10px 60px;
   }
   
 .pirchart .chartwrap {
@@ -161,8 +161,8 @@
     border-top: 1px solid #fff;
     border-left: 1px solid #fff;
     position: absolute;
-    top: -3%;
-    left: 53.5%;
+    top: 1%;
+    left: 69%;
 
   }
   
@@ -174,7 +174,7 @@
   
   .pirchart  .line-one .line-wrap span {
     position: absolute;
-    right: -256%;
+    right: -275%;
     top: -60%;
     color: #fff;
     font-family: 'heading';
@@ -189,8 +189,8 @@
     border-bottom: 1px solid #fff;
     border-left: 1px solid #fff;
     position: absolute;
-    bottom: -1%;
-    left: 64.5%;
+    bottom: 4%;
+    left: 75%;
   }
   
   .pirchart  .line-two .line-wrap {
@@ -201,8 +201,8 @@
   
   .pirchart .line-two .line-wrap span {
     position: absolute;
-    right: -500%;
-    top: 36%;
+    right: -535%;
+    top: 45%;
     color: #fff;
     font-family: 'heading';
   }
@@ -213,8 +213,8 @@
     border-bottom: 1px solid #fff;
     border-right: 1px solid #fff;
     position: absolute;
-    bottom: -2%;
-    left: 20.5%;
+    bottom: 3%;
+    left: 5%;
   }
   
   .pirchart  .line-three .line-wrap {
@@ -225,11 +225,12 @@
   
   .pirchart  .line-three .line-wrap span {
     position: absolute;
-    left: -304%;
-    top: 40%;
+    left: -325%;
+    top: 45%;
     color: #fff;
     word-wrap: unset;
     font-family: 'heading';
+
   }
   
   
@@ -239,7 +240,7 @@
     border-bottom: 1px solid #fff;
     /* border-left: 1px solid #fff; */
     position: absolute;
-    left: -15%;
+    left: -10%;
     bottom: 49%;
   }
   
@@ -251,7 +252,7 @@
   
   .pirchart  .line-four .line-wrap span {
     position: absolute;
-    left: -200%;
+    left: -215%;
     bottom: -41%;
     color: #fff;
     font-family: 'heading';
@@ -265,8 +266,8 @@
     border-top: 1px solid #fff;
     border-right: 1px solid #fff;
     position: absolute;
-    right: 55.5%;
-    top: -2%;
+    right: 70.5%;
+    top: 1%;
   }
   
   .pirchart .line-five .line-wrap {
@@ -277,7 +278,7 @@
   
   .pirchart .line-five .line-wrap span {
     position: absolute;
-    left: -215%;
+    left: -235%;
     bottom: 57%;
     color: #fff;
     font-family: 'heading';
@@ -380,7 +381,7 @@
   .pie-chart-mgs .pie-wrap .data-wrap h2 {
     color: #FFC107;
     margin: 0;
-    font-family: 'Kidspace';
+    /* font-family: 'Kidspace'; */
     font-size: 18px;
     font-weight: 400;
     line-height: 19px;
@@ -517,7 +518,7 @@
   
   .pirchart-two  .line-one .line-wrap span {
     position: absolute;
-    right: -50%;
+    right: -54%;
     top: -61%;
     color: #fff;
     font-family: 'heading';
@@ -532,8 +533,8 @@
     border-bottom: 1px solid #fff;
     border-right: 1px solid #fff;
     position: absolute;
-    bottom: -3%;
-    right: 56.5%;
+    bottom: 1%;
+    right: 70%;
   }
   
   .pirchart-two  .line-two .line-wrap {
@@ -544,10 +545,11 @@
   
   .pirchart-two .line-two .line-wrap span {
     position: absolute;
-    left: -229%;
-    bottom: -40%;
+    left: -242%;
+    bottom: -45%;
     color: #fff;
     font-family: 'heading';
+
   }
   
   .pirchart-two  .line-three {
@@ -567,7 +569,7 @@
   
   .pirchart-two  .line-three .line-wrap span {
     position: absolute;
-    left: -68%;
+    left: -73%;
     top: -60%;
     color: #fff;
     font-family: 'heading';
@@ -580,8 +582,8 @@
     border-top: 1px solid #fff;
     border-right: 1px solid #fff;
     position: absolute;
-    left: 7.5%;
-    top: -2%;
+    left: -3%;
+    top: -0%;
   }
   
   .pirchart-two .line-four .line-wrap {
@@ -592,8 +594,8 @@
   
   .pirchart-two  .line-four .line-wrap span {
     position: absolute;
-    left: -75%;
-    top: -59%;
+    left: -82%;
+    top: -57%;
     color: #fff;
     font-family: 'heading';
   }
@@ -613,23 +615,24 @@
   }
 
   .pirchart-two .part-one {
-    width: 150px;
+    width: 125px;
     height: 300px;
 }
 
 .pirchart-two .part-two {
-  width: 150px;
-  height: 150px;
+  width: 125px;
+  height: 125px;
 }
 
 .pirchart-two .part-three {
   width: 150px;
   height: 305px;
+  bottom: -4%;
 }
 
 .pirchart-two .part-four {
-  width: 263px;
-  height: 165px;
+  width: 125px;
+  height: 148px;
 }
 
 .pirchart-two .line-one {

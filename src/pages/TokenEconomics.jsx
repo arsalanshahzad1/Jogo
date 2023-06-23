@@ -11,8 +11,6 @@ const TokenEconomics = (index, setIndex, activeRound) => {
       <section id="tokenEco">
         <div className="home-section-three">
           <h2 className="title">Token Economics</h2>
-          <br />
-          <br />
           <div className="sec-image">
             <PirChartTwo index={index} setIndex={setIndex} />
           </div>

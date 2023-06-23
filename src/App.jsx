@@ -84,15 +84,52 @@ function App() {
     // loadContracts(signer)
   }
 
+  const changeScrollPosition = (event) => {
+    setState(event)
+    console.log('working');
+    if(state === 'home'){
+      document
+      .getElementById(state)
+      ?.scrollIntoView?.({ block: "start", behavior: "smooth" });
+    }
+    if(state === 'tokenEnd'){
+      document
+      .getElementById(state)
+      ?.scrollIntoView?.({ block: "start", behavior: "smooth" });
+    }
+    if(state === 'fund'){
+      document
+      .getElementById(state)
+      ?.scrollIntoView?.({ block: "start", behavior: "smooth" });
+    }
+    if(state === 'roadmap'){
+      document
+      .getElementById(state)
+      ?.scrollIntoView?.({ block: "start", behavior: "smooth" });
+    }
+    if(state === 'team'){
+      document
+      .getElementById(state)
+      ?.scrollIntoView?.({ block: "start", behavior: "smooth" });
+    }
+    if(state === 'About-us'){
+      document
+      .getElementById(state)
+      ?.scrollIntoView?.({ block: "start", behavior: "smooth" });
+    }
+    if(state === 'faqs'){
+      document
+      .getElementById(state)
+      ?.scrollIntoView?.({ block: "start", behavior: "smooth" });
+    }
+  }
 
 
 
 
   useEffect(() => {
     checkIsWalletConnected();
-  }, [account])
-
-
+  }, [account , state])
 
   return (
     <Router>
@@ -101,7 +138,7 @@ function App() {
         <Route path="/dashboard/*" element={<Main changeNetwork={changeNetwork} account={account} setAccount={setAccount} />} />
         <Route path="*" element={<LandingPage
           state={state}
-          setState={setState}
+          setState={changeScrollPosition}
           index={index}
           setIndex={setIndex}
           activeSection={activeSection}
@@ -111,7 +148,7 @@ function App() {
         <Route path='/' exact
           element={<LandingPage
             state={state}
-            setState={setState}
+            setState={changeScrollPosition}
             index={index}
             setIndex={setIndex}
             activeSection={activeSection}
