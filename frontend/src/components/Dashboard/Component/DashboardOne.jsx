@@ -241,7 +241,7 @@ console.log('runingRound',runingRound);
                     <div className='D-one-holder-inner-1'>
                         <div className='CardsForData borderyellow'>
                             <p className='Card-text-one'>
-                                noOfUsersInRound
+                                No Of Users In Round
                             </p>
                             <p className='Card-text-two'>
                                 {data?.total_users}
@@ -249,7 +249,7 @@ console.log('runingRound',runingRound);
                         </div>
                         <div className='CardsForData'>
                             <p className='Card-text-one'>
-                                ethRaisedInCurrentRound
+                                Eth Raised In Current Round
                             </p>
                             <p className='Card-text-two'>
                                 {data?.total_eth_amount/ 10 ** 18}
@@ -257,7 +257,7 @@ console.log('runingRound',runingRound);
                         </div>
                         <div className='CardsForData'>
                             <p className='Card-text-one'>
-                                tokensSoldInCurrentRound
+                                Tokens Sold In Current Round
                             </p>
                             <p className='Card-text-two'>
                                 {data?.total_token_sale/10**18}
@@ -265,7 +265,7 @@ console.log('runingRound',runingRound);
                         </div>
                         <div className='CardsForData'>
                             <p className='Card-text-one'>
-                                usdtRaisedInCurrentRound
+                                USDT Raised In Current Round
                             </p>
                             <p className='Card-text-two'>
                                 {data?.total_usdt_amount/ 10 ** 6}

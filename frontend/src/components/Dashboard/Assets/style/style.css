@@ -108,7 +108,6 @@
 .activelink p {
     color: #FF6347 !important ;
 }
-
 .DashboardMain {
 
     flex: 80%;
@@ -320,7 +319,7 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
+    /* align-items: center; */
 }
 
 .Font-24 {
@@ -373,3 +372,12 @@
         padding: 0px 4px 0 4px !important;
     }
 }
+
+.dashboard-chart .apexcharts-tooltip {
+    background-color: #000000 !important;
+    color: #ffffff !important;
+  }
+  .dashboard-chart .apexcharts-tooltip-title{
+    background-color: #000000 !important;
+  }
+

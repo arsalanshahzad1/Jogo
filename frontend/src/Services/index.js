@@ -32,12 +32,20 @@ const createBackendServer = (baseURL) => {
     const getdata = async (body) => await api.get(`get-blockchain-users?filter=${body}`);
     const getRound = async (body) => await api.get(`get-blockchain-users?round=${body}`);
 
+
+    const getStatistics = async () => await api.get(`get-blockchain-users-month-vice`);
+    const getStatisticsMonthly = async () => await api.get(`get-blockchain-users-month-vice?all_months`);
+   
+   
+   
     //Returning all the API
     return {
         addUser,
         getAll,
         getdata,
-        getRound  
+        getRound,
+        getStatistics,
+        getStatisticsMonthly
     };
 };
 
