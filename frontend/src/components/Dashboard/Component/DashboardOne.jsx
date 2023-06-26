@@ -27,7 +27,7 @@ const AimTokenContract = () => {
 const { ethereum } = window;
 function DashboardOne({ checkIsWalletConnected, changeNetwork, account, setAccount }) {
     const [show, setShow] = useState(false)
-    const [selectedRound, setSelectedRound] = useState('CurrentRound');
+    const [selectedRound, setSelectedRound] = useState('1');
     const [runingRound, setrunningRound] = useState([]);
     const [UpcomingRound, setUpcomingRound] = useState(null);
     const [CheckData, setCheckData] = useState(false);
@@ -35,125 +35,126 @@ function DashboardOne({ checkIsWalletConnected, changeNetwork, account, setAccou
 
 
 
-    const getRound = async () => {
-        //check Round Data
-        let RoundData = [];
-        if (selectedRound == "Round 1") {
-            console.log("selectedRound", selectedRound)
-            let RoundRuning = await AimTokenContract().round();
-            if(RoundRuning.toString() == "2"){
-                let runingRounds = await AimTokenContract().roundsData("1");
-                console.log("this is Data", runingRounds);
-                RoundData.push({
-                    noOfUsersInRound: runingRounds[0], tokensSoldInCurrentRound: runingRounds[1], ethRaisedInCurrentRound: runingRounds[2],
-                    usdtRaisedInCurrentRound: runingRounds[3]
-                });
-            }
-            else{
-                RoundData.push({
-                    noOfUsersInRound: 0, tokensSoldInCurrentRound: 0, ethRaisedInCurrentRound:0,
-                    usdtRaisedInCurrentRound: 0
-                });
 
-            }
+    // const getRound = async () => {
+    //     //check Round Data
+    //     let RoundData = [];
+    //     if (selectedRound == "Round 1") {
+    //         console.log("selectedRound", selectedRound)
+    //         let RoundRuning = await AimTokenContract().round();
+    //         if(RoundRuning.toString() == "2"){
+    //             let runingRounds = await AimTokenContract().roundsData("1");
+    //             console.log("this is Data", runingRounds);
+    //             RoundData.push({
+    //                 noOfUsersInRound: runingRounds[0], tokensSoldInCurrentRound: runingRounds[1], ethRaisedInCurrentRound: runingRounds[2],
+    //                 usdtRaisedInCurrentRound: runingRounds[3]
+    //             });
+    //         }
+    //         else{
+    //             RoundData.push({
+    //                 noOfUsersInRound: 0, tokensSoldInCurrentRound: 0, ethRaisedInCurrentRound:0,
+    //                 usdtRaisedInCurrentRound: 0
+    //             });
+
+    //         }
           
-        }
-        else if (selectedRound == "Round 2") {
-            console.log("selectedRound", selectedRound)
-            let RoundRuning = await AimTokenContract().round();
-            if(RoundRuning.toString() == "3"){
-                let runingRounds = await AimTokenContract().roundsData("2");
-                console.log("this is Data", runingRounds);
-                RoundData.push({
-                    noOfUsersInRound: runingRounds[0], tokensSoldInCurrentRound: runingRounds[1], ethRaisedInCurrentRound: runingRounds[2],
-                    usdtRaisedInCurrentRound: runingRounds[3]
-                });
-            }
-            else{
-                RoundData.push({
-                    noOfUsersInRound: 0, tokensSoldInCurrentRound: 0, ethRaisedInCurrentRound:0,
-                    usdtRaisedInCurrentRound: 0
-                });
+    //     }
+    //     else if (selectedRound == "Round 2") {
+    //         console.log("selectedRound", selectedRound)
+    //         let RoundRuning = await AimTokenContract().round();
+    //         if(RoundRuning.toString() == "3"){
+    //             let runingRounds = await AimTokenContract().roundsData("2");
+    //             console.log("this is Data", runingRounds);
+    //             RoundData.push({
+    //                 noOfUsersInRound: runingRounds[0], tokensSoldInCurrentRound: runingRounds[1], ethRaisedInCurrentRound: runingRounds[2],
+    //                 usdtRaisedInCurrentRound: runingRounds[3]
+    //             });
+    //         }
+    //         else{
+    //             RoundData.push({
+    //                 noOfUsersInRound: 0, tokensSoldInCurrentRound: 0, ethRaisedInCurrentRound:0,
+    //                 usdtRaisedInCurrentRound: 0
+    //             });
 
-            }
-        }
-        else if (selectedRound == "Round 3") {
-            console.log("selectedRound", selectedRound)
-            let RoundRuning = await AimTokenContract().round();
-            if(RoundRuning.toString() == "4"){
-                let runingRounds = await AimTokenContract().roundsData("3");
-                console.log("this is Data", runingRounds);
-                RoundData.push({
-                    noOfUsersInRound: runingRounds[0], tokensSoldInCurrentRound: runingRounds[1], ethRaisedInCurrentRound: runingRounds[2],
-                    usdtRaisedInCurrentRound: runingRounds[3]
-                });
-            }
-            else{
-                RoundData.push({
-                    noOfUsersInRound: 0, tokensSoldInCurrentRound: 0, ethRaisedInCurrentRound:0,
-                    usdtRaisedInCurrentRound: 0
-                });
+    //         }
+    //     }
+    //     else if (selectedRound == "Round 3") {
+    //         console.log("selectedRound", selectedRound)
+    //         let RoundRuning = await AimTokenContract().round();
+    //         if(RoundRuning.toString() == "4"){
+    //             let runingRounds = await AimTokenContract().roundsData("3");
+    //             console.log("this is Data", runingRounds);
+    //             RoundData.push({
+    //                 noOfUsersInRound: runingRounds[0], tokensSoldInCurrentRound: runingRounds[1], ethRaisedInCurrentRound: runingRounds[2],
+    //                 usdtRaisedInCurrentRound: runingRounds[3]
+    //             });
+    //         }
+    //         else{
+    //             RoundData.push({
+    //                 noOfUsersInRound: 0, tokensSoldInCurrentRound: 0, ethRaisedInCurrentRound:0,
+    //                 usdtRaisedInCurrentRound: 0
+    //             });
 
-            }
-        }
-        else if (selectedRound == "Round 4") {
-            console.log("selectedRound", selectedRound)
-            let RoundRuning = await AimTokenContract().round();
-            if(RoundRuning.toString() == "5"){
-                let runingRounds = await AimTokenContract().roundsData("4");
-                console.log("this is Data", runingRounds);
-                RoundData.push({
-                    noOfUsersInRound: runingRounds[0], tokensSoldInCurrentRound: runingRounds[1], ethRaisedInCurrentRound: runingRounds[2],
-                    usdtRaisedInCurrentRound: runingRounds[3]
-                });
-            }
-            else{
-                RoundData.push({
-                    noOfUsersInRound: 0, tokensSoldInCurrentRound: 0, ethRaisedInCurrentRound:0,
-                    usdtRaisedInCurrentRound: 0
-                });
+    //         }
+    //     }
+    //     else if (selectedRound == "Round 4") {
+    //         console.log("selectedRound", selectedRound)
+    //         let RoundRuning = await AimTokenContract().round();
+    //         if(RoundRuning.toString() == "5"){
+    //             let runingRounds = await AimTokenContract().roundsData("4");
+    //             console.log("this is Data", runingRounds);
+    //             RoundData.push({
+    //                 noOfUsersInRound: runingRounds[0], tokensSoldInCurrentRound: runingRounds[1], ethRaisedInCurrentRound: runingRounds[2],
+    //                 usdtRaisedInCurrentRound: runingRounds[3]
+    //             });
+    //         }
+    //         else{
+    //             RoundData.push({
+    //                 noOfUsersInRound: 0, tokensSoldInCurrentRound: 0, ethRaisedInCurrentRound:0,
+    //                 usdtRaisedInCurrentRound: 0
+    //             });
 
-            }
-        }
-        else if (selectedRound == "Round 5") {
-            console.log("selectedRound", selectedRound)
-            let RoundRuning = await AimTokenContract().round();
-            if(RoundRuning.toString() == "6"){
-                let runingRounds = await AimTokenContract().roundsData("5");
-                console.log("this is Data", runingRounds);
-                RoundData.push({
-                    noOfUsersInRound: runingRounds[0], tokensSoldInCurrentRound: runingRounds[1], ethRaisedInCurrentRound: runingRounds[2],
-                    usdtRaisedInCurrentRound: runingRounds[3]
-                });
-            }
-            else{
-                RoundData.push({
-                    noOfUsersInRound: 0, tokensSoldInCurrentRound: 0, ethRaisedInCurrentRound:0,
-                    usdtRaisedInCurrentRound: 0
-                });
+    //         }
+    //     }
+    //     else if (selectedRound == "Round 5") {
+    //         console.log("selectedRound", selectedRound)
+    //         let RoundRuning = await AimTokenContract().round();
+    //         if(RoundRuning.toString() == "6"){
+    //             let runingRounds = await AimTokenContract().roundsData("5");
+    //             console.log("this is Data", runingRounds);
+    //             RoundData.push({
+    //                 noOfUsersInRound: runingRounds[0], tokensSoldInCurrentRound: runingRounds[1], ethRaisedInCurrentRound: runingRounds[2],
+    //                 usdtRaisedInCurrentRound: runingRounds[3]
+    //             });
+    //         }
+    //         else{
+    //             RoundData.push({
+    //                 noOfUsersInRound: 0, tokensSoldInCurrentRound: 0, ethRaisedInCurrentRound:0,
+    //                 usdtRaisedInCurrentRound: 0
+    //             });
 
-            }
-        }
-        else {
+    //         }
+    //     }
+    //     else {
 
-            let noOfUsersInRound = await AimTokenContract().noOfUsersInRound()
-            let tokensSoldInCurrentRound = await AimTokenContract().tokensSoldInCurrentRound()
-            let ethRaisedInCurrentRound = await AimTokenContract().ethRaisedInCurrentRound()
-            let usdtRaisedInCurrentRound = await AimTokenContract().usdtRaisedInCurrentRound()
-            let currentRound = await AimTokenContract().round();
+    //         let noOfUsersInRound = await AimTokenContract().noOfUsersInRound()
+    //         let tokensSoldInCurrentRound = await AimTokenContract().tokensSoldInCurrentRound()
+    //         let ethRaisedInCurrentRound = await AimTokenContract().ethRaisedInCurrentRound()
+    //         let usdtRaisedInCurrentRound = await AimTokenContract().usdtRaisedInCurrentRound()
+    //         let currentRound = await AimTokenContract().round();
 
-            console.log("!!!!!!!!!!!!!!",noOfUsersInRound.toString(),
-            tokensSoldInCurrentRound.toString(),
-            ethRaisedInCurrentRound.toString(),
-            usdtRaisedInCurrentRound.toString())
-            RoundData.push({
-                noOfUsersInRound, tokensSoldInCurrentRound, ethRaisedInCurrentRound,
-                usdtRaisedInCurrentRound,
-            })
-        }
+    //         console.log("!!!!!!!!!!!!!!",noOfUsersInRound.toString(),
+    //         tokensSoldInCurrentRound.toString(),
+    //         ethRaisedInCurrentRound.toString(),
+    //         usdtRaisedInCurrentRound.toString())
+    //         RoundData.push({
+    //             noOfUsersInRound, tokensSoldInCurrentRound, ethRaisedInCurrentRound,
+    //             usdtRaisedInCurrentRound,
+    //         })
+    //     }
 
-        setrunningRound(RoundData);
-    }
+    //     setrunningRound(RoundData);
+    // }
 
 
     const startRound = async () => {
@@ -167,18 +168,15 @@ function DashboardOne({ checkIsWalletConnected, changeNetwork, account, setAccou
         setUpcomingRound(Number(currentRoundss) + 1)
     }
 
+    const apiResponses = async()=>{
+        console.log('selectedRound',selectedRound);
+        const response = await apis.getRound(selectedRound);
+        setrunningRound([response.data.data])
+        console.log("response2", response.data.data);
+        
+    }
 
     
-
-
-
-
-
-
-    // const checkDataStatus =()=>{
-    //    let result = runingRound[0]?.noOfUsersInRound > 0 ? true:false;
-    //    setCheckData(result)
-    // }
 
     // useEffect(async()=>{
     
@@ -194,13 +192,13 @@ function DashboardOne({ checkIsWalletConnected, changeNetwork, account, setAccou
 
 
     useEffect(() => {
-        getRound();
         currentRound();
         checkIsWalletConnected();
+        apiResponses();
     }, [account, selectedRound]);
 
-
-
+console.log('runingRound',runingRound);
+    
     return (
         <div>
             
@@ -226,17 +224,17 @@ function DashboardOne({ checkIsWalletConnected, changeNetwork, account, setAccou
                     <ArrowDropDownIcon />
                 </div>
                 <div className={`dropdowndiv ${show ? '' : 'hideDropdown'}`}>
-                    <p onClick={() => handleRoundSelect('CurrentRound')}> CurrentRound</p>
-                    <p onClick={() => handleRoundSelect('Round 1')}>Round 1</p>
-                    <p onClick={() => handleRoundSelect('Round 2')}>Round 2</p>
-                    <p onClick={() => handleRoundSelect('Round 3')}>Round 3</p>
-                    <p onClick={() => handleRoundSelect('Round 4')}>Round 4</p>
-                    <p onClick={() => handleRoundSelect('Round 5')}>Round 5</p>
+                    <p onClick={() => handleRoundSelect('1')}> Round 1</p>
+                    {/* <p onClick={() => handleRoundSelect('1')}>Round 1</p> */}
+                    <p onClick={() => handleRoundSelect('2')}>Round 2</p>
+                    <p onClick={() => handleRoundSelect('3')}>Round 3</p>
+                    <p onClick={() => handleRoundSelect('4')}>Round 4</p>
+                    <p onClick={() => handleRoundSelect('5')}>Round 5</p>
 
                 </div>
             </div>
 
-            {runingRound.map((data, index) => (
+            {runingRound?.map((data, index) => (
 
                 <div className='D-one-holder'>
 
@@ -246,7 +244,7 @@ function DashboardOne({ checkIsWalletConnected, changeNetwork, account, setAccou
                                 noOfUsersInRound
                             </p>
                             <p className='Card-text-two'>
-                                {data?.noOfUsersInRound.toString()}
+                                {data?.total_users}
                             </p>
                         </div>
                         <div className='CardsForData'>
@@ -254,7 +252,7 @@ function DashboardOne({ checkIsWalletConnected, changeNetwork, account, setAccou
                                 ethRaisedInCurrentRound
                             </p>
                             <p className='Card-text-two'>
-                                {data?.ethRaisedInCurrentRound.toString() / 10 ** 18}
+                                {data?.total_eth_amount/ 10 ** 18}
                             </p>
                         </div>
                         <div className='CardsForData'>
@@ -262,7 +260,7 @@ function DashboardOne({ checkIsWalletConnected, changeNetwork, account, setAccou
                                 tokensSoldInCurrentRound
                             </p>
                             <p className='Card-text-two'>
-                                {Number(utils.formatEther(data?.tokensSoldInCurrentRound))}
+                                {data?.total_token_sale/10**18}
                             </p>
                         </div>
                         <div className='CardsForData'>
@@ -270,7 +268,7 @@ function DashboardOne({ checkIsWalletConnected, changeNetwork, account, setAccou
                                 usdtRaisedInCurrentRound
                             </p>
                             <p className='Card-text-two'>
-                                {data?.usdtRaisedInCurrentRound.toString() / 10 ** 6}
+                                {data?.total_usdt_amount/ 10 ** 6}
                             </p>
                         </div>
                         {/* <div className='CardsForData'>

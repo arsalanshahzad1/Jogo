@@ -26,14 +26,17 @@ import LinkedIn from "../../components/svg/LinkedIn";
 import { Loader } from "../../assets/Loader/Loader";
 
 
-const LandingPage = ({ state, setState, index, setIndex , }) => {
+const LandingPage = ({state, setState, index, setIndex , loader , setloader }) => {
   const zero = BigNumber.from(0);
   const [walletConnected, setWalletConnected] = useState(false);
   const [roundNumber, setRoundNumber] = useState(zero);
   const web3ModalRef = useRef();
   const [close, setClose] = useState("");
   const location = useLocation();
+  // const [loder, setloder] = useState(false)
+
   const searchParams = new URLSearchParams(location.search);
+
   const [activeSection, setActiveSection] = useState("home");
 
 
@@ -174,6 +177,9 @@ const LandingPage = ({ state, setState, index, setIndex , }) => {
 
   return (
     <>
+    {
+   loader ? <Loader/> :
+        
       <div className="home_wrap">
         <div className="container-fluid">
           <div className="row">
@@ -279,16 +285,8 @@ const LandingPage = ({ state, setState, index, setIndex , }) => {
                                 </h2>
                                 <div className="detail">
                                   <p>
-                                    {/* It blends the power of AI with the humor of
-                                    memes, providing a new and innovative way
-                                    for users to interact with this exciting
-                                    technology. AIM is poised to become a leader
-                                    in this space. Don't miss out on the
-                                    opportunity to be a part of this
-                                    game-changing platform! */}
                                     Welcome to AIM - the future of AI personal agents! Infusing cutting-edge AI with the humor of memes, we're pioneering an engaging digital experience. Join us, invest in innovation, and be part of this game-changing platform poised for industry leadership.
                                   </p>
-                                  {/* <p>Create Browse. Vote. <br /> The Future of meme sharing is here.</p> */}
                                 </div>
                               </div>
                               <div className="col-lg-6"></div>
@@ -323,12 +321,11 @@ const LandingPage = ({ state, setState, index, setIndex , }) => {
                               src="/assets/images/section-one/sec-6.png"
                               alt=""
                             />
-                            {/* <BillGates /> */}
                           </div>
                         </section>
                         <BillGates />
                         <Video />
-                        <PreSales />
+                        <PreSales loader ={loader} setloader={setloader}/>
                         <div className="sticky-background">
                           <div
                             className="bg-fixed-img"
@@ -341,7 +338,6 @@ const LandingPage = ({ state, setState, index, setIndex , }) => {
                               height={"100%"}
                             />
                           </div>
-                          {/* <PreSales /> */}
                           <div className="sec-absolute">
                             <TokenEconomics
                               index={index}
@@ -370,6 +366,7 @@ const LandingPage = ({ state, setState, index, setIndex , }) => {
           </div>
         </div>
       </div>
+      }
     </>
   );
 };

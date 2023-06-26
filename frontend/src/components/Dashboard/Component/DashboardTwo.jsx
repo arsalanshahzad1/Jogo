@@ -6,6 +6,7 @@ import aimContractAbi from "../../../contractsData/AIMToken.json";
 import aimContractAddress from "../../../contractsData/AIMToken-address.json";
 import { ethers } from 'ethers';
 import DashboardChart from './DashboardChart';
+import apis from '../../../Services';
 
 
 
@@ -25,52 +26,62 @@ const { ethereum } = window;
 
 function DashboardTwo({ account, setAccount }) {
     const [show, setShow] = useState(false)
-    const [selectedRound, setSelectedRound] = useState('CurrentRound');
+    const [selectedRound, setSelectedRound] = useState('month');
     const [runingRound, setrunningRound] = useState([]);
 
 
-    const getRound = async () => {
-        //check Round Data
-        let RoundData = [];
+    // const getRound = async () => {
+    //     //check Round Data
+    //     let RoundData = [];
         
-        let noOfUsersInRound = 0;
-        let tokensSoldInCurrentRound = 0;
-        let ethRaisedInCurrentRound = 0;
-        let usdtRaisedInCurrentRound = 0;
+    //     let noOfUsersInRound = 0;
+    //     let tokensSoldInCurrentRound = 0;
+    //     let ethRaisedInCurrentRound = 0;
+    //     let usdtRaisedInCurrentRound = 0;
 
-        let currentRoundss = await AimTokenContract().round();
+    //     let currentRoundss = await AimTokenContract().round();
         
-        if(currentRoundss > 0){
-            for (let i = 1; i < currentRoundss; i++) {
-                let runingRounds = await AimTokenContract().roundsData(i);
-                console.log("runingRounds",Number(runingRounds[3]))
+    //     if(currentRoundss > 0){
+    //         for (let i = 1; i < currentRoundss; i++) {
+    //             let runingRounds = await AimTokenContract().roundsData(i);
+    //             console.log("runingRounds",Number(runingRounds[3]))
     
-                   noOfUsersInRound+=Number(runingRounds[0]);
-                    tokensSoldInCurrentRound+=Number(runingRounds[1]);
-                    ethRaisedInCurrentRound+=Number(runingRounds[2]);
-                    usdtRaisedInCurrentRound+=Number(runingRounds[3]);
+    //                noOfUsersInRound+=Number(runingRounds[0]);
+    //                 tokensSoldInCurrentRound+=Number(runingRounds[1]);
+    //                 ethRaisedInCurrentRound+=Number(runingRounds[2]);
+    //                 usdtRaisedInCurrentRound+=Number(runingRounds[3]);
     
-            }
-        }
+    //         }
+    //     }
    
-        RoundData.push({
-            noOfUsersInRound: noOfUsersInRound, tokensSoldInCurrentRound: tokensSoldInCurrentRound, ethRaisedInCurrentRound: ethRaisedInCurrentRound,
-            usdtRaisedInCurrentRound: usdtRaisedInCurrentRound
-        });
-        setrunningRound(RoundData);
-        }
+    //     RoundData.push({
+    //         noOfUsersInRound: noOfUsersInRound, tokensSoldInCurrentRound: tokensSoldInCurrentRound, ethRaisedInCurrentRound: ethRaisedInCurrentRound,
+    //         usdtRaisedInCurrentRound: usdtRaisedInCurrentRound
+    //     });
+    //     setrunningRound(RoundData);
+    //     }
 
     const handleRoundSelect = (round) => {
         setSelectedRound(round);
         setShow(false);
     };
-
+    
+    const apiResponses = async()=>{
+        console.log('selectedRound',selectedRound);
+        const response = await apis.getdata(selectedRound);
+        setrunningRound([response.data.data])
+        console.log("response2", response);
+        
+    }
 
     useEffect(() => {
-        getRound();
+        apiResponses();
     }, [account, selectedRound]);
 
-    console.log("ss", runingRound[0]?.usdtRaisedInCurrentRound.toString() / 10 ** 6);
+    console.log("ss",runingRound );
+
+
+    
 
 
 
@@ -86,7 +97,7 @@ function DashboardTwo({ account, setAccount }) {
                                 Total Users
                             </p>
                             <p className='Card-text-two'>
-                                {data.noOfUsersInRound.toString()}
+                                {data?.total_users}
                             </p>
                         </div>
                         <div className='CardsForData width225'>
@@ -94,7 +105,7 @@ function DashboardTwo({ account, setAccount }) {
                                 Total ETH
                             </p>
                             <p className='Card-text-two'>
-                                {Number(data.ethRaisedInCurrentRound.toString()/10**18).toFixed(6)}
+                                {Number(data?.total_eth_amount/10**18).toFixed(6)}
                             </p>
                         </div>
                         <div className='CardsForData width225'>
@@ -102,7 +113,7 @@ function DashboardTwo({ account, setAccount }) {
                                 Total USDT
                             </p>
                             <p className='Card-text-two'>
-                                {Number(data.usdtRaisedInCurrentRound.toString() / 10 ** 6).toFixed(6)}
+                                {Number(data?.total_usdt_amount/10**6).toFixed(6)}
                             </p>
                         </div>
 
@@ -119,9 +130,9 @@ function DashboardTwo({ account, setAccount }) {
                                         <ArrowDropDownIcon />
                                     </div>
                                     <div className={`dropdowndiv ${show ? '' : 'hideDropdown'}`}>
-                                        <p onClick={() => handleRoundSelect('Weekly')}>Weekly</p>
-                                        <p onClick={() => handleRoundSelect('Daily')}>Daily</p>
-                                        <p onClick={() => handleRoundSelect('Yearly')}>Yearly</p>
+                                        <p onClick={() => handleRoundSelect('weekly')}>Weekly</p>
+                                        <p onClick={() => handleRoundSelect('daily')}>Daily</p>
+                                        <p onClick={() => handleRoundSelect('yearly')}>Yearly</p>
                                     </div>
                                 </div>
                             </div>

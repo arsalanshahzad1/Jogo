@@ -30,12 +30,12 @@ import TETHER_TOKEN_CONTRACT_ADDRESS from '../contractsData/TetherToken-address.
 
 import Claim from "../components/svg/Claim";
 
-const PreSales = () => {
+const PreSales = ({loader,setloader}) => {
   const zero = BigNumber.from(0);
+  console.log("loding",loader);
+  console.log("setloding",setloader);
 
   const [walletConnected, setWalletConnected] = useState(false);
-
-  const [loading, setLoading] = useState(false);
 
   const web3ModalRef = useRef();
 
@@ -62,6 +62,7 @@ const PreSales = () => {
   const [offBars, setOffBars] = useState(0);
 
   const [usersTokens, setUsersTokens] = useState(0);
+  const [price, setPrice] = useState(null)
 
   const onBarsList = [];
 
@@ -217,7 +218,10 @@ const PreSales = () => {
 
  
   const sendUSDT = async () => {
-    try {const signer = await getProviderOrSigner(true);
+    try {
+      setloader(true);
+      
+      const signer = await getProviderOrSigner(true);
 
       // Load the USDT contract
       const usdtContract = new Contract(
@@ -231,8 +235,9 @@ const PreSales = () => {
         AIMTOKEN_CONTRACT_ABI.abi,
         signer
       );
-  
-      const _amount = Number(document.getElementById("usdtInput").value);
+      const _amount = Number(price);
+      console.log(_amount,"_amount2");
+      // const _amount = Number(document.getElementById("usdtInput").value);
       const tokensPurchase = ethers.utils.parseEther(_amount.toString());
   
       const amountUSDT = await tokenContract.sellTokenInUDSTPrice(
@@ -250,11 +255,10 @@ const PreSales = () => {
       let tx = await tokenContract.mintByUSDT(tokensPurchase.toString());
   
       await tx.wait();
-      await tokenContract.on("RoundData",handleEvent);
-      sendUSDTBox(false)
-      window.alert("Successfully minted Crypto Dev Tokens");
-      
+      let reposnse = await tokenContract.on("RoundData",handleEvent);
+      setPrice('');   
     } catch (error) {
+      setloader(false)
       console.log(error);
     }
 
@@ -263,22 +267,23 @@ const PreSales = () => {
   };
 
   const sendETH = async () => {
-    try {
+ 
+       try {
+      setloader(true);
       const signer = await getProviderOrSigner(true);
-
 
       const tokenContract = new Contract(
         AIMTOKEN_CONTRACT_ADDRESS.address,
         AIMTOKEN_CONTRACT_ABI.abi,
         signer
       );
+      
+      const _amount = Number(price);
+  
+      // const _amount = Number(document.getElementById("ethInput").value);
 
-      const _amount = Number(document.getElementById("ethInput").value);
-
+      
       let tokenEth = ethers.utils.parseEther(_amount.toString())
-
-
-
 
       const amountValue = await tokenContract.sellTokenInETHPrice(tokenEth?.toString(), roundPrice * 10 ** 6);
 
@@ -288,15 +293,17 @@ const PreSales = () => {
         value: amountValue.toString(),
       });
 
-  
       // wait for the transaction to get mined
       await tx.wait();
-     
-      await tokenContract.on("RoundData",handleEvent);
-      sendUSDTBox(false)
-      window.alert("Successfully minted Crypto Dev Tokens");
+
+      let success = await tokenContract.on("RoundData",handleEvent);
+      setPrice('');
+      console.log("success",success);
+    
     
     } catch (err) {
+      setloader(false);
+      console.log(err);
     }
   };
 
@@ -509,9 +516,20 @@ const PreSales = () => {
     }
 
     const response = await apis.addUser(data);
-    console.log("response", response);
-
-  }
+    console.log('response',response.data.status);
+    if(response.data.status){
+      sendUSDTBox(false)
+      window.alert("Successfully minted Crypto Dev Tokens");
+      setloader(false);
+      window.location.reload();
+    }
+    else{
+      sendUSDTBox(false);
+      setloader(false);
+      window.location.reload();
+    }
+  
+ }
 
 
 
@@ -795,7 +813,8 @@ const PreSales = () => {
             <input
               placeholder="Enter number of tokens"
               type="number"
-              id="usdtInput"
+              // id="usdtInput"
+              onChange={(e) => setPrice(e.target.value)}
             ></input>
             <div className="button">
               <br />
@@ -827,7 +846,8 @@ const PreSales = () => {
             <input
               placeholder="Enter number of tokens"
               type="number"
-              id="ethInput"
+              // id="ethInput"
+              onChange={(e) => setPrice(e.target.value)}
             ></input>
             <div className="button">
               <br />

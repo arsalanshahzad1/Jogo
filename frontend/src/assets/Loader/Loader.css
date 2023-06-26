@@ -12,6 +12,10 @@
     -webkit-mask-repeat: no-repeat;
     animation: cu10 1.5s infinite;
     align-items: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
   }
   
   @keyframes cu10 {

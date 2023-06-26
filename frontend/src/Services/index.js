@@ -29,20 +29,14 @@ const createBackendServer = (baseURL) => {
 
     const addUser = async (body) => await api.post(`blockchain-user-data`,body);
     const getAll = async () => await api.get(`get-blockchain-users`);
-    const getToday = async () => await api.get(`get-blockchain-users?filter=today`);
-    const getWeek = async () => await api.get(`get-blockchain-users?filter=week`);
-    const getMonth = async () => await api.get(`get-blockchain-users?filter=month`);
-    const getYear = async () => await api.get(`get-blockchain-users?filter=year`);
-    const getRound = async (value) => await api.get(`get-blockchain-users?round=${value}`);
+    const getdata = async (body) => await api.get(`get-blockchain-users?filter=${body}`);
+    const getRound = async (body) => await api.get(`get-blockchain-users?round=${body}`);
 
     //Returning all the API
     return {
         addUser,
         getAll,
-        getToday,
-        getWeek,
-        getMonth,
-        getYear,
+        getdata,
         getRound  
     };
 };

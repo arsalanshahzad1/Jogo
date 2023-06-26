@@ -12,8 +12,9 @@ function App() {
   const [state, setState] = useState("home")
   const [index, setIndex] = useState(0)
   const [activeSection, setActiveSection] = useState(null);
+  const [loader, setloader] = useState(false)
 
-  const [loding, setloding] = useState(false)
+
   const [account, setAccount] = useState(null)
 
   ethereum.on("accountsChanged", async (account) => {
@@ -44,8 +45,8 @@ function App() {
     try {
       if (!ethereum) return alert("please install MetaMask");
       const accounts = await ethereum.request({ method: "eth_accounts" });
-      if (accounts.length) {
-        setAccount(accounts[0]);
+      setAccount(accounts[0]);
+      console.log("accounts",accounts);
         // Get provider from Metamask
         const provider = new ethers.providers.Web3Provider(window.ethereum)
         // Set signer
@@ -53,9 +54,7 @@ function App() {
         // loadContracts(signer)
         const accountss = await signer.getAddress();
         // Use the selected account to fetch the account name
-      } else {
-        console.log("No account Found");
-      }
+     
     } catch (err) {
       throw new Error("No ethereum Object");
     }
@@ -87,40 +86,40 @@ function App() {
   const changeScrollPosition = (event) => {
     setState(event)
     console.log('working');
-    if(state === 'home'){
+    if (state === 'home') {
       document
-      .getElementById(state)
-      ?.scrollIntoView?.({ block: "start", behavior: "smooth" });
+        .getElementById(state)
+        ?.scrollIntoView?.({ block: "start", behavior: "smooth" });
     }
-    if(state === 'tokenEnd'){
+    if (state === 'tokenEnd') {
       document
-      .getElementById(state)
-      ?.scrollIntoView?.({ block: "start", behavior: "smooth" });
+        .getElementById(state)
+        ?.scrollIntoView?.({ block: "start", behavior: "smooth" });
     }
-    if(state === 'fund'){
+    if (state === 'fund') {
       document
-      .getElementById(state)
-      ?.scrollIntoView?.({ block: "start", behavior: "smooth" });
+        .getElementById(state)
+        ?.scrollIntoView?.({ block: "start", behavior: "smooth" });
     }
-    if(state === 'roadmap'){
+    if (state === 'roadmap') {
       document
-      .getElementById(state)
-      ?.scrollIntoView?.({ block: "start", behavior: "smooth" });
+        .getElementById(state)
+        ?.scrollIntoView?.({ block: "start", behavior: "smooth" });
     }
-    if(state === 'team'){
+    if (state === 'team') {
       document
-      .getElementById(state)
-      ?.scrollIntoView?.({ block: "start", behavior: "smooth" });
+        .getElementById(state)
+        ?.scrollIntoView?.({ block: "start", behavior: "smooth" });
     }
-    if(state === 'About-us'){
+    if (state === 'About-us') {
       document
-      .getElementById(state)
-      ?.scrollIntoView?.({ block: "start", behavior: "smooth" });
+        .getElementById(state)
+        ?.scrollIntoView?.({ block: "start", behavior: "smooth" });
     }
-    if(state === 'faqs'){
+    if (state === 'faqs') {
       document
-      .getElementById(state)
-      ?.scrollIntoView?.({ block: "start", behavior: "smooth" });
+        .getElementById(state)
+        ?.scrollIntoView?.({ block: "start", behavior: "smooth" });
     }
   }
 
@@ -129,7 +128,7 @@ function App() {
 
   useEffect(() => {
     checkIsWalletConnected();
-  }, [account , state])
+  }, [account, state])
 
   return (
     <Router>
@@ -143,6 +142,8 @@ function App() {
           setIndex={setIndex}
           activeSection={activeSection}
           setActiveSection={setActiveSection}
+          loader={loader}
+          setloader={setloader}
         />} />
         {/* <Route path='/pre-sale' element={<PreSales />} /> */}
         <Route path='/' exact
@@ -153,6 +154,8 @@ function App() {
             setIndex={setIndex}
             activeSection={activeSection}
             setActiveSection={setActiveSection}
+            loader={loader}
+            setloader={setloader}
           />
           } />
 
