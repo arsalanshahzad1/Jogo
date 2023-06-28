@@ -1,11 +1,12 @@
 import React, { useEffect } from 'react'
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 import DashboardTwo from '../Component/DashboardTwo';
 import DashboardOne from '../Component/DashboardOne';
 import Presale from '../../svg/Presale';
+import WalletConnect from '../../svg/WalletConnect';
 
-function Dashboard({ changeNetwork, account,setAccount }) {
-   
+function Dashboard({ changeNetwork, account, setAccount }) {
+
     const checkIsWalletConnected = async () => {
         try {
             if (!ethereum) return alert("please install MetaMask");
@@ -34,26 +35,46 @@ function Dashboard({ changeNetwork, account,setAccount }) {
 
 
     return (
-        <div className='DashboardMain dashboardResponsive'>
-            <div className='DashboardInner'>
-             <div className='DashboardMainHeading'>
 
-                    <Routes>
-                        <Route path='/' element={<div >Dashboard </div>} />
-                        <Route path='/overview' element={<div >Overview </div>} />
-                    </Routes>
-                </div>
-                <div className='DashboardContentHolder'>
-                    <div className='ComponentHolder'>
+        account?.toLowerCase().toString() === "0xB08F5f1D719cE9e6cb320253589483CE47fF0072".toLowerCase().toString()
+            ?
+            <div className='DashboardMain dashboardResponsive'>
+                <div className='DashboardInner'>
+                    <div className='DashboardMainHeading'>
+
                         <Routes>
-                            <Route path='/' element={<DashboardOne checkIsWalletConnected={checkIsWalletConnected} changeNetwork={changeNetwork} account={ account} setAccount={ setAccount} />} />
-                            <Route path='/overview' element={<DashboardTwo account={ account} setAccount={ setAccount}  />} />
+                            <Route path='/' element={<div >Dashboard </div>} />
+                            <Route path='/overview' element={<div >Overview </div>} />
                         </Routes>
                     </div>
+                    <div className='DashboardContentHolder'>
+                        <div className='ComponentHolder'>
+                            <Routes>
+                                <Route path='/' element={<DashboardOne checkIsWalletConnected={checkIsWalletConnected} changeNetwork={changeNetwork} account={account} setAccount={setAccount} />} />
+                                <Route path='/overview' element={<DashboardTwo account={account} setAccount={setAccount} />} />
+                            </Routes>
+                        </div>
+                    </div>
                 </div>
+
+            </div >
+            :
+
+            <div className='DashboardMain dashboardResponsive2'>
+                <div className='DashboardMainHeading2'>
+                    You Are Not Authorised To View This Page
+                    <br/>
+                    <Link onClick={changeNetwork}>
+                    <WalletConnect />
+                </Link>
+                </div>
+              
             </div>
 
-        </div >
+
+
+
+
     )
 }
 

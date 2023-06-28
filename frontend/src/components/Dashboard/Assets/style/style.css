@@ -54,6 +54,11 @@
     flex: 95%;
 }
 
+.dashboardResponsive2 {
+    flex: 95%;
+    position: relative;
+}
+
 .hide {
     display: none !important;
 }
@@ -176,6 +181,17 @@
     color: white;
     padding-left: 5px;
     font-family: 'heading';
+}
+.DashboardMainHeading2 {
+    font-size: 40px;
+    color: white;
+    padding-left: 5px;
+    font-family: 'heading';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
 }
 
 .DashboardContentHolder {
