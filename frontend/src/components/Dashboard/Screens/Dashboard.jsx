@@ -63,12 +63,16 @@ function Dashboard({ changeNetwork, account, setAccount }) {
             <div className='DashboardMain dashboardResponsive2'>
                 <div className='DashboardMainHeading2'>
                     You Are Not Authorised To View This Page
-                    <br/>
-                    <Link onClick={changeNetwork}>
-                    <WalletConnect />
-                </Link>
+                    <br />
+                    {account ?
+                        ""
+                        :
+                        <Link onClick={changeNetwork}>
+                            <WalletConnect />
+                        </Link>
+                    }
                 </div>
-              
+
             </div>
 
 
