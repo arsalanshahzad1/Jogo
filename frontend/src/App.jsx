@@ -17,10 +17,10 @@ function App() {
 
   const [account, setAccount] = useState(null)
 
-  ethereum.on("accountsChanged", async (account) => {
-    setAccount(account[0]);
-    window.location.reload()
-  })
+  // ethereum.on("accountsChanged", async (account) => {
+  //   setAccount(account[0]);
+  //   window.location.reload()
+  // })
 
   const changeNetwork = async () => {
     try {
@@ -122,8 +122,6 @@ function App() {
         ?.scrollIntoView?.({ block: "start", behavior: "smooth" });
     }
   }
-
-
 
 
   useEffect(() => {

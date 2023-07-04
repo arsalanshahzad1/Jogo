@@ -135,7 +135,6 @@ const LandingPage = ({state, setState, index, setIndex , loader , setloader }) =
         providerOptions: {},
         disableInjectedProvider: false,
       });
-      connectWallet();
       getNumberOfRound();
       getUSDTPrice();
     }
@@ -202,8 +201,8 @@ const LandingPage = ({state, setState, index, setIndex , loader , setloader }) =
                           </span>
                         </Link>
                         <ul className="social-icons">
-                          <li>
-                            <Link onClick={openPdfInNewTab}>{" "}<Doc />
+                          <li>                      
+                            <Link onClick={connectWallet}><Wallet/>
                             </Link>
                           </li>
                           <li>
