@@ -37,8 +37,8 @@ const Team = () => {
           arrows={false}
           responsive={responsive}
           ssr={true} // means to render carousel on server-side.
-          infinite={true}
-          autoPlay={true}
+          infinite={false}
+          autoPlay={false}
           autoPlaySpeed={3000}
           keyBoardControl={true}
           customTransition="all .5"
@@ -46,12 +46,14 @@ const Team = () => {
         >
 
           <div className="last-sec-wrap">
+            <a href="https://twitter.com/ChingizAim" target="_blank">
             <img src="/assets/images/Chingiz.png" alt="" />
+            </a>
             <p>Chingiz Ianda</p>
           </div>
 
 
-          <div className="last-sec-wrap">
+          {/* <div className="last-sec-wrap">
             <img src="/assets/images/section-last/last-1.png" alt="" />
             <p>APE</p>
           </div>
@@ -76,7 +78,7 @@ const Team = () => {
           <div className="last-sec-wrap">
             <img src="/assets/images/section-last/last-5.png" alt="" />
             <p>Shiba Ai</p>
-          </div>
+          </div> */}
 
         </Carousel>
 

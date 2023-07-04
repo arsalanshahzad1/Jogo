@@ -2632,6 +2632,10 @@ input[type=number] {
 
 .connect-modal-wrap .modal-content .connect-data {}
 
+.react-multi-carousel-list{
+  justify-content: center;
+}
+
 @keyframes loader-pulse {
   0% {
     opacity: .9
@@ -2691,12 +2695,22 @@ input[type=number] {
     font-size: 16px !important;
   }
 
+  .FAQ-question {
+    color: #ffc107;
+    text-align: center;
+    font-size: 18px !important;
+    line-height: 20px !important;
+    margin: 15px 0px !important;
+    padding: 15px 0px !important;
+}
 
 
   .Billgates-section{
     background-color: #272727;
     border-radius: 16px 8px 8px 16px;
     margin-bottom: 20px;
+    height: auto !important;
+    padding: 20px 0px;
   }
 
   .About-section{
@@ -2718,7 +2732,7 @@ input[type=number] {
   font-size: 24px !important;
   color: #ffc107;
   line-height: 28px;
-  margin-bottom: 20px !important;
+ padding: 20px 0px !important;
 }
 
 
@@ -3039,6 +3053,10 @@ input[type=number] {
   .modal-dialog {
     width: 500px;
   }
+
+  .home-wrap{
+    text-align: center !important;
+  }
 }
 
 @media only screen and (max-width: 550px) {
@@ -3054,9 +3072,18 @@ input[type=number] {
     padding-bottom: 10px;
   }
 
-  .home-section-one .detail p {
-    font-size: 16px;
-    line-height: 18px;
+  .home-section-one .detail p:nth-child(1) {
+    font-size: 22px;
+    font-weight: 600;
+    line-height: 26px;
+    text-align: center;
+    margin-bottom: 10px !important;
+  }
+  .home-section-one .detail p:nth-child(2) {
+    font-size: 18px;
+    line-height: 22px;
+    text-align: center;
+    margin-bottom: 20px !important;
   }
 
   .home-wrap .image-two {
@@ -3186,7 +3213,7 @@ input[type=number] {
   margin: 3% auto !important;
   color: #fff;
   text-align: center;
-  font-size: 22px;
+  font-size: 16px;
   line-height: 26px;
   font-family: 'sub-content';
 }
@@ -3242,6 +3269,15 @@ input[type=number] {
   text-align: center;
   font-size: 32px;
   color: #ffc107;
+  margin-bottom: 0px !important;
+}
+
+.white-paper{
+  position: absolute;
+  left: 25%;
+  top: 80%;
+  transform: translate(-25% , -70%);
+  z-index: 9999;
 }
 
 .FAQ-question {
@@ -3262,7 +3298,7 @@ input[type=number] {
 }
 
 .FAQ-inner {
-  padding: 35px;
+  padding: 20px;
   z-index: 99999;
   position: relative;
 }

@@ -288,6 +288,11 @@ const LandingPage = ({state, setState, index, setIndex , loader , setloader }) =
                                     Welcome to AIM - the future of AI personal agents! Infusing cutting-edge AI with the humor of memes, we're pioneering an engaging digital experience. Join us, invest in innovation, and be part of this game-changing platform poised for industry leadership.
                                   </p>
                                 </div>
+                                <div className="white-paper">
+                                  <Link onClick={openPdfInNewTab}>
+                                    <BuyNow/>
+                                  </Link>
+                                </div>
                               </div>
                               <div className="col-lg-6"></div>
                             </div>
