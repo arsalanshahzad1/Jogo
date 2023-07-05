@@ -23,7 +23,7 @@ error transferFaild();
 error roundSupplyLimitExceed();
 error waitForStartingSaleRoud();
 error contractDontHaveUSDT();
-error youHavePurchasedToken();
+error youDontHaveEnoughTokens();
 error mintingIsNotAllowed();
 error pleaseSendTokenPrice();
 error allRoundsAreFinished();
@@ -66,7 +66,7 @@ contract AIMToken is ERC20, Ownable {
 
     modifier isListed() {
         if (soldTokens[msg.sender] <= 0) {
-            revert youHavePurchasedToken();
+            revert youDontHaveEnoughTokens();
         }
         _;
     }
@@ -117,7 +117,7 @@ contract AIMToken is ERC20, Ownable {
                 payAmountInUDST < 30*10**6 ||
                 USDTtoken.balanceOf(msg.sender) < payAmountInUDST
             ) {
-                //price*token/ether
+            
                 revert youDontHaveEnoughUsdtORplasePurchaseMorethan30UsdtToken();
             }
 
@@ -136,7 +136,7 @@ contract AIMToken is ERC20, Ownable {
                  payAmountInUDST < 30*10**6 ||
                 USDTtoken.balanceOf(msg.sender) < payAmountInUDST
             ) {
-                //price*token/ether
+            
                 revert youDontHaveEnoughUsdtORplasePurchaseMorethan30UsdtToken();
             }
             USDTtoken.transferFrom(msg.sender, address(this), payAmountInUDST);
@@ -154,7 +154,7 @@ contract AIMToken is ERC20, Ownable {
                  payAmountInUDST < 30*10**6 ||
                 USDTtoken.balanceOf(msg.sender) < payAmountInUDST
             ) {
-                //price*token/ether
+            
                 revert youDontHaveEnoughUsdtORplasePurchaseMorethan30UsdtToken();
             }
             USDTtoken.transferFrom(msg.sender, address(this), payAmountInUDST);
@@ -172,7 +172,7 @@ contract AIMToken is ERC20, Ownable {
                  payAmountInUDST < 30*10**6  ||
                 USDTtoken.balanceOf(msg.sender) < payAmountInUDST
             ) {
-                //price*token/ether
+            
                 revert youDontHaveEnoughUsdtORplasePurchaseMorethan30UsdtToken();
             }
             USDTtoken.transferFrom(msg.sender, address(this), payAmountInUDST);
@@ -190,7 +190,7 @@ contract AIMToken is ERC20, Ownable {
                  payAmountInUDST < 30*10**6 ||
                 USDTtoken.balanceOf(msg.sender) < payAmountInUDST
             ) {
-                //price*token/ether
+            
                 revert youDontHaveEnoughUsdtORplasePurchaseMorethan30UsdtToken();
             }
             USDTtoken.transferFrom(msg.sender, address(this), payAmountInUDST);
@@ -216,13 +216,13 @@ contract AIMToken is ERC20, Ownable {
         if (round == 1) {
             uint256 payAmountInUDST = sellTokenInUDSTPrice(_amount,round1Price);
             if (payAmountInUDST < 30*10**6) {
-                //price*token/ether
+            
                 revert pleasePurchaseMorethan30Doller();
             }
 
             uint256 payAmount = sellTokenInETHPrice(_amount, round1Price);
             if (msg.value < payAmount) {
-                //price*token/ether
+            
                 revert pleaseSendTokenPrice();
             }
             remainingSupply -= _amount;
@@ -233,13 +233,13 @@ contract AIMToken is ERC20, Ownable {
         else if (round == 2) {
             uint256 payAmountInUDST = sellTokenInUDSTPrice(_amount,round2Price);
             if (payAmountInUDST < 30*10**6) {
-                //price*token/ether
+            
                 revert pleasePurchaseMorethan30Doller();
             }
 
             uint256 payAmount = sellTokenInETHPrice(_amount, round2Price);
             if (msg.value < payAmount) {
-                //price*token/ether
+            
                 revert pleaseSendTokenPrice();
             }
             remainingSupply -= _amount;
@@ -250,13 +250,13 @@ contract AIMToken is ERC20, Ownable {
         else if (round == 3) {
             uint256 payAmountInUDST = sellTokenInUDSTPrice(_amount,round3Price);
             if (payAmountInUDST < 30*10**6) {
-                //price*token/ether
+            
                 revert pleasePurchaseMorethan30Doller();
             }
 
             uint256 payAmount = sellTokenInETHPrice(_amount, round3Price);
             if (msg.value < payAmount) {
-                //price*token/ether
+            
                 revert pleaseSendTokenPrice();
             }
             remainingSupply -= _amount;
@@ -267,14 +267,14 @@ contract AIMToken is ERC20, Ownable {
         else if (round == 4) {
             uint256 payAmountInUDST = sellTokenInUDSTPrice(_amount,round4Price);
             if (payAmountInUDST < 30*10**6) {
-                //price*token/ether
+            
                 revert pleasePurchaseMorethan30Doller();
             }
 
             uint256 payAmount = sellTokenInETHPrice(_amount, round4Price);
 
             if (msg.value < payAmount) {
-                //price*token/ether
+            
                 revert pleaseSendTokenPrice();
             }
             remainingSupply -= _amount;
@@ -286,7 +286,7 @@ contract AIMToken is ERC20, Ownable {
 
             uint256 payAmountInUDST = sellTokenInUDSTPrice(_amount,round5Price);
             if (payAmountInUDST < 30*10**6) {
-                //price*token/ether
+            
                 revert pleasePurchaseMorethan30Doller();
             }
 
@@ -294,7 +294,7 @@ contract AIMToken is ERC20, Ownable {
             uint256 payAmount = sellTokenInETHPrice(_amount, round5Price);
 
             if (msg.value < payAmount) {
-                //price*token/ether
+            
                 revert pleaseSendTokenPrice();
             }
             remainingSupply -= _amount;
@@ -331,7 +331,6 @@ contract AIMToken is ERC20, Ownable {
     //withdraw USDT tokens
     function withdrawUSDT(uint256 _amount) public onlyOwner {
         if (USDTtoken.balanceOf(msg.sender) < 1000000) {
-            //price*token/ether
             revert contractDontHaveUSDT();
         }
         USDTtoken.transfer(owner(), _amount);
@@ -339,7 +338,7 @@ contract AIMToken is ERC20, Ownable {
 
     //claiming Tokens
     function claimAIMToken() public isListed {
-        if (round != 6) {
+        if (round < 6) {
             revert pleaseWaitForPreSaleEnd();
         }
 

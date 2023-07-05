@@ -37,28 +37,28 @@ async function main() {
 
 
 
-let usdtToken = await ethers.getContractAt("TetherToken", USDT);
- const imperUSDC = "0xA7A93fd0a276fc1C0197a5B5623eD117786eeD06";
+  let usdtToken = await ethers.getContractAt("TetherToken", USDT);
+  const imperUSDC = "0xA7A93fd0a276fc1C0197a5B5623eD117786eeD06";
 
-    await network.provider.request({
-      method: "hardhat_impersonateAccount",
-      params: [imperUSDC],
-    });
+  await network.provider.request({
+    method: "hardhat_impersonateAccount",
+    params: [imperUSDC],
+  });
 
-    const signer = await ethers.getSigner(imperUSDC);
+  const signer = await ethers.getSigner(imperUSDC);
 
-    console.log(
-      "Vitalik account before transaction",
-      ethers.utils.formatEther(await signer.getBalance())
-    );
+  console.log(
+    "Vitalik account before transaction",
+    ethers.utils.formatEther(await signer.getBalance())
+  );
 
-    let USDTtoken = await usdtToken.connect(signer).balanceOf(signer.getAddress());
-    console.log("ImpersonateAccount Balance", USDTtoken)
+  let USDTtoken = await usdtToken.connect(signer).balanceOf(signer.getAddress());
+  console.log("ImpersonateAccount Balance", USDTtoken)
 
-    await usdtToken.connect(signer).transfer("0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266", USDTtoken);
-    let balance = await usdtToken.balanceOf("0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266");
+  await usdtToken.connect(signer).transfer("0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266", USDTtoken);
+  let balance = await usdtToken.balanceOf("0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266");
 
-    console.log("usdToken balance ", balance)
+  console.log("usdToken balance ", balance)
   saveFrontendFiles(deployedAIMTokenContract, "AIMToken");
 
 }
