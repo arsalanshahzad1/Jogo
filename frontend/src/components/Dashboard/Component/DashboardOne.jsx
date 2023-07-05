@@ -164,15 +164,15 @@ function DashboardOne({ checkIsWalletConnected, changeNetwork, account, setAccou
     const currentRound = async () => {
         let currentRoundss = await AimTokenContract().round();
 
-        console.log("currentRoundsssssssssssssssssssssss", Number(currentRoundss) + 1)
+        // console.log("currentRoundsssssssssssssssssssssss", Number(currentRoundss) + 1)
         setUpcomingRound(Number(currentRoundss) + 1)
     }
 
     const apiResponses = async()=>{
-        console.log('selectedRound',selectedRound);
+        // console.log('selectedRound',selectedRound);
         const response = await apis.getRound(selectedRound);
         setrunningRound([response.data.data])
-        console.log("response2", response.data.data);
+        // console.log("response2", response.data.data);
         
     }
 
@@ -197,7 +197,7 @@ function DashboardOne({ checkIsWalletConnected, changeNetwork, account, setAccou
         apiResponses();
     }, [account, selectedRound]);
 
-console.log('runingRound',runingRound);
+// console.log('runingRound',runingRound);
     
     return (
         <div>

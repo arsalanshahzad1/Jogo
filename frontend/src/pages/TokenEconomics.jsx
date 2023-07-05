@@ -2,7 +2,7 @@ import React from "react";
 import PirChartTwo from "../components/common/PirChartTwo";
 
 const TokenEconomics = (index, setIndex, activeRound) => {
-  console.log("activeRound", index.activeRound);
+  // console.log("activeRound", index.activeRound);
 
   const round = index.activeRound;
 

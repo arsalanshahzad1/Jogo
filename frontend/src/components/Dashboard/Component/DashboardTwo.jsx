@@ -22,7 +22,7 @@ function DashboardTwo({ account, setAccount }) {
     const getUsersData = async()=>{
         const response = await apis.getdata();
         setData(response?.data?.data)
-        console.log("response2", response);
+        // console.log("response2", response);
     }
 
 
@@ -41,7 +41,7 @@ function DashboardTwo({ account, setAccount }) {
         const ethWeekData = response?.data?.data?.EthDataByWeek.map((item)=>{
             if(item > 100000)
             {
-                console.log("CAAAAAAAAAAAAAAAAAAAAA")
+                // console.log("CAAAAAAAAAAAAAAAAAAAAA")
                 return Number(item/10**18).toFixed(4)
             }
             return item
@@ -60,11 +60,11 @@ function DashboardTwo({ account, setAccount }) {
     })
         setStatisticsDataMonthly({total_eth:data ,total_users:response?.data?.data.total_users})      
     }
-console.log(data,"data")
+// console.log(data,"data")
 
-console.log(statisticsData,"statisticsData")
+// console.log(statisticsData,"statisticsData")
 
-console.log(statisticsDataMonthly,"statisticsDataMonthly")
+// console.log(statisticsDataMonthly,"statisticsDataMonthly")
     
 
    useEffect(() => {

@@ -1,126 +1,151 @@
-const {
-  time,
-  loadFixture,
-} = require("@nomicfoundation/hardhat-network-helpers");
-const { anyValue } = require("@nomicfoundation/hardhat-chai-matchers/withArgs");
 const { expect } = require("chai");
+const { ethers } = require("hardhat");
+const { Provider } = require("web3modal");
 
-describe("Lock", function () {
-  // We define a fixture to reuse the same setup in every test.
-  // We use loadFixture to run this setup once, snapshot that state,
-  // and reset Hardhat Network to that snapshot in every test.
-  async function deployOneYearLockFixture() {
-    const ONE_YEAR_IN_SECS = 365 * 24 * 60 * 60;
-    const ONE_GWEI = 1_000_000_000;
 
-    const lockedAmount = ONE_GWEI;
-    const unlockTime = (await time.latest()) + ONE_YEAR_IN_SECS;
 
-    // Contracts are deployed using the first signer/account by default
-    const [owner, otherAccount] = await ethers.getSigners();
+// async function mineNBlocks(n) {
+//   for (let index = 0; index < n; index++) {
+//     await ethers.provider.send('evm_mine');
+//   }
+// }
 
-    const Lock = await ethers.getContractFactory("Lock");
-    const lock = await Lock.deploy(unlockTime, { value: lockedAmount });
+describe("This Is AIM", function () {
 
-    return { lock, unlockTime, lockedAmount, owner, otherAccount };
-  }
 
-  describe("Deployment", function () {
-    it("Should set the right unlockTime", async function () {
-      const { lock, unlockTime } = await loadFixture(deployOneYearLockFixture);
+  let TetherToken
+  let Tether
+  let AIMToken
+  let AIM
+  let usdtToken
 
-      expect(await lock.unlockTime()).to.equal(unlockTime);
-    });
+  let USDT = "0xdAC17F958D2ee523a2206206994597C13D831ec7";
 
-    it("Should set the right owner", async function () {
-      const { lock, owner } = await loadFixture(deployOneYearLockFixture);
+  before(async () => {
+    [per1, per2, per3] = await ethers.getSigners()
 
-      expect(await lock.owner()).to.equal(owner.address);
-    });
+    AIMToken = await ethers.getContractFactory("AIMToken")
+    AIM = await AIMToken.deploy();
+    console.log("AIM contract address", AIM.address);
 
-    it("Should receive and store the funds to lock", async function () {
-      const { lock, lockedAmount } = await loadFixture(
-        deployOneYearLockFixture
-      );
+    usdtToken = await ethers.getContractAt("TetherToken", USDT);
 
-      expect(await ethers.provider.getBalance(lock.address)).to.equal(
-        lockedAmount
-      );
-    });
-
-    it("Should fail if the unlockTime is not in the future", async function () {
-      // We don't use the fixture here because we want a different deployment
-      const latestTime = await time.latest();
-      const Lock = await ethers.getContractFactory("Lock");
-      await expect(Lock.deploy(latestTime, { value: 1 })).to.be.revertedWith(
-        "Unlock time should be in the future"
-      );
-    });
   });
 
-  describe("Withdrawals", function () {
-    describe("Validations", function () {
-      it("Should revert with the right error if called too soon", async function () {
-        const { lock } = await loadFixture(deployOneYearLockFixture);
 
-        await expect(lock.withdraw()).to.be.revertedWith(
-          "You can't withdraw yet"
-        );
-      });
+  it("this is get Round", async function () {
+    await AIM.startTheSale();
+    let round = await AIM.round();
+    console.log("this is Round", round);
+  })
+  it("this is get Round", async function () {
+    await AIM.startTheSale();
+    let round = await AIM.round();
+    console.log("this is Round", round);
+  })
+  it("this is get Round", async function () {
+    await AIM.startTheSale();
+    let round = await AIM.round();
+    console.log("this is Round", round);
+  })
+  it("this is get Round", async function () {
+    await AIM.startTheSale();
+    let round = await AIM.round();
+    console.log("this is Round", round);
+  })
+  it("this is get Round", async function () {
+    await AIM.startTheSale();
+    let round = await AIM.round();
+    console.log("this is Round", round);
+  })
 
-      it("Should revert with the right error if called from another account", async function () {
-        const { lock, unlockTime, otherAccount } = await loadFixture(
-          deployOneYearLockFixture
-        );
 
-        // We can increase the time in Hardhat Network
-        await time.increaseTo(unlockTime);
 
-        // We use lock.connect() to send a transaction from another account
-        await expect(lock.connect(otherAccount).withdraw()).to.be.revertedWith(
-          "You aren't the owner"
-        );
-      });
 
-      it("Shouldn't fail if the unlockTime has arrived and the owner calls it", async function () {
-        const { lock, unlockTime } = await loadFixture(
-          deployOneYearLockFixture
-        );
+  it("this is impersonate account ", async function () {
+    /// trying to take token from mainnet 
+    const imperUSDC = "0xA7A93fd0a276fc1C0197a5B5623eD117786eeD06";
 
-        // Transactions are sent using the first signer by default
-        await time.increaseTo(unlockTime);
-
-        await expect(lock.withdraw()).not.to.be.reverted;
-      });
+    await network.provider.request({
+      method: "hardhat_impersonateAccount",
+      params: [imperUSDC],
     });
 
-    describe("Events", function () {
-      it("Should emit an event on withdrawals", async function () {
-        const { lock, unlockTime, lockedAmount } = await loadFixture(
-          deployOneYearLockFixture
-        );
+    const signer = await ethers.getSigner(imperUSDC);
 
-        await time.increaseTo(unlockTime);
+    console.log(
+      "Vitalik account before transaction",
+      ethers.utils.formatEther(await signer.getBalance())
+    );
 
-        await expect(lock.withdraw())
-          .to.emit(lock, "Withdrawal")
-          .withArgs(lockedAmount, anyValue); // We accept any value as `when` arg
-      });
-    });
+    let USDTtoken = await usdtToken.connect(signer).balanceOf(signer.getAddress());
+    console.log("ImpersonateAccount Balance", USDTtoken)
 
-    describe("Transfers", function () {
-      it("Should transfer the funds to the owner", async function () {
-        const { lock, unlockTime, lockedAmount, owner } = await loadFixture(
-          deployOneYearLockFixture
-        );
+    await usdtToken.connect(signer).transfer(per1.getAddress(), USDTtoken);
+    let balance = await usdtToken.balanceOf(per1.getAddress());
 
-        await time.increaseTo(unlockTime);
+    console.log("usdToken balance ", balance)
 
-        await expect(lock.withdraw()).to.changeEtherBalances(
-          [owner, lock],
-          [lockedAmount, -lockedAmount]
-        );
-      });
-    });
+  })
+
+  it("Get latus price ", async function () {
+    let price = await AIM.getLatestUSDTPrice();
+    console.log("lets Price", price);
+  })
+
+
+  it("lets swap by ETH ", async function () {
+
+
+    const balance = await ethers.provider.getBalance(AIM.address);
+    // Convert the balance to ether
+    const balanceInEther = ethers.utils.formatEther(balance);
+    console.log(balanceInEther);
+
+    let token = ethers.utils.parseEther("370");
+    // let getPrice = await AIM.sellTokenInETHPrice(token,"80000");
+    // await AIM.mintByEth(token, { value: getPrice })
+
+
+    let getPrice2 = await AIM.sellTokenInUDSTPrice(token,"80000");
+    await usdtToken.approve(AIM.address,getPrice2);
+    await AIM.mintByUSDT(token)
+
+    const afterbalance = await ethers.provider.getBalance(AIM.address);
+    // Convert the balance to ether
+    const afterbalances = ethers.utils.formatEther(afterbalance);
+    console.log("afterbalance", Number(afterbalances).toFixed(6));
+    console.log("afterbalance without fix", afterbalance.toString());
+
+    //   let balance = await usdtToken.balanceOf(account2);
+    //   console.log("usdToken balance ", balance)
+
   });
+
+  it("this is error check of round before  ", async function(){
+    await AIM.claimAIMToken();
+  })
+
+  it("this is get Round", async function () {
+    await AIM.startTheSale();
+    let round = await AIM.round();
+    console.log("this is Round", round);
+  })
+
+  it("this is error check of round ", async function(){
+    await AIM.claimAIMToken();
+  })
+
+  it("this is get Round", async function () {
+    await AIM.startTheSale();
+    let round = await AIM.round();
+    console.log("this is Round", round);
+  })
+
+  it("this is checking balance after calm token", async function (){
+    
+    let balance = await AIM.balanceOf(per1.getAddress());
+    console.log("usdToken balance ", balance)
+  })
+
 });

@@ -5,10 +5,11 @@ async function main() {
   A ContractFactory in ethers.js is an abstraction used to deploy new smart contracts,
   so whitelistContract here is a factory for instances of our Whitelist contract.
   */
+  let USDT = "0xdAC17F958D2ee523a2206206994597C13D831ec7";
   const TetherTokenContract = await ethers.getContractFactory("TetherToken");
 
   // here we deploy the contract
-  const deployedTetherTokenContract = await TetherTokenContract.deploy();
+  const deployedTetherTokenContract = await TetherTokenContract.deploy("1000000", "Mohsin", "MRS", "6");
   // 10 is the Maximum number of whitelisted addresses allowed
 
   // Wait for it to finish deploying
@@ -19,12 +20,13 @@ async function main() {
     "TetherToken Contract Address:",
     deployedTetherTokenContract.address
   );
+
+
+
   const AIMTokenContract = await ethers.getContractFactory("AIMToken");
 
   // here we deploy the contract
-  const deployedAIMTokenContract = await AIMTokenContract.deploy(
-    deployedTetherTokenContract.address
-  );
+  const deployedAIMTokenContract = await AIMTokenContract.deploy();
   // 10 is the Maximum number of whitelisted addresses allowed
 
   // Wait for it to finish deploying
@@ -33,9 +35,34 @@ async function main() {
   // print the address of the deployed contract
   console.log("AIMToken Contract Address:", deployedAIMTokenContract.address);
 
+
+
+let usdtToken = await ethers.getContractAt("TetherToken", USDT);
+ const imperUSDC = "0xA7A93fd0a276fc1C0197a5B5623eD117786eeD06";
+
+    await network.provider.request({
+      method: "hardhat_impersonateAccount",
+      params: [imperUSDC],
+    });
+
+    const signer = await ethers.getSigner(imperUSDC);
+
+    console.log(
+      "Vitalik account before transaction",
+      ethers.utils.formatEther(await signer.getBalance())
+    );
+
+    let USDTtoken = await usdtToken.connect(signer).balanceOf(signer.getAddress());
+    console.log("ImpersonateAccount Balance", USDTtoken)
+
+    await usdtToken.connect(signer).transfer("0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266", USDTtoken);
+    let balance = await usdtToken.balanceOf("0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266");
+
+    console.log("usdToken balance ", balance)
   saveFrontendFiles(deployedAIMTokenContract, "AIMToken");
-  saveFrontendFiles(deployedTetherTokenContract, "TetherToken");
+
 }
+
 // Call the main function and catch if there is any error
 function saveFrontendFiles(contract, name) {
   const fs = require("fs");

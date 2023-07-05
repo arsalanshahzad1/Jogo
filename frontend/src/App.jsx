@@ -7,7 +7,7 @@ import PreSales from './pages/PreSales';
 import Main from './components/Dashboard/Screens/Main';
 import Dashboard from './components/Dashboard/Screens/Dashboard';
 
-
+const { ethereum } = window;
 function App() {
   const [state, setState] = useState("home")
   const [index, setIndex] = useState(0)
@@ -42,11 +42,11 @@ function App() {
   });
 
   const checkIsWalletConnected = async () => {
-    try {
+  try {
       if (!ethereum) return alert("please install MetaMask");
       const accounts = await ethereum.request({ method: "eth_accounts" });
       setAccount(accounts[0]);
-      console.log("accounts",accounts);
+      // console.log("accounts",accounts);
         // Get provider from Metamask
         const provider = new ethers.providers.Web3Provider(window.ethereum)
         // Set signer
@@ -54,7 +54,6 @@ function App() {
         // loadContracts(signer)
         const accountss = await signer.getAddress();
         // Use the selected account to fetch the account name
-     
     } catch (err) {
       throw new Error("No ethereum Object");
     }
@@ -85,7 +84,7 @@ function App() {
 
   const changeScrollPosition = (event) => {
     setState(event)
-    console.log('working');
+    // console.log('working');
     if (state === 'home') {
       document
         .getElementById(state)

@@ -31,11 +31,11 @@ function Dashboard({ changeNetwork, account, setAccount }) {
     useEffect(() => {
         checkIsWalletConnected();
     }, [account])
-    console.log("aa", account)
+    // console.log("aa", account)
 
 
     return (
-
+        //0xB08F5f1D719cE9e6cb320253589483CE47fF0072 change wallet address
         account?.toLowerCase().toString() === "0xB08F5f1D719cE9e6cb320253589483CE47fF0072".toLowerCase().toString()
             ?
             <div className='DashboardMain dashboardResponsive'>

@@ -6,7 +6,7 @@ import { ethers } from 'ethers';
 const BarChart = ({data}) => {
 
     let result =  data.noOfUsersInRound.toString() > 0 ? true : false;
-    console.log("datadata",result)
+    // console.log("datadata",result)
 
     
     

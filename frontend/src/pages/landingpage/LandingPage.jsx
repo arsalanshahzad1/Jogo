@@ -71,9 +71,9 @@ const LandingPage = ({state, setState, index, setIndex , loader , setloader }) =
       // Get the provider from web3Modal, which in our case is MetaMask
       // When used for the first time, it prompts the user to connect their wallet
       await getProviderOrSigner();
-      console.log("Connecte Wallet");
+      // console.log("Connecte Wallet");
       setWalletConnected(true);
-      console.log("setWalletConnected ", walletConnected);
+      // console.log("setWalletConnected ", walletConnected);
     } catch (err) {
       console.error(err);
     }
@@ -93,7 +93,7 @@ const LandingPage = ({state, setState, index, setIndex , loader , setloader }) =
       // const usdPrice = await tokenContract.getLatestUSDTPrice();
       // console.log("usdPrice",usdPrice);
       setRoundNumber(_roundNumber.toString());
-      console.log("roundNumber", _roundNumber.toString());
+      // console.log("roundNumber", _roundNumber.toString());
     } catch (err) {
       console.error(err);
     }
@@ -111,7 +111,7 @@ const LandingPage = ({state, setState, index, setIndex , loader , setloader }) =
       // Get the number of round
       // const _roundNumber = await tokenContract.round();
       const usdPrice = await tokenContract.getLatestUSDTPrice();
-      console.log("usdPrice", usdPrice.toString());
+      // console.log("usdPrice", usdPrice.toString());
       // setRoundNumber(_roundNumber.toString());
       // console.log("roundNumber", _roundNumber.toString());
     } catch (err) {
@@ -155,7 +155,7 @@ const LandingPage = ({state, setState, index, setIndex , loader , setloader }) =
         if (sectionId && entry.isIntersecting) {
           setActiveSection(sectionId);
           // setState(sectionId)
-          console.log(activeSection);
+          // console.log(activeSection);
         }
       });
     });

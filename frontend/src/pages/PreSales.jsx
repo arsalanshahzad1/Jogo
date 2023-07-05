@@ -32,8 +32,8 @@ import Claim from "../components/svg/Claim";
 
 const PreSales = ({loader,setloader}) => {
   const zero = BigNumber.from(0);
-  console.log("loding",loader);
-  console.log("setloding",setloader);
+  // console.log("loding",loader);
+  // console.log("setloding",setloader);
 
   const [walletConnected, setWalletConnected] = useState(false);
 
@@ -219,24 +219,25 @@ const PreSales = ({loader,setloader}) => {
  
   const sendUSDT = async () => {
     try {
+     
       setloader(true);
       
       const signer = await getProviderOrSigner(true);
-
       // Load the USDT contract
       const usdtContract = new Contract(
         TETHER_TOKEN_CONTRACT_ADDRESS.address,
         TETHER_TOKEN_CONTRACT_ABI.abi,
         signer
       );
-  
+      
       const tokenContract = new Contract(
         AIMTOKEN_CONTRACT_ADDRESS.address,
         AIMTOKEN_CONTRACT_ABI.abi,
         signer
       );
+      
       const _amount = Number(price);
-      console.log(_amount,"_amount2");
+      // console.log(_amount,"_amount2");
       // const _amount = Number(document.getElementById("usdtInput").value);
       const tokensPurchase = ethers.utils.parseEther(_amount.toString());
   
@@ -244,7 +245,13 @@ const PreSales = ({loader,setloader}) => {
         tokensPurchase.toString(),
         roundPrice * 10 ** 6
       );
+   
+      if(amountUSDT.toString() < 30000000){
+        alert("please Purchase more than 30 doller Token");
+        window.location.reload();
+      }
 
+      console.log("amountUSDT",amountUSDT.toString());
       const appprove = await usdtContract.approve(
         AIMTOKEN_CONTRACT_ADDRESS.address,
         amountUSDT
@@ -279,11 +286,23 @@ const PreSales = ({loader,setloader}) => {
       );
       
       const _amount = Number(price);
+      
+      let tokenEth = ethers.utils.parseEther(_amount.toString())
+
   
       // const _amount = Number(document.getElementById("ethInput").value);
 
+      const amountUSDT = await tokenContract.sellTokenInUDSTPrice(
+        tokenEth?.toString(),
+        roundPrice * 10 ** 6
+      );
+   
+      if(amountUSDT?.toString() < 30000000){
+        alert("please Purchase more than 30 doller Token");
+        window.location.reload();
+      }
       
-      let tokenEth = ethers.utils.parseEther(_amount.toString())
+      
 
       const amountValue = await tokenContract.sellTokenInETHPrice(tokenEth?.toString(), roundPrice * 10 ** 6);
 
@@ -298,7 +317,7 @@ const PreSales = ({loader,setloader}) => {
 
       let success = await tokenContract.on("RoundData",handleEvent);
       setPrice('');
-      console.log("success",success);
+      // console.log("success",success);
     
     
     } catch (err) {
@@ -516,7 +535,7 @@ const PreSales = ({loader,setloader}) => {
     }
 
     const response = await apis.addUser(data);
-    console.log('response',response.data.status);
+    // console.log('response',response.data.status);
     if(response.data.status){
       sendUSDTBox(false)
       window.alert("Successfully minted Crypto Dev Tokens");

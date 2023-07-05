@@ -3,7 +3,7 @@ import Sidebar from '../Component/Sidebar.jsx'
 import Dashboard from './Dashboard'
 
 function Main({changeNetwork, account, setAccount}) {
-    console.log("account",account);
+    // console.log("account",account);
     return (
        
         <div className='MainApp'>
