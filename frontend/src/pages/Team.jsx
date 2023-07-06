@@ -30,7 +30,7 @@ const Team = () => {
     <>
       <section className="home-section-six" id='team'>
 
-        <Carousel
+        {/* <Carousel
           swipeable={false}
           draggable={false}
           showDots={false}
@@ -53,7 +53,7 @@ const Team = () => {
           </div>
 
 
-          {/* <div className="last-sec-wrap">
+          <div className="last-sec-wrap">
             <img src="/assets/images/section-last/last-1.png" alt="" />
             <p>APE</p>
           </div>
@@ -78,10 +78,15 @@ const Team = () => {
           <div className="last-sec-wrap">
             <img src="/assets/images/section-last/last-5.png" alt="" />
             <p>Shiba Ai</p>
-          </div> */}
+          </div>
 
-        </Carousel>
-
+        </Carousel> */}
+  <div className="last-sec-wrap">
+            <a href="https://twitter.com/ChingizAim" target="_blank">
+            <img src="/assets/images/Chingiz.png" alt="" />
+            </a>
+            <p>Chingiz Ianda</p>
+          </div>
 
       </section>
     </>

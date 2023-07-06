@@ -10,6 +10,7 @@ import About from './landingpage/About'
 import { Loader } from '../assets/Loader/Loader'
 import { Link } from 'react-router-dom'
 import BuyNow from '../components/svg/BuyNow'
+import WhitePaper from '../components/svg/WhitePaper'
 
 const MobileLayout = () => {
     const openPdfInNewTab = () => {
@@ -27,7 +28,7 @@ const MobileLayout = () => {
                                 <p style={{ color: '#e4513b', paddingBottom: '10px' }}>Join the AI meme revolution with AIM</p>
                                 <p>Welcome to AIM - the future of AI personal agents! Infusing cutting-edge AI with the humor of memes, we're pioneering an engaging digital experience. Join us, invest in innovation, and be part of this game-changing platform poised for industry leadership.</p>
                                 <Link onClick={openPdfInNewTab}>
-                                    <BuyNow/>
+                                    <WhitePaper/>
                                   </Link>
                             </div>
                         </div>

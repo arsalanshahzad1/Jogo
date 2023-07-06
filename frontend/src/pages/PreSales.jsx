@@ -631,8 +631,8 @@ const PreSales = ({loader,setloader}) => {
                   {/* <h3>has started!</h3> */}
                   <p>
                     <span>1 USDT</span>
-                    <span> =</span>
-                    <span>{coinsPerDollar.toString()} ICO</span>
+                    <span> = </span>
+                    <span>{coinsPerDollar.toString()} AIM</span>
                   </p>
                 </div>
                 <div className="image-wrap">
@@ -644,7 +644,7 @@ const PreSales = ({loader,setloader}) => {
                     />
                     <div className="detail">
                       <h2>
-                        You have {usersTokens.toString()} ICO
+                        You have {usersTokens.toString()} AIM
                         Tokens
                       </h2>
                       {/* <h3>View your potential returns</h3> */}
@@ -688,7 +688,7 @@ const PreSales = ({loader,setloader}) => {
                   width={"60%"}
                 />
                 <p>
-                  <span>USDT Raised </span>
+                  <span>USDT Raised: </span>
                   <br />
                   <span>
                     {(raisedAmount.toFixed(2))} /{" "}
@@ -696,6 +696,11 @@ const PreSales = ({loader,setloader}) => {
                   </span>
                 </p>
                 <h2>Amount raised</h2>
+                <p>
+                  <span>Token Address:</span>
+                  <br/>
+                  <span>0x23250A16AFDd06c9e2c44E3F7A6CcE5A23B2107d</span>
+                </p>
                 <div className="loader-root">
                   <div
                     className="loader-inner"

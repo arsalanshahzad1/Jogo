@@ -24,6 +24,7 @@ import FAQ from "./FAQ";
 import BuyNow from "../../components/svg/BuyNow";
 import LinkedIn from "../../components/svg/LinkedIn";
 import { Loader } from "../../assets/Loader/Loader";
+import WhitePaper from "../../components/svg/WhitePaper";
 
 
 const LandingPage = ({state, setState, index, setIndex , loader , setloader }) => {
@@ -289,7 +290,7 @@ const LandingPage = ({state, setState, index, setIndex , loader , setloader }) =
                                 </div>
                                 <div className="white-paper">
                                   <Link onClick={openPdfInNewTab}>
-                                    <BuyNow/>
+                                  <WhitePaper/>
                                   </Link>
                                 </div>
                               </div>

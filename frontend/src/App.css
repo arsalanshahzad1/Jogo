@@ -662,6 +662,12 @@ p {
   text-align: center;
   width: 200px;
   margin: auto;
+  display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+
 }
 
 .home-section-six .last-sec-wrap img {
@@ -2633,7 +2639,11 @@ input[type=number] {
 .connect-modal-wrap .modal-content .connect-data {}
 
 .react-multi-carousel-list{
-  justify-content: center;
+  justify-content: unset !important;
+}
+
+.home-section-one .detail{
+  text-align: center;
 }
 
 @keyframes loader-pulse {
@@ -3314,3 +3324,4 @@ input[type=number] {
   position: absolute;
   bottom: 0;
 }
+
