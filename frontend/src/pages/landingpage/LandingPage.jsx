@@ -50,9 +50,9 @@ const LandingPage = ({state, setState, index, setIndex , loader , setloader }) =
 
     // If user is not connected to the Sepolia network, let them know and throw an error
     const { chainId } = await web3Provider.getNetwork();
-    if (chainId !== 31337) {
-      // window.alert("Change the network to Sepolia");
-      // throw new Error("Change network to Sepolia");
+    if (chainId !== 1) {
+      // window.alert("Change the network to Ethereum Mainent");
+      // throw new Error("Change network to Ethereum Mainent");
     }
 
     if (needSigner) {
@@ -140,8 +140,6 @@ const LandingPage = ({state, setState, index, setIndex , loader , setloader }) =
       getUSDTPrice();
     }
   }, [walletConnected]);
-
-  
 
   useEffect(() => {
   

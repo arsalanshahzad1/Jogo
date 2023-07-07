@@ -29,7 +29,8 @@ function App() {
         method: "wallet_switchEthereumChain",
         params: [{
           // chainId: "0x7A69"
-          chainId: "0x5"
+          //chainId: "0x5"
+          chainId: "0x1"
         }]
       });
       await web3Handler();
