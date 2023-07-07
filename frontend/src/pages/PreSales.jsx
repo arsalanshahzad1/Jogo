@@ -93,7 +93,7 @@ const PreSales = ({loader,setloader}) => {
     // If user is not connected to the Sepolia network, let them know and throw an error
     const { chainId } = await web3Provider.getNetwork();
     if (chainId !== 1) {
-      //  window.alert("Change the network to Ethereum Mainent");
+       window.alert("Change the network to Ethereum Mainent");
       // throw new Error("Change network to Ethereum Mainent");
     }
 
