@@ -6,6 +6,7 @@ import './App.css'
 import PreSales from './pages/PreSales';
 import Main from './components/Dashboard/Screens/Main';
 import Dashboard from './components/Dashboard/Screens/Dashboard';
+import { ethers } from "ethers";
 
 const { ethereum } = window;
 function App() {
@@ -13,14 +14,8 @@ function App() {
   const [index, setIndex] = useState(0)
   const [activeSection, setActiveSection] = useState(null);
   const [loader, setloader] = useState(false)
-
-
   const [account, setAccount] = useState(null)
-
-  // ethereum.on("accountsChanged", async (account) => {
-  //   setAccount(account[0]);
-  //   window.location.reload()
-  // })
+  const [walletConnected, setWalletConnected] = useState(false);
 
   const changeNetwork = async () => {
     try {
@@ -28,9 +23,9 @@ function App() {
       await ethereum.request({
         method: "wallet_switchEthereumChain",
         params: [{
-          // chainId: "0x7A69"
-          //chainId: "0x5"
-          chainId: "0x1"
+          chainId: "0x7A69" //localHost
+          //chainId: "0x5" //goerli
+          // chainId: "0x1" //mainNet
         }]
       });
       await web3Handler();
@@ -54,8 +49,10 @@ function App() {
         const signer = provider.getSigner()
         // loadContracts(signer)
         const accountss = await signer.getAddress();
+        setWalletConnected(true);
         // Use the selected account to fetch the account name
     } catch (err) {
+      setWalletConnected(false);
       throw new Error("No ethereum Object");
     }
   }
@@ -82,6 +79,59 @@ function App() {
     })
     // loadContracts(signer)
   }
+
+
+// /////////// wallet Connect ///////////////////////
+// const connect = async () => {
+//   try {
+//     setError("");
+
+//     const accounts = await injectedProvider.request({
+//       method: "eth_requestAccounts",
+//     });
+
+//     const chainId = await injectedProvider.request({ method: "eth_chainId" });
+
+//     setSelectedAccount(accounts[0]);
+//     setChainId(chainId);
+//     setConnected(true);
+
+//     injectedProvider.addListener("chainChanged", setChainId);
+
+//     injectedProvider.addListener("accountsChanged", (accounts) => {
+//       if (accounts.length === 0) {
+//         setConnected(false);
+//         setSelectedAccount("");
+//         setChainId("");
+//       } else {
+//         const connectedAccount = accounts[0];
+//         setSelectedAccount(connectedAccount);
+//       }
+//     });
+//   } catch (e) {
+//     console.error(e);
+//     if (e.code === 4001) {
+//       setError("User denied connection.");
+//     }
+//   }
+// };
+
+// const switchChain = async () => {
+//   try {
+//     await injectedProvider.request({
+//       method: "wallet_switchEthereumChain",
+//       params: [{ chainId: "0x1" }],
+//     });
+//     connect();
+//   } catch (e) {
+//     console.error(e);
+//     if (e.code === 4001) {
+//       setError("User rejected switching chains.");
+//     }
+//   }
+// };
+
+
 
   const changeScrollPosition = (event) => {
     setState(event)
@@ -142,10 +192,12 @@ function App() {
           setActiveSection={setActiveSection}
           loader={loader}
           setloader={setloader}
+          changeNetwork={changeNetwork} account={account} setAccount={setAccount} walletConnected={walletConnected}
         />} />
         {/* <Route path='/pre-sale' element={<PreSales />} /> */}
         <Route path='/' exact
-          element={<LandingPage
+          element={<LandingPage 
+            changeNetwork={changeNetwork} account={account} setAccount={setAccount} walletConnected={walletConnected}
             state={state}
             setState={changeScrollPosition}
             index={index}

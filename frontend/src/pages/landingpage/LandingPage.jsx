@@ -27,9 +27,22 @@ import { Loader } from "../../assets/Loader/Loader";
 import WhitePaper from "../../components/svg/WhitePaper";
 
 
-const LandingPage = ({state, setState, index, setIndex , loader , setloader }) => {
+
+
+
+const getAIMTokenContrat = () => {
+  const provider = new ethers.providers.Web3Provider(ethereum);
+  // const provider = new ethers.providers.JsonRpcProvider(
+  //   "https://polygon-mainnet.g.alchemy.com/v2/8JkHo3qUxg6xK4OpBBG7XrfND3pZL0ig"
+  // );
+  const signer = provider.getSigner();
+  const AIMContract = new ethers.Contract(AIMTOKEN_CONTRACT_ADDRESS.address, AIMTOKEN_CONTRACT_ABI.abi, signer);
+  return AIMContract;
+}
+
+
+const LandingPage = ({walletConnected,changeNetwork,account,setAccount,state, setState, index, setIndex , loader , setloader }) => {
   const zero = BigNumber.from(0);
-  const [walletConnected, setWalletConnected] = useState(false);
   const [roundNumber, setRoundNumber] = useState(zero);
   const web3ModalRef = useRef();
   const [close, setClose] = useState("");
@@ -41,56 +54,17 @@ const LandingPage = ({state, setState, index, setIndex , loader , setloader }) =
   const [activeSection, setActiveSection] = useState("home");
 
 
-
-  const getProviderOrSigner = async (needSigner = false) => {
-    // Connect to Metamask
-    // Since we store `web3Modal` as a reference, we need to access the `current` value to get access to the underlying object
-    const provider = await web3ModalRef.current.connect();
-    const web3Provider = new providers.Web3Provider(provider);
-
-    // If user is not connected to the Sepolia network, let them know and throw an error
-    const { chainId } = await web3Provider.getNetwork();
-    if (chainId !== 1) {
-      window.alert("Change the network to Ethereum Mainent");
-      // throw new Error("Change network to Ethereum Mainent");
-    }
-
-    if (needSigner) {
-      const signer = web3Provider.getSigner();
-      return signer;
-    }
-
-    return web3Provider;
-  };
-
-  /*
-  connectWallet: Connects the MetaMask wallet
-  */
-
-  const connectWallet = async () => {
-    try {
-      // Get the provider from web3Modal, which in our case is MetaMask
-      // When used for the first time, it prompts the user to connect their wallet
-      await getProviderOrSigner();
-      // console.log("Connecte Wallet");
-      setWalletConnected(true);
-      // console.log("setWalletConnected ", walletConnected);
-    } catch (err) {
-      console.error(err);
-    }
-  };
-
   const getNumberOfRound = async () => {
     try {
-      const provider = await getProviderOrSigner();
+      // const provider = await getProviderOrSigner();
 
-      const tokenContract = new Contract(
-        AIMTOKEN_CONTRACT_ADDRESS.address,
-        AIMTOKEN_CONTRACT_ABI.abi,
-        provider
-      );
+      // const tokenContract = new Contract(
+      //   AIMTOKEN_CONTRACT_ADDRESS.address,
+      //   AIMTOKEN_CONTRACT_ABI.abi,
+      //   provider
+      // );
       // Get the number of round
-      const _roundNumber = await tokenContract.round();
+      const _roundNumber = await getAIMTokenContrat().round();
       // const usdPrice = await tokenContract.getLatestUSDTPrice();
       // console.log("usdPrice",usdPrice);
       setRoundNumber(_roundNumber.toString());
@@ -102,16 +76,16 @@ const LandingPage = ({state, setState, index, setIndex , loader , setloader }) =
 
   const getUSDTPrice = async () => {
     try {
-      const provider = await getProviderOrSigner();
+      // const provider = await getProviderOrSigner();
 
-      const tokenContract = new Contract(
-        AIMTOKEN_CONTRACT_ADDRESS.address,
-        AIMTOKEN_CONTRACT_ABI.abi,
-        provider
-      );
+      // const tokenContract = new Contract(
+      //   AIMTOKEN_CONTRACT_ADDRESS.address,
+      //   AIMTOKEN_CONTRACT_ABI.abi,
+      //   provider
+      // );
       // Get the number of round
       // const _roundNumber = await tokenContract.round();
-      const usdPrice = await tokenContract.getLatestUSDTPrice();
+      const usdPrice = await getAIMTokenContrat().getLatestUSDTPrice();
       // console.log("usdPrice", usdPrice.toString());
       // setRoundNumber(_roundNumber.toString());
       // console.log("roundNumber", _roundNumber.toString());
@@ -126,20 +100,20 @@ const LandingPage = ({state, setState, index, setIndex , loader , setloader }) =
     window.open("/assets/docs/Jogo-Media-whitepaper.pdf", "_blank");
   };
 
-  useEffect(() => {
-    // if wallet is not connected, create a new instance of Web3Modal and connect the MetaMask wallet
-    if (!walletConnected) {
-      // Assign the Web3Modal class to the reference object by setting it's `current` value
-      // The `current` value is persisted throughout as long as this page is open
-      web3ModalRef.current = new Web3Modal({
-        network: "hardhat",
-        providerOptions: {},
-        disableInjectedProvider: false,
-      });
-      getNumberOfRound();
-      getUSDTPrice();
-    }
-  }, [walletConnected]);
+  // useEffect(() => {
+  //   // if wallet is not connected, create a new instance of Web3Modal and connect the MetaMask wallet
+  //   if (!walletConnected) {
+  //     // Assign the Web3Modal class to the reference object by setting it's `current` value
+  //     // The `current` value is persisted throughout as long as this page is open
+  //     web3ModalRef.current = new Web3Modal({
+  //       network: "hardhat",
+  //       providerOptions: {},
+  //       disableInjectedProvider: false,
+  //     });
+  //     getNumberOfRound();
+  //     getUSDTPrice();
+  //   }
+  // }, [walletConnected]);
 
   useEffect(() => {
   
@@ -189,7 +163,7 @@ const LandingPage = ({state, setState, index, setIndex , loader , setloader }) =
 
                     <div className="sec-right-wrap hide-on-mobile">
                       <div className="left hide">
-                        <span onClick={connectWallet}>
+                        <span onClick={changeNetwork}>
                           <Wallet classes={"wallet-btn"} />
                         </span>
                       </div>
@@ -201,7 +175,7 @@ const LandingPage = ({state, setState, index, setIndex , loader , setloader }) =
                         </Link>
                         <ul className="social-icons">
                           <li>                      
-                            <Link onClick={connectWallet}><Wallet/>
+                            <Link onClick={changeNetwork}><Wallet/>
                             </Link>
                           </li>
                           <li>
@@ -328,7 +302,7 @@ const LandingPage = ({state, setState, index, setIndex , loader , setloader }) =
                         </section>
                         <BillGates />
                         <Video />
-                        <PreSales loader ={loader} setloader={setloader}/>
+                        <PreSales changeNetwork={changeNetwork} account={account} setAccount={setAccount} loader ={loader} setloader={setloader}/>
                         <div className="sticky-background">
                           <div
                             className="bg-fixed-img"

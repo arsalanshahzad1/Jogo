@@ -20,22 +20,50 @@ import AIMTOKEN_CONTRACT_ABI from '../contractsData/AIMToken.json'
 import AIMTOKEN_CONTRACT_ADDRESS from '../contractsData/AIMToken-address.json'
 import TETHER_TOKEN_CONTRACT_ABI from '../contractsData/TetherToken.json'
 import TETHER_TOKEN_CONTRACT_ADDRESS from '../contractsData/TetherToken-address.json'
-
-// import {
-//   AIMTOKEN_CONTRACT_ABI,
-//   AIMTOKEN_CONTRACT_ADDRESS,
-//   TETHER_TOKEN_CONTRACT_ABI,
-//   TETHER_TOKEN_CONTRACT_ADDRESS,
-// } from "./../.././constants/constants";
-
 import Claim from "../components/svg/Claim";
 
-const PreSales = ({loader,setloader}) => {
+
+const getAIMTokenContrat = () => {
+  const provider = new ethers.providers.Web3Provider(ethereum);
+  // const provider = new ethers.providers.JsonRpcProvider(
+  //   "https://polygon-mainnet.g.alchemy.com/v2/8JkHo3qUxg6xK4OpBBG7XrfND3pZL0ig"
+  // );
+  const signer = provider.getSigner();
+  const AIMContract = new ethers.Contract(AIMTOKEN_CONTRACT_ADDRESS.address, AIMTOKEN_CONTRACT_ABI.abi, signer);
+  return AIMContract;
+}
+
+
+const getUSDTTokenContrat = () => {
+  const provider = new ethers.providers.Web3Provider(ethereum);
+  // const provider = new ethers.providers.JsonRpcProvider(
+  //   "https://polygon-mainnet.g.alchemy.com/v2/8JkHo3qUxg6xK4OpBBG7XrfND3pZL0ig"
+  // );
+  const signer = provider.getSigner();
+  const USDTContract = new ethers.Contract(TETHER_TOKEN_CONTRACT_ADDRESS.address, TETHER_TOKEN_CONTRACT_ABI.abi, signer);
+  return USDTContract;
+}
+
+const getProviderAIMTokenContrat = () => {
+  // const provider = new ethers.providers.Web3Provider(ethereum);
+  const provider = new ethers.providers.JsonRpcProvider(
+    "http://localhost:8545"
+  );
+
+  // const provider = new ethers.providers.JsonRpcProvider(
+  //   "https://eth-mainnet.g.alchemy.com/v2/ZNNDDz0q4xxwLvO9wQw-dPsHQ0urQ_J8"
+  // );
+
+  // const signer = provider.getSigner();
+  const AIMContract = new ethers.Contract(AIMTOKEN_CONTRACT_ADDRESS.address, AIMTOKEN_CONTRACT_ABI.abi, provider);
+  return AIMContract;
+}
+
+const PreSales = ({changeNetwork,account,setAccount,loader,setloader}) => {
   const zero = BigNumber.from(0);
   // console.log("loding",loader);
   // console.log("setloding",setloader);
 
-  const [walletConnected, setWalletConnected] = useState(false);
 
   const web3ModalRef = useRef();
 
@@ -46,6 +74,8 @@ const PreSales = ({loader,setloader}) => {
   const [roundNumber, setRoundNumber] = useState(zero);
 
   const [roundStatus, setRoundStatus] = useState(false);
+
+  const [claimStatus, setClaimStatus] = useState(false);
 
   const [roundPrice, setRoundPrice] = useState(zero);
 
@@ -63,6 +93,8 @@ const PreSales = ({loader,setloader}) => {
 
   const [usersTokens, setUsersTokens] = useState(0);
   const [price, setPrice] = useState(null)
+
+  const [walletConnected, setWalletConnected] = useState(false);
 
   const onBarsList = [];
 
@@ -85,26 +117,25 @@ const PreSales = ({loader,setloader}) => {
   }
 
 
-
-  const getProviderOrSigner = async (needSigner = false) => {
-    const provider = await web3ModalRef.current.connect();
-    const web3Provider = new providers.Web3Provider(provider);
-
-    // If user is not connected to the Sepolia network, let them know and throw an error
-    const { chainId } = await web3Provider.getNetwork();
-    if (chainId !== 1) {
-       window.alert("Change the network to Ethereum Mainent");
-      // throw new Error("Change network to Ethereum Mainent");
+  const checkIsWalletConnected = async () => {
+    try {
+        if (!ethereum) return alert("please install MetaMask");
+        const accounts = await ethereum.request({ method: "eth_accounts" });
+        setAccount(accounts[0]);
+        // console.log("accounts",accounts);
+          // Get provider from Metamask
+          const provider = new ethers.providers.Web3Provider(window.ethereum)
+          // Set signer
+          const signer = provider.getSigner()
+          // loadContracts(signer)
+          const accountss = await signer.getAddress();
+          setWalletConnected(true);
+          // Use the selected account to fetch the account name
+      } catch (err) {
+        setWalletConnected(false);
+        throw new Error("No ethereum Object");
+      }
     }
-
-    if (needSigner) {
-      const signer = web3Provider.getSigner();
-      // console.log("signer", signer);
-
-      return signer;
-    }
-    return web3Provider;
-  };
 
 
   const checkActiveRound = async () => {
@@ -112,6 +143,9 @@ const PreSales = ({loader,setloader}) => {
 
     if (_round > 0 || _round > 6) {
       setRoundStatus(true);
+      if(_round > 5){
+        setClaimStatus(true)
+      }
     } else {
       setRoundStatus(false);
     }
@@ -122,15 +156,15 @@ const PreSales = ({loader,setloader}) => {
   // })
   const getNumberOfRound = async () => {
     try {
-      const provider = await getProviderOrSigner();
-      const tokenContract = new Contract(
-        AIMTOKEN_CONTRACT_ADDRESS.address,
-        AIMTOKEN_CONTRACT_ABI.abi,
-        provider
-      );
+      // const provider = await getProviderOrSigner();
+      // const tokenContract = new Contract(
+      //   AIMTOKEN_CONTRACT_ADDRESS.address,
+      //   AIMTOKEN_CONTRACT_ABI.abi,
+      //   provider
+      // );
       // Get the number of round
-      const _roundNumber = await tokenContract.round();
-
+      const _roundNumber = await getProviderAIMTokenContrat().round();
+      console.log("_roundNumber",_roundNumber);
       setRoundNumber(_roundNumber.toString());
 
       // return _roundNumber.toString();
@@ -140,23 +174,20 @@ const PreSales = ({loader,setloader}) => {
 
   const claimTokens = async () => {
     try {
-      const signer = await getProviderOrSigner(true);
+      if(!walletConnected){
+        changeNetwork();
+      }
+      // const signer = await getProviderOrSigner(true);
 
-      const tokenContract = new Contract(
-        AIMTOKEN_CONTRACT_ADDRESS.address,
-        AIMTOKEN_CONTRACT_ABI.abi,
-        signer
-      );
-
-      //with the help of this you can change the Round  
-
-      // ye line sale start kr rhi h aur dubara click krney pey next round jayegi
-      await tokenContract.startTheSale();
-
+      // const tokenContract = new Contract(
+      //   AIMTOKEN_CONTRACT_ADDRESS.address,
+      //   AIMTOKEN_CONTRACT_ABI.abi,
+      //   signer
+      // );
+      
       //////////////////////////  
       // jb rounds khtm hjaye to tokens claim krney k liye isko uncomment krden aur opar wali ko comment krden
-      // await tokenContract.claimAIMToken();
-
+      await getAIMTokenContrat().claimAIMToken();
       window.alert("Tokens claimed");
     } catch (err) {
       console.error(err);
@@ -203,45 +234,50 @@ const PreSales = ({loader,setloader}) => {
 
 
 
-  const getCurrentUser = async () => {
-    const web3 = new Web3(window.ethereum);
+  // const getCurrentUser = async () => {
+  //   const web3 = new Web3(window.ethereum);
 
-    // Request access to the user's accounts
-    await window.ethereum.enable();
+  //   // Request access to the user's accounts
+  //   await window.ethereum.enable();
 
-    // Get the user's addresses from Metamask
-    const accounts = await web3.eth.getAccounts();
+  //   // Get the user's addresses from Metamask
+  //   const accounts = await web3.eth.getAccounts();
 
-    // Retrieve the user's address
-    const userAddress = setUserAddress(accounts[0]);
-  };
+  //   // Retrieve the user's address
+  //   const userAddress = setUserAddress(accounts[0]);
+  // };
 
  
   const sendUSDT = async () => {
     try {
+      console.log("Done");
+      if(!walletConnected){
+        changeNetwork();
+      console.log("Done");
+      }
      
       setloader(true);
       
-      const signer = await getProviderOrSigner(true);
-      // Load the USDT contract
-      const usdtContract = new Contract(
-        TETHER_TOKEN_CONTRACT_ADDRESS.address,
-        TETHER_TOKEN_CONTRACT_ABI.abi,
-        signer
-      );
+      // const signer = await getProviderOrSigner(true);
+      // // Load the USDT contract
+      // const usdtContract = new Contract(
+      //   TETHER_TOKEN_CONTRACT_ADDRESS.address,
+      //   TETHER_TOKEN_CONTRACT_ABI.abi,
+      //   signer
+      // );
       
-      const tokenContract = new Contract(
-        AIMTOKEN_CONTRACT_ADDRESS.address,
-        AIMTOKEN_CONTRACT_ABI.abi,
-        signer
-      );
+      // const tokenContract = new Contract(
+      //   AIMTOKEN_CONTRACT_ADDRESS.address,
+      //   AIMTOKEN_CONTRACT_ABI.abi,
+      //   signer
+      // );
       
       const _amount = Number(price);
       // console.log(_amount,"_amount2");
       // const _amount = Number(document.getElementById("usdtInput").value);
       const tokensPurchase = ethers.utils.parseEther(_amount.toString());
   
-      const amountUSDT = await tokenContract.sellTokenInUDSTPrice(
+      const amountUSDT = await getAIMTokenContrat().sellTokenInUDSTPrice(
         tokensPurchase.toString(),
         roundPrice * 10 ** 6
       );
@@ -252,17 +288,17 @@ const PreSales = ({loader,setloader}) => {
       }
 
       console.log("amountUSDT",amountUSDT.toString());
-      const appprove = await usdtContract.approve(
+      const appprove = await getUSDTTokenContrat().approve(
         AIMTOKEN_CONTRACT_ADDRESS.address,
         amountUSDT
       );
   
       appprove.wait();
   
-      let tx = await tokenContract.mintByUSDT(tokensPurchase.toString());
+      let tx = await getAIMTokenContrat().mintByUSDT(tokensPurchase.toString());
   
       await tx.wait();
-      let reposnse = await tokenContract.on("RoundData",handleEvent);
+      let reposnse = await getAIMTokenContrat().on("RoundData",handleEvent);
       setPrice('');   
     } catch (error) {
       setloader(false)
@@ -276,14 +312,20 @@ const PreSales = ({loader,setloader}) => {
   const sendETH = async () => {
  
        try {
+        console.log("Done");
+        if(!walletConnected){
+          changeNetwork();
+        console.log("Done");
+        }
+        
       setloader(true);
-      const signer = await getProviderOrSigner(true);
+      // const signer = await getProviderOrSigner(true);
 
-      const tokenContract = new Contract(
-        AIMTOKEN_CONTRACT_ADDRESS.address,
-        AIMTOKEN_CONTRACT_ABI.abi,
-        signer
-      );
+      // const tokenContract = new Contract(
+      //   AIMTOKEN_CONTRACT_ADDRESS.address,
+      //   AIMTOKEN_CONTRACT_ABI.abi,
+      //   signer
+      // );
       
       const _amount = Number(price);
       
@@ -292,7 +334,7 @@ const PreSales = ({loader,setloader}) => {
   
       // const _amount = Number(document.getElementById("ethInput").value);
 
-      const amountUSDT = await tokenContract.sellTokenInUDSTPrice(
+      const amountUSDT = await getAIMTokenContrat().sellTokenInUDSTPrice(
         tokenEth?.toString(),
         roundPrice * 10 ** 6
       );
@@ -304,9 +346,9 @@ const PreSales = ({loader,setloader}) => {
       
       
 
-      const amountValue = await tokenContract.sellTokenInETHPrice(tokenEth?.toString(), roundPrice * 10 ** 6);
+      const amountValue = await getAIMTokenContrat().sellTokenInETHPrice(tokenEth?.toString(), roundPrice * 10 ** 6);
 
-      const tx = await tokenContract.mintByEth(tokenEth.toString(), {
+      const tx = await getAIMTokenContrat().mintByEth(tokenEth.toString(), {
         // value signifies the cost of one crypto dev token which is "0.001" eth.
         // We are parsing `0.001` string to ether using the utils library from ethers.js
         value: amountValue.toString(),
@@ -315,11 +357,9 @@ const PreSales = ({loader,setloader}) => {
       // wait for the transaction to get mined
       await tx.wait();
 
-      let success = await tokenContract.on("RoundData",handleEvent);
+      let success = await getAIMTokenContrat().on("RoundData",handleEvent);
       setPrice('');
       // console.log("success",success);
-    
-    
     } catch (err) {
       setloader(false);
       console.log(err);
@@ -332,16 +372,16 @@ const PreSales = ({loader,setloader}) => {
 
   const getNumberOfTokensOwned = async () => {
     try {
-      const provider = await getProviderOrSigner();
+      // const provider = await getProviderOrSigner();
 
-      const tokenContract = new Contract(
-        AIMTOKEN_CONTRACT_ADDRESS.address,
-        AIMTOKEN_CONTRACT_ABI.abi,
-        provider
-      );
+      // const tokenContract = new Contract(
+      //   AIMTOKEN_CONTRACT_ADDRESS.address,
+      //   AIMTOKEN_CONTRACT_ABI.abi,
+      //   provider
+      // );
       // Get the number of round
-      const tokensOfUser = await tokenContract.soldTokens(userAddress);
-
+      const tokensOfUser = await getAIMTokenContrat().soldTokens(userAddress);
+      console.log("All Purchased Tokens",tokensOfUser);
       // setRoundNumber(tokensOfUser.toString());
 
 
@@ -369,41 +409,41 @@ const PreSales = ({loader,setloader}) => {
 
 
 
-  /*
-          connectWallet: Connects the MetaMask wallet
-        */
-  const connectWallet = async () => {
-    try {
-      // Get the provider from web3Modal, which in our case is MetaMask
-      // When used for the first time, it prompts the user to connect their wallet
-      await getProviderOrSigner();
-      setWalletConnected(true);
-    } catch (err) {
-    }
-  };
+  // /*
+  //         connectWallet: Connects the MetaMask wallet
+  //       */
+  // const connectWallet = async () => {
+  //   try {
+  //     // Get the provider from web3Modal, which in our case is MetaMask
+  //     // When used for the first time, it prompts the user to connect their wallet
+  //     await getProviderOrSigner();
+  //     setWalletConnected(true);
+  //   } catch (err) {
+  //   }
+  // };
 
-  const disConnectWallet = async () => {
-    try {
+  // const disConnectWallet = async () => {
+  //   try {
 
-      web3ModalRef.current.clearCachedProvider();
-      window.localStorage.clear();
-      setWalletConnected(false);
-    } catch (err) {
-    }
-  };
+  //     web3ModalRef.current.clearCachedProvider();
+  //     window.localStorage.clear();
+  //     setWalletConnected(false);
+  //   } catch (err) {
+  //   }
+  // };
 
   const getUSDTPrice = async () => {
     try {
-      const provider = await getProviderOrSigner();
+      // const provider = await getProviderOrSigner();
 
-      const tokenContract = new Contract(
-        AIMTOKEN_CONTRACT_ADDRESS.address,
-        AIMTOKEN_CONTRACT_ABI.abi,
-        provider
-      );
+      // const tokenContract = new Contract(
+      //   AIMTOKEN_CONTRACT_ADDRESS.address,
+      //   AIMTOKEN_CONTRACT_ABI.abi,
+      //   provider
+      // );
       // Get the number of round
       // const _roundNumber = await tokenContract.round();
-      const usdPrice = await tokenContract.getLatestUSDTPrice();
+      const usdPrice = await getProviderAIMTokenContrat().getLatestUSDTPrice();
       // console.log("usdPrice", usdPrice.toString());
       // setRoundNumber(_roundNumber.toString());
       // console.log("roundNumber", _roundNumber.toString());
@@ -415,17 +455,21 @@ const PreSales = ({loader,setloader}) => {
 
   const getTotalAmountToRaise = async () => {
     try {
-      const provider = await getProviderOrSigner();
+      // const provider = await getProviderOrSigner();
 
-      const tokenContract = new Contract(
-        AIMTOKEN_CONTRACT_ADDRESS.address,
-        AIMTOKEN_CONTRACT_ABI.abi,
-        provider
-      );
+      // const tokenContract = new Contract(
+      //   AIMTOKEN_CONTRACT_ADDRESS.address,
+      //   AIMTOKEN_CONTRACT_ABI.abi,
+      //   provider
+      // );
       // Get the number of round
       // const _roundNumber = await tokenContract.round();
-      const _totalSupply = (await tokenContract.totalSupply()) / 10 ** 18;
-      setTotalSupply(_totalSupply.toString());
+      let roudTotalAmount = (roundPrice * 10 ** 6) * (100_000_000*10**18) /10**18
+      console.log("roudTotalAmount",roudTotalAmount);
+      setTotalSupply(roudTotalAmount.toString());
+
+      // const _totalSupply = (await getProviderAIMTokenContrat().totalSupply()) / 10 ** 18;
+      // setTotalSupply(_totalSupply.toString());
 
       // return totalSupply.toString();
     } catch (err) {
@@ -434,14 +478,14 @@ const PreSales = ({loader,setloader}) => {
 
   const getRaisedAmount = async () => {
     try {
-      const provider = await getProviderOrSigner();
+      // const provider = await getProviderOrSigner();
 
 
-      const usdtContract = new Contract(
-        TETHER_TOKEN_CONTRACT_ADDRESS.address,
-        TETHER_TOKEN_CONTRACT_ABI.abi,
-        provider
-      );
+      // const usdtContract = new Contract(
+      //   TETHER_TOKEN_CONTRACT_ADDRESS.address,
+      //   TETHER_TOKEN_CONTRACT_ABI.abi,
+      //   provider
+      // );
 
       // const tokenContract = new Contract(
       //   AIMTOKEN_CONTRACT_ADDRESS.address,
@@ -453,20 +497,23 @@ const PreSales = ({loader,setloader}) => {
       // console.log("USDT in contract");
 
       const balanceOfUSDT = Number(
-        await usdtContract.balanceOf(AIMTOKEN_CONTRACT_ADDRESS.address)
+        await getUSDTTokenContrat().balanceOf(AIMTOKEN_CONTRACT_ADDRESS.address)
       );
       // console.log("BalanceInUSDT", typeof balanceOfUSDT);
       // console.log("BalanceInUSDT", balanceOfUSDT.toString());
 
       // ETH in contract
       // console.log("ETH in contract");
-
+      
+      //const provider = new Web3.providers.HttpProvider('https://eth-mainnet.g.alchemy.com/v2/ZNNDDz0q4xxwLvO9wQw-dPsHQ0urQ_J8');
+      const provider = new Web3.providers.HttpProvider('http://localhost:8545');
+      
       const web3 = new Web3(window.ethereum);
 
       const balanceOfETH = Number(
         await web3.eth.getBalance(AIMTOKEN_CONTRACT_ADDRESS.address)
       );
-      // console.log("balanceOfETH", balanceOfETH);
+      console.log("balanceOfETH", balanceOfETH);
 
       // Convert ETH in USDT
 
@@ -569,36 +616,38 @@ const PreSales = ({loader,setloader}) => {
 
 
 
-  useEffect(() => {
-    // if wallet is not connected, create a new instance of Web3Modal and connect the MetaMask wallet
-    if (!walletConnected) {
-      // Assign the Web3Modal class to the reference object by setting it's `current` value
-      // The `current` value is persisted throughout as long as this page is open
-      web3ModalRef.current = new Web3Modal({
-        network: "hardhat",
-        providerOptions: {},
-        disableInjectedProvider: false,
-      });
-      connectWallet();
-      getUSDTPrice();
-      // numberOFICOTokens();
-    }
-  }, [walletConnected]);
+  // useEffect(() => {
+  //   // if wallet is not connected, create a new instance of Web3Modal and connect the MetaMask wallet
+  //   if (!walletConnected) {
+  //     // Assign the Web3Modal class to the reference object by setting it's `current` value
+  //     // The `current` value is persisted throughout as long as this page is open
+  //     web3ModalRef.current = new Web3Modal({
+  //       network: "hardhat",
+  //       providerOptions: {},
+  //       disableInjectedProvider: false,
+  //     });
+  //     connectWallet();
+  //     getUSDTPrice();
+  //     // numberOFICOTokens();
+  //   }
+  // }, [walletConnected]);
 
-  useEffect(() => {
+  // useEffect(() => {
 
-  }, [roundNumber]);
+  // }, [roundNumber]);
+
+  console.log("walletConnected",walletConnected)
 
   useEffect(() => {
     // if wallet is not connected, create a new instance of Web3Modal and connect the MetaMask wallet
     // if (!walletConnected) {
     // Assign the Web3Modal class to the reference object by setting it's `current` value
     // The `current` value is persisted throughout as long as this page is open
-    web3ModalRef.current = new Web3Modal({
-      network: "hardhat",
-      providerOptions: {},
-      disableInjectedProvider: false,
-    });
+    // web3ModalRef.current = new Web3Modal({
+    //   network: "hardhat",
+    //   providerOptions: {},
+    //   disableInjectedProvider: false,
+    // });
     getRaisedAmount();
     getNumberOfTokensOwned();
     getNumberOfBars();
@@ -607,12 +656,16 @@ const PreSales = ({loader,setloader}) => {
     getNumberOfRound();
     getCoinsPerDollar();
     getRoundPrice();
-    getCurrentUser();
     checkActiveRound();
     getRaisedAmount();
     //   connectWallet();
     // }
-  }, [totalSupply, roundPrice]);
+  }, [totalSupply, roundPrice,roundNumber]);
+
+  
+  useEffect(() => {
+    checkIsWalletConnected();
+  }, [account])
 
   return (
     <>
@@ -649,7 +702,7 @@ const PreSales = ({loader,setloader}) => {
                       </h2>
                       {/* <h3>View your potential returns</h3> */}
                       <p className="p1">Connected Wallet</p>
-                      <p className="p2">{userAddress}</p>
+                      <p className="p2">{account}</p>
                       {roundStatus && (
                         <div className="btn-line-one">
                           <span
@@ -668,13 +721,18 @@ const PreSales = ({loader,setloader}) => {
                           </span>
                         </div>
                       )}
-
-                      <div className="btn-line-two">
-                        <span onClick={claimTokens}>
-                          {/* <Disconnect classes={"disconnect"} /> */}
-                          <Claim classes={"buy-with-usdt"} />
-                        </span>
-                      </div>
+                {/* style={{pointerEvents :  claimStatus ? '' : 'none'}} */}
+                      { claimStatus ?
+                       <div className="btn-line-two" >
+                       <span  onClick={claimTokens}>
+                       {/* <Disconnect classes={"disconnect"} /> */}
+                         <Claim classes={"buy-with-usdt"} />
+                       </span>
+                     </div>
+                     :
+                     ''
+                      }
+                     
                     </div>
                   </div>
                 </div>
