@@ -46,13 +46,13 @@ const getUSDTTokenContrat = () => {
 
 const getProviderAIMTokenContrat = () => {
   // const provider = new ethers.providers.Web3Provider(ethereum);
-  const provider = new ethers.providers.JsonRpcProvider(
-    "http://localhost:8545"
-  );
-
   // const provider = new ethers.providers.JsonRpcProvider(
-  //   "https://eth-mainnet.g.alchemy.com/v2/ZNNDDz0q4xxwLvO9wQw-dPsHQ0urQ_J8"
+  //   "http://localhost:8545"
   // );
+
+  const provider = new ethers.providers.JsonRpcProvider(
+    "https://eth-mainnet.g.alchemy.com/v2/ZNNDDz0q4xxwLvO9wQw-dPsHQ0urQ_J8"
+  );
 
   // const signer = provider.getSigner();
   const AIMContract = new ethers.Contract(AIMTOKEN_CONTRACT_ADDRESS.address, AIMTOKEN_CONTRACT_ABI.abi, provider);
@@ -92,6 +92,7 @@ const PreSales = ({changeNetwork,account,setAccount,loader,setloader}) => {
   const [offBars, setOffBars] = useState(0);
 
   const [usersTokens, setUsersTokens] = useState(0);
+
   const [price, setPrice] = useState(null)
 
   const [walletConnected, setWalletConnected] = useState(false);
@@ -380,8 +381,9 @@ const PreSales = ({changeNetwork,account,setAccount,loader,setloader}) => {
       //   provider
       // );
       // Get the number of round
-      const tokensOfUser = await getAIMTokenContrat().soldTokens(userAddress);
-      console.log("All Purchased Tokens",tokensOfUser);
+      const tokensOfUser = await getAIMTokenContrat().soldTokens(account);
+      // console.log("All",tokensOfUser.toString()/10**18);
+      setUsersTokens(tokensOfUser.toString()/10**18)
       // setRoundNumber(tokensOfUser.toString());
 
 
@@ -401,6 +403,7 @@ const PreSales = ({changeNetwork,account,setAccount,loader,setloader}) => {
 
       // return _roundNumber.toString();
     } catch (err) {
+      console.log(err);
     }
   };
 
@@ -450,6 +453,7 @@ const PreSales = ({changeNetwork,account,setAccount,loader,setloader}) => {
 
       return usdPrice.toString();
     } catch (err) {
+      console.log(err);
     }
   };
 
@@ -473,6 +477,7 @@ const PreSales = ({changeNetwork,account,setAccount,loader,setloader}) => {
 
       // return totalSupply.toString();
     } catch (err) {
+      console.log(err);
     }
   };
 
@@ -506,7 +511,7 @@ const PreSales = ({changeNetwork,account,setAccount,loader,setloader}) => {
       // console.log("ETH in contract");
       
       //const provider = new Web3.providers.HttpProvider('https://eth-mainnet.g.alchemy.com/v2/ZNNDDz0q4xxwLvO9wQw-dPsHQ0urQ_J8');
-      const provider = new Web3.providers.HttpProvider('http://localhost:8545');
+      // const provider = new Web3.providers.HttpProvider('http://localhost:8545');
       
       const web3 = new Web3(window.ethereum);
 

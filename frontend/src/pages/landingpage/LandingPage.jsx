@@ -42,7 +42,8 @@ const getAIMTokenContrat = () => {
 }
 
 
-const LandingPage = ({ walletConnected, changeNetwork, account, setAccount, state, setState, index, setIndex, loader, setloader }) => {
+const LandingPage = ({ ShowPopup,
+  setShowPopup,walletConnected, changeNetwork, account, setAccount, state, setState, index, setIndex, loader, setloader }) => {
   const zero = BigNumber.from(0);
   const [roundNumber, setRoundNumber] = useState(zero);
   const web3ModalRef = useRef();
@@ -149,7 +150,8 @@ const LandingPage = ({ walletConnected, changeNetwork, account, setAccount, stat
   // }
 
 
-  const [ShowPopup, setShowPopup] = useState(false)
+  console.log("hi",ShowPopup);
+  // const [ShowPopup, setShowPopup] = useState(false)
   return (
     <>
       {
@@ -176,9 +178,9 @@ const LandingPage = ({ walletConnected, changeNetwork, account, setAccount, stat
                                 <BuyNow activeSection={activeSection} />
                               </span>
                             </Link>
-                            <ul className="social-icons">
+                            <ul className="social-icons" onClick={() => {setShowPopup(!ShowPopup)}}>
                               <li>
-                                <Link onClick={() => { changeNetwork, setShowPopup(true) }}>
+                                <Link onClick={() => {setShowPopup(true)}}>
                                   <Wallet />
                                 </Link>
                               </li>
@@ -190,10 +192,10 @@ const LandingPage = ({ walletConnected, changeNetwork, account, setAccount, stat
                                     </div>
                                     <div className="images-holder">
                                       <div className="images-inner ">
-                                        <img src={metamask} alt="" className="img-70" />
+                                        <img onClick={changeNetwork} src={metamask} alt="" className="img-70" />
                                       </div>
                                       <div className="images-inner">
-                                        <img src={trustwallet} className=" img-100" alt="" />
+                                        <img onClick={changeNetwork} src={trustwallet} className=" img-100" alt="" />
                                       </div>
 
                                     </div>
@@ -282,7 +284,7 @@ const LandingPage = ({ walletConnected, changeNetwork, account, setAccount, stat
                                         Welcome to AIM - the future of AI personal agents! Infusing cutting-edge AI with the humor of memes, we're pioneering an engaging digital experience. Join us, invest in innovation, and be part of this game-changing platform poised for industry leadership.
                                       </p>
                                     </div>
-                                    <div className="white-paper">
+                                    <div className={ShowPopup ? 'white-paper-true' : "white-paper"}>
                                       <Link onClick={openPdfInNewTab}>
                                         <WhitePaper />
                                       </Link>

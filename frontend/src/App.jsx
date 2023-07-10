@@ -16,6 +16,7 @@ function App() {
   const [loader, setloader] = useState(false)
   const [account, setAccount] = useState(null)
   const [walletConnected, setWalletConnected] = useState(false);
+  const [ShowPopup, setShowPopup] = useState(false)
 
   const changeNetwork = async () => {
     try {
@@ -23,9 +24,9 @@ function App() {
       await ethereum.request({
         method: "wallet_switchEthereumChain",
         params: [{
-          chainId: "0x7A69" //localHost
+          // chainId: "0x7A69" //localHost
           //chainId: "0x5" //goerli
-          // chainId: "0x1" //mainNet
+          chainId: "0x1" //mainNet
         }]
       });
       await web3Handler();
@@ -62,13 +63,13 @@ function App() {
     const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
     setAccount(accounts[0])
     // Get provider from Metamask
+    setShowPopup(false)
     const provider = new ethers.providers.Web3Provider(window.ethereum)
     // Set signer
     const signer = provider.getSigner()
     const accountss = await signer.getAddress();
     // Use the selected account to fetch the account name
     const UserAccount = await provider.lookupAddress(accountss);
-
     window.ethereum.on('chainChanged', (chainId) => {
       window.location.reload();
     })
@@ -193,11 +194,15 @@ function App() {
           loader={loader}
           setloader={setloader}
           changeNetwork={changeNetwork} account={account} setAccount={setAccount} walletConnected={walletConnected}
+          ShowPopup={ShowPopup}
+setShowPopup={setShowPopup}
         />} />
         {/* <Route path='/pre-sale' element={<PreSales />} /> */}
         <Route path='/' exact
           element={<LandingPage 
             changeNetwork={changeNetwork} account={account} setAccount={setAccount} walletConnected={walletConnected}
+            ShowPopup={ShowPopup}
+            setShowPopup={setShowPopup}
             state={state}
             setState={changeScrollPosition}
             index={index}
