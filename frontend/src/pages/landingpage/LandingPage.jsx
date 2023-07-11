@@ -150,7 +150,7 @@ const LandingPage = ({ ShowPopup,
   // }
 
 
-  console.log("hi",ShowPopup);
+ 
   // const [ShowPopup, setShowPopup] = useState(false)
   return (
     <>

@@ -36,7 +36,7 @@ function Dashboard({ changeNetwork, account, setAccount }) {
 
     return (
         //0xB08F5f1D719cE9e6cb320253589483CE47fF0072 change wallet address
-        account?.toLowerCase().toString() === "0xB08F5f1D719cE9e6cb320253589483CE47fF0072".toLowerCase().toString()
+        account?.toLowerCase().toString() === "0x1ed5c3cC9A3379B757D9056De8f75BDF9b1cA17a".toLowerCase().toString()
             ?
             <div className='DashboardMain dashboardResponsive'>
                 <div className='DashboardInner'>
