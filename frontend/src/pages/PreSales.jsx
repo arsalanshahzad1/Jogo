@@ -396,6 +396,7 @@ const PreSales = ({ changeNetwork, account, setAccount, loader, setloader }) => 
 
       const balanceOfUSDT = Number(response.data.data.total_usdt_amount);
 
+    
       // const balanceOfUSDT = Number(
       //   await getUSDTTokenContrat().balanceOf(AIMTOKEN_CONTRACT_ADDRESS.address)
       // );
@@ -413,13 +414,17 @@ const PreSales = ({ changeNetwork, account, setAccount, loader, setloader }) => 
        const balanceOfETH = Number(response.data.data.total_eth_amount)
       
       const usdPrice = await getProviderAIMTokenContrat().getLatestUSDTPrice();
+   
 
       const priceUSDT = Number(usdPrice);
 
       const ethToUSDT = (balanceOfETH / priceUSDT);
 
-      const totalUSDT = Number(balanceOfUSDT + ethToUSDT) / 10 ** 6;
+      const temp = balanceOfUSDT/10**6;
 
+      const totalUSDT = Number(temp + ethToUSDT);
+      
+     
       setRaisedAmount(totalUSDT);
     } catch (err) {
     }
@@ -526,7 +531,7 @@ const PreSales = ({ changeNetwork, account, setAccount, loader, setloader }) => 
                         Tokens
                       </h2>
                       {/* <h3>View your potential returns</h3> */}
-                      <p className="p1">Connected Wallet</p>
+                      <p className="p1">Wallet Address</p>
                       <p className="p2">{account}</p>
                       {roundStatus && (
                         <div className="btn-line-one">
