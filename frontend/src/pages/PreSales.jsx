@@ -162,6 +162,7 @@ const PreSales = ({ changeNetwork, account, setAccount, loader, setloader }) => 
     try {
       if (!walletConnected) {
         changeNetwork();
+        return;
       }
       await getAIMTokenContrat().claimAIMToken();
       window.alert("Tokens claimed");
@@ -228,6 +229,7 @@ const PreSales = ({ changeNetwork, account, setAccount, loader, setloader }) => 
      
       if (!walletConnected) {
         changeNetwork();
+        return;
       }
 
       setloader(true);
@@ -240,8 +242,8 @@ const PreSales = ({ changeNetwork, account, setAccount, loader, setloader }) => 
         roundPrice * 10 ** 6
       );
 
-      if (amountUSDT.toString() < 30000000) {
-        alert("please Purchase more than 30 doller Token");
+      if (amountUSDT?.toString() < 30000000) {
+        alert("Please purchase tokens of more than 30 dollar");
         window.location.reload();
       }
 
@@ -274,6 +276,7 @@ const PreSales = ({ changeNetwork, account, setAccount, loader, setloader }) => 
 
       if (!walletConnected) {
         changeNetwork();
+        return;
       }
 
       setloader(true);
@@ -290,7 +293,7 @@ const PreSales = ({ changeNetwork, account, setAccount, loader, setloader }) => 
       );
 
       if (amountUSDT?.toString() < 30000000) {
-        alert("please Purchase more than 30 doller Token");
+        alert("Please purchase tokens of more than 30 dollar");
         window.location.reload();
       }
 
