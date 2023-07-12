@@ -583,7 +583,7 @@ const PreSales = ({ changeNetwork, account, setAccount, loader, setloader }) => 
                   <br />
                   <span>
                     {(raisedAmount.toFixed(2))} /{" "}
-                    {totalSupply.toString()}
+                    {totalSupply.toString()/10**6}
                   </span>
                 </p>
                 <h2>Amount raised</h2>

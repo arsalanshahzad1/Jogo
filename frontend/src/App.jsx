@@ -39,19 +39,19 @@ function App() {
   });
 
   const checkIsWalletConnected = async () => {
-  try {
+    try {
       if (!ethereum) return alert("please install MetaMask");
       const accounts = await ethereum.request({ method: "eth_accounts" });
       setAccount(accounts[0]);
       // console.log("accounts",accounts);
-        // Get provider from Metamask
-        const provider = new ethers.providers.Web3Provider(window.ethereum)
-        // Set signer
-        const signer = provider.getSigner()
-        // loadContracts(signer)
-        const accountss = await signer.getAddress();
-        setWalletConnected(true);
-        // Use the selected account to fetch the account name
+      // Get provider from Metamask
+      const provider = new ethers.providers.Web3Provider(window.ethereum)
+      // Set signer
+      const signer = provider.getSigner()
+      // loadContracts(signer)
+      const accountss = await signer.getAddress();
+      setWalletConnected(true);
+      // Use the selected account to fetch the account name
     } catch (err) {
       setWalletConnected(false);
       throw new Error("No ethereum Object");
@@ -82,55 +82,55 @@ function App() {
   }
 
 
-// /////////// wallet Connect ///////////////////////
-// const connect = async () => {
-//   try {
-//     setError("");
+  // /////////// wallet Connect ///////////////////////
+  // const connect = async () => {
+  //   try {
+  //     setError("");
 
-//     const accounts = await injectedProvider.request({
-//       method: "eth_requestAccounts",
-//     });
+  //     const accounts = await injectedProvider.request({
+  //       method: "eth_requestAccounts",
+  //     });
 
-//     const chainId = await injectedProvider.request({ method: "eth_chainId" });
+  //     const chainId = await injectedProvider.request({ method: "eth_chainId" });
 
-//     setSelectedAccount(accounts[0]);
-//     setChainId(chainId);
-//     setConnected(true);
+  //     setSelectedAccount(accounts[0]);
+  //     setChainId(chainId);
+  //     setConnected(true);
 
-//     injectedProvider.addListener("chainChanged", setChainId);
+  //     injectedProvider.addListener("chainChanged", setChainId);
 
-//     injectedProvider.addListener("accountsChanged", (accounts) => {
-//       if (accounts.length === 0) {
-//         setConnected(false);
-//         setSelectedAccount("");
-//         setChainId("");
-//       } else {
-//         const connectedAccount = accounts[0];
-//         setSelectedAccount(connectedAccount);
-//       }
-//     });
-//   } catch (e) {
-//     console.error(e);
-//     if (e.code === 4001) {
-//       setError("User denied connection.");
-//     }
-//   }
-// };
+  //     injectedProvider.addListener("accountsChanged", (accounts) => {
+  //       if (accounts.length === 0) {
+  //         setConnected(false);
+  //         setSelectedAccount("");
+  //         setChainId("");
+  //       } else {
+  //         const connectedAccount = accounts[0];
+  //         setSelectedAccount(connectedAccount);
+  //       }
+  //     });
+  //   } catch (e) {
+  //     console.error(e);
+  //     if (e.code === 4001) {
+  //       setError("User denied connection.");
+  //     }
+  //   }
+  // };
 
-// const switchChain = async () => {
-//   try {
-//     await injectedProvider.request({
-//       method: "wallet_switchEthereumChain",
-//       params: [{ chainId: "0x1" }],
-//     });
-//     connect();
-//   } catch (e) {
-//     console.error(e);
-//     if (e.code === 4001) {
-//       setError("User rejected switching chains.");
-//     }
-//   }
-// };
+  // const switchChain = async () => {
+  //   try {
+  //     await injectedProvider.request({
+  //       method: "wallet_switchEthereumChain",
+  //       params: [{ chainId: "0x1" }],
+  //     });
+  //     connect();
+  //   } catch (e) {
+  //     console.error(e);
+  //     if (e.code === 4001) {
+  //       setError("User rejected switching chains.");
+  //     }
+  //   }
+  // };
 
 
 
@@ -195,11 +195,11 @@ function App() {
           setloader={setloader}
           changeNetwork={changeNetwork} account={account} setAccount={setAccount} walletConnected={walletConnected}
           ShowPopup={ShowPopup}
-setShowPopup={setShowPopup}
+          setShowPopup={setShowPopup}
         />} />
         {/* <Route path='/pre-sale' element={<PreSales />} /> */}
         <Route path='/' exact
-          element={<LandingPage 
+          element={<LandingPage
             changeNetwork={changeNetwork} account={account} setAccount={setAccount} walletConnected={walletConnected}
             ShowPopup={ShowPopup}
             setShowPopup={setShowPopup}

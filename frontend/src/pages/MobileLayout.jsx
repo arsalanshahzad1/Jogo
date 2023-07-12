@@ -15,8 +15,8 @@ import WhitePaper from '../components/svg/WhitePaper'
 const MobileLayout = () => {
     const openPdfInNewTab = () => {
         window.open("/assets/docs/Jogo-Media-whitepaper.pdf", "_blank");
-      };
-    
+    };
+
     return (
         <div className="mobile-layout">
             <section className="home-section-one" id="home">
@@ -26,10 +26,10 @@ const MobileLayout = () => {
                         <div className="col-lg-6">
                             <div className="detail">
                                 <p style={{ color: '#e4513b', paddingBottom: '10px' }}>Join the AI meme revolution with AIM</p>
-                                <p>Welcome to AIM - the future of AI personal agents! Infusing cutting-edge AI with the humor of memes, we're pioneering an engaging digital experience. Join us, invest in innovation, and be part of this game-changing platform poised for industry leadership.</p>
+                                <p>Venture into the heart of the AIM project, where cherished memes like Doge, Shiba, Baby Doge, and Pepe awaken as AI companions in an exhilarating new reality. Envision tailoring their voices, skills, and accessories, and immersing yourself in a dynamic Meme World where they interact and compete. Experience the thrill as these meme characters evolve into your personal assistants or steadfast companions, offering unwavering support and companionship, seamlessly integrating into your life. This isn't just another project; it's a pioneering venture that promises to redefine the intersection of AI and personal connection, making AIM the unparalleled leader in this space.</p>
                                 <Link onClick={openPdfInNewTab}>
-                                    <WhitePaper/>
-                                  </Link>
+                                    <WhitePaper />
+                                </Link>
                             </div>
                         </div>
                         <div className="col-lg-6"></div>
@@ -123,38 +123,38 @@ const MobileLayout = () => {
             </section>
             <section className='About-section' id='aboutus'>
                 <p className='About-desc'>
-                Jogo Media LTD is an avant-garde digital marketing agency headquartered in London, specializing in the transformative realms of blockchain technology and artificial intelligence. For over three years, we have been pioneers in these groundbreaking sectors, providing cutting-edge solutions to large and medium-sized enterprises.
-<br/><br/>
-Our proficiency in blockchain development has steered us to the launch of several successful projects, aiding our clients in decoding the intricate terrain of distributed ledger technology. We take immense pride in our significant contributions to the blockchain ecosystem and anticipate continuing our innovative pursuits with the introduction of our AI personal assistant powered by the AIM Token.
-<br/><br/>
-Parallel to our blockchain ventures, we also excel in artificial intelligence and machine learning, perpetually harnessing the potential of these technologies to engineer innovative solutions and propel business growth.
-<br/><br/>
-Beyond our expertise in AI and blockchain, we provide an extensive spectrum of digital marketing services. Our seasoned team of experts has an impressive track record in developing mobile applications for iOS and Android, crafting bespoke software solutions, and executing effective marketing strategies tailored to meet our clients' distinct needs.
-<br/><br/>
-Our suite of digital marketing services includes SEO, SEM, social media marketing, content marketing, and pay-per-click advertising, all meticulously designed to help our clients realize their business objectives.
-<br/><br/>
-We are honored to have collaborated with a diverse range of clients, including some of the most prominent names in the tech industry, and remain committed to staying at the vanguard of technological and marketing trends.
-<br/><br/>
-As we gear up for the AIM Token ICO, we cordially invite potential investors to delve deeper into this thrilling opportunity at the intersection of AI and blockchain technology. Join us on this remarkable journey and explore how Jogo Media LTD can help shape your financial future."
-<br/><br/>
-Change this content in the FAQs section:
-Frequently Asked Questions ( Frequently asked question is written twice, remove one)
-<br/><br/>
-Is the personal Ai assistent already developed ?
-Indeed, we have already developed a prototype of our personal AI assistant, which you can preview in our YouTube video: https://www.youtube.com/watch?v=9zHIxAsjFvg.
-At this stage, we are eager to build a powerful community that can test, refine, and perfect the project. The launch of the AIM Token is a strategic move to raise the necessary funds to continue the development of the project. We are excited about the journey ahead and look forward to seeing the transformative impact our AI assistant will bring.
+                    Jogo Media LTD is an avant-garde digital marketing agency headquartered in London, specializing in the transformative realms of blockchain technology and artificial intelligence. For over three years, we have been pioneers in these groundbreaking sectors, providing cutting-edge solutions to large and medium-sized enterprises.
+                    <br /><br />
+                    Our proficiency in blockchain development has steered us to the launch of several successful projects, aiding our clients in decoding the intricate terrain of distributed ledger technology. We take immense pride in our significant contributions to the blockchain ecosystem and anticipate continuing our innovative pursuits with the introduction of our AI personal assistant powered by the AIM Token.
+                    <br /><br />
+                    Parallel to our blockchain ventures, we also excel in artificial intelligence and machine learning, perpetually harnessing the potential of these technologies to engineer innovative solutions and propel business growth.
+                    <br /><br />
+                    Beyond our expertise in AI and blockchain, we provide an extensive spectrum of digital marketing services. Our seasoned team of experts has an impressive track record in developing mobile applications for iOS and Android, crafting bespoke software solutions, and executing effective marketing strategies tailored to meet our clients' distinct needs.
+                    <br /><br />
+                    Our suite of digital marketing services includes SEO, SEM, social media marketing, content marketing, and pay-per-click advertising, all meticulously designed to help our clients realize their business objectives.
+                    <br /><br />
+                    We are honored to have collaborated with a diverse range of clients, including some of the most prominent names in the tech industry, and remain committed to staying at the vanguard of technological and marketing trends.
+                    <br /><br />
+                    As we gear up for the AIM Token ICO, we cordially invite potential investors to delve deeper into this thrilling opportunity at the intersection of AI and blockchain technology. Join us on this remarkable journey and explore how Jogo Media LTD can help shape your financial future."
+                    <br /><br />
+                    Change this content in the FAQs section:
+                    Frequently Asked Questions ( Frequently asked question is written twice, remove one)
+                    <br /><br />
+                    Is the personal Ai assistent already developed ?
+                    Indeed, we have already developed a prototype of our personal AI assistant, which you can preview in our YouTube video: https://www.youtube.com/watch?v=9zHIxAsjFvg.
+                    At this stage, we are eager to build a powerful community that can test, refine, and perfect the project. The launch of the AIM Token is a strategic move to raise the necessary funds to continue the development of the project. We are excited about the journey ahead and look forward to seeing the transformative impact our AI assistant will bring.
                 </p>
             </section>
             <section className="titleOfSection">
                 <h2>FAQs</h2>
             </section>
             <section className='FAQ-section' id='faqs'>
-            <div className='FAQ-inner'>
-                <p className='FAQ-heading'>
-                    Frequently Asked Questions
-                </p>
-                <div>
-                <p className='FAQ-question'>
+                <div className='FAQ-inner'>
+                    <p className='FAQ-heading'>
+                        Frequently Asked Questions
+                    </p>
+                    <div>
+                        <p className='FAQ-question'>
                             Is the personal Ai assistent already developed ?
                         </p>
                         <p className='FAQ-Answer'>
@@ -193,10 +193,10 @@ At this stage, we are eager to build a powerful community that can test, refine,
                             AIM Tokens will be available for purchase during our Initial Coin Offering (ICO). You can purchase AIM Tokens by connecting your wallet and using USDT (ERC-20) for the transaction.
                         </p>
                         <p className='FAQ-question'>
-                        There is any Buy Or Sell Tax ?
+                            There is any Buy Or Sell Tax ?
                         </p>
                         <p className='FAQ-Answer'>
-                        No, our token does not have any buy or sell taxes. When you trade our token, there are no additional taxes or fees imposed on the transactions. We aim to provide a seamless and cost-effective trading experience for our token holders.
+                            No, our token does not have any buy or sell taxes. When you trade our token, there are no additional taxes or fees imposed on the transactions. We aim to provide a seamless and cost-effective trading experience for our token holders.
                         </p>
                         <p className='FAQ-question'>
                             What is the roadmap for AIM Token's development?
@@ -257,28 +257,28 @@ At this stage, we are eager to build a powerful community that can test, refine,
                             However, we must remind you that as with all investments, there are risks involved. We encourage all potential investors to thoroughly read our whitepaper, understand the project, and consider their financial situation and risk tolerance before investing.
                         </p>
                         <p className='FAQ-heading'>
-                        Disclaimer
-                    </p>
-                    <div>
-                        <p className='FAQ-Answer'>
-                            This document and the information contained herein is not intended to be a source of investment, financial, technical, tax, or legal advice. This document and the AIM Token project are not an offer to sell or a solicitation of an offer to buy a security in any jurisdiction where it is unlawful to make such an offer or solicitation.
-                            <br /><br />
-                            The AIM Token project is a highly speculative venture that carries significant risks. Potential purchasers should carefully consider these risks and consult with their legal, financial, tax, and other advisors before making a decision to invest in AIM Tokens.
-                            <br /><br />
-                            The AIM Token project is still in an early development stage. There can be no assurance that the technology or the project will be implemented or that the AIM Tokens will have any utility. The purchase of AIM Tokens should only be undertaken by individuals or entities that are capable of understanding and affording the risks involved with the purchase of a digital asset like the AIM Tokens.
-                            <br /><br />
-                            No representations or warranties of any kind are made, or should be inferred, about the suitability of AIM Tokens for your investment, the likelihood of profitability from purchasing or holding AIM Tokens, or the tax consequences of such purchase or hold.
-                            <br /><br />
-                            Please note that the regulatory status of cryptographic tokens and digital assets is unclear or unsettled in many jurisdictions. It is your responsibility to know and understand how cryptocurrencies and blockchain technology is regulated in your country.
-                            <br /><br />
-                            This disclaimer applies to the fullest extent permitted by law in each jurisdiction in which a token purchaser is domiciled.
+                            Disclaimer
                         </p>
+                        <div>
+                            <p className='FAQ-Answer'>
+                                This document and the information contained herein is not intended to be a source of investment, financial, technical, tax, or legal advice. This document and the AIM Token project are not an offer to sell or a solicitation of an offer to buy a security in any jurisdiction where it is unlawful to make such an offer or solicitation.
+                                <br /><br />
+                                The AIM Token project is a highly speculative venture that carries significant risks. Potential purchasers should carefully consider these risks and consult with their legal, financial, tax, and other advisors before making a decision to invest in AIM Tokens.
+                                <br /><br />
+                                The AIM Token project is still in an early development stage. There can be no assurance that the technology or the project will be implemented or that the AIM Tokens will have any utility. The purchase of AIM Tokens should only be undertaken by individuals or entities that are capable of understanding and affording the risks involved with the purchase of a digital asset like the AIM Tokens.
+                                <br /><br />
+                                No representations or warranties of any kind are made, or should be inferred, about the suitability of AIM Tokens for your investment, the likelihood of profitability from purchasing or holding AIM Tokens, or the tax consequences of such purchase or hold.
+                                <br /><br />
+                                Please note that the regulatory status of cryptographic tokens and digital assets is unclear or unsettled in many jurisdictions. It is your responsibility to know and understand how cryptocurrencies and blockchain technology is regulated in your country.
+                                <br /><br />
+                                This disclaimer applies to the fullest extent permitted by law in each jurisdiction in which a token purchaser is domiciled.
+                            </p>
+
+                        </div>
 
                     </div>
-
                 </div>
-            </div>
-        </section>
+            </section>
         </div>
     )
 }

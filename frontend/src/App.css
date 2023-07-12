@@ -489,7 +489,7 @@ p {
 
 .home-section-one .detail p {
   /* font-family: 'Kidspace'; */
-  font-size: 24px;
+  font-size: 18px;
   font-weight: 400;
   line-height: 30px;
   letter-spacing: 0em;
@@ -702,7 +702,7 @@ p {
   left: 13.5%;
   text-align: center;
   font-size: 24px;
-  top: 84px;
+  top: 40px;
   font-family: 'heading';
   z-index: 1000;
 }
@@ -3295,16 +3295,18 @@ input[type=number] {
 .white-paper {
   position: absolute;
   left: 25%;
-  top: 80%;
+  top: 90%;
   transform: translate(-25%, -70%);
   z-index: 9999;
 }
+
 .white-paper-true {
   position: absolute;
   left: 25%;
   top: 80%;
   transform: translate(-25%, -70%);
 }
+
 .FAQ-question {
   margin: 1% auto 0 auto !important;
   color: #ffc107;
