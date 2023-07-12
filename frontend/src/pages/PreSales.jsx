@@ -43,13 +43,13 @@ const getUSDTTokenContrat = () => {
 
 const getProviderAIMTokenContrat = () => {
   // const provider = new ethers.providers.Web3Provider(ethereum);
-  // const provider = new ethers.providers.JsonRpcProvider(
-  //   "http://localhost:8545"
-  // );
-
   const provider = new ethers.providers.JsonRpcProvider(
-    "https://eth-mainnet.g.alchemy.com/v2/ZNNDDz0q4xxwLvO9wQw-dPsHQ0urQ_J8"
+    "http://localhost:8545"
   );
+
+  // const provider = new ethers.providers.JsonRpcProvider(
+  //   "https://eth-mainnet.g.alchemy.com/v2/ZNNDDz0q4xxwLvO9wQw-dPsHQ0urQ_J8"
+  // );
 
   // const signer = provider.getSigner();
   const AIMContract = new ethers.Contract(AIMTOKEN_CONTRACT_ADDRESS.address, AIMTOKEN_CONTRACT_ABI.abi, provider);
