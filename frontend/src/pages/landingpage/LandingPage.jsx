@@ -281,7 +281,7 @@ const LandingPage = ({ ShowPopup,
                                     </h2>
                                     <div className="detail">
                                       <p>
-                                        Welcome to AIM - the future of AI personal agents! Infusing cutting-edge AI with the humor of memes, we're pioneering an engaging digital experience. Join us, invest in innovation, and be part of this game-changing platform poised for industry leadership.
+                                      Venture into the heart of the AIM project, where cherished memes like Doge, Shiba, Baby Doge, and Pepe awaken as AI companions in an exhilarating new reality. Envision tailoring their voices, skills, and accessories, and immersing yourself in a dynamic Meme World where they interact and compete. Experience the thrill as these meme characters evolve into your personal assistants or steadfast companions, offering unwavering support and companionship, seamlessly integrating into your life. This isn't just another project; it's a pioneering venture that promises to redefine the intersection of AI and personal connection, making AIM the unparalleled leader in this space.
                                       </p>
                                     </div>
                                     <div className={ShowPopup ? 'white-paper-true' : "white-paper"}>
@@ -324,7 +324,7 @@ const LandingPage = ({ ShowPopup,
                                 />
                               </div>
                             </section>
-                            <BillGates />
+                            {/* <BillGates /> */}
                             <Video />
                             <PreSales changeNetwork={changeNetwork} account={account} setAccount={setAccount} loader={loader} setloader={setloader} />
                             <div className="sticky-background">
