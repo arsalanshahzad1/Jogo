@@ -33,6 +33,7 @@ error pleasePurchaseMorethan30Doller();
 
 contract AIMToken is ERC20, Ownable {
     uint256 public round;
+    uint256 public raisedAmount;
 
     uint256 public constant roundLimit = 100_000_000 ether;
 
@@ -124,6 +125,7 @@ contract AIMToken is ERC20, Ownable {
             USDTtoken.transferFrom(msg.sender, address(this), payAmountInUDST);
             remainingSupply -= _amount;
             soldTokens[msg.sender] += _amount;
+            raisedAmount += payAmountInUDST;
             emit RoundData(round, msg.sender, _amount, 0, payAmountInUDST);
         }
         //////// stage Two ////////////
@@ -142,6 +144,7 @@ contract AIMToken is ERC20, Ownable {
             USDTtoken.transferFrom(msg.sender, address(this), payAmountInUDST);
             remainingSupply -= _amount;
             soldTokens[msg.sender] += _amount;
+            raisedAmount += payAmountInUDST;
             emit RoundData(round, msg.sender, _amount, 0, payAmountInUDST);
         }
         //////// stage Three ////////////
@@ -160,6 +163,7 @@ contract AIMToken is ERC20, Ownable {
             USDTtoken.transferFrom(msg.sender, address(this), payAmountInUDST);
             remainingSupply -= _amount;
             soldTokens[msg.sender] += _amount;
+            raisedAmount += payAmountInUDST;
             emit RoundData(round, msg.sender, _amount, 0, payAmountInUDST);
         }
         //////// stage four ////////////
@@ -178,6 +182,7 @@ contract AIMToken is ERC20, Ownable {
             USDTtoken.transferFrom(msg.sender, address(this), payAmountInUDST);
             remainingSupply -= _amount;
             soldTokens[msg.sender] += _amount;
+            raisedAmount += payAmountInUDST;
             emit RoundData(round, msg.sender, _amount, 0, payAmountInUDST);
         }
         //////// stage five ////////////
@@ -196,6 +201,7 @@ contract AIMToken is ERC20, Ownable {
             USDTtoken.transferFrom(msg.sender, address(this), payAmountInUDST);
             remainingSupply -= _amount;
             soldTokens[msg.sender] += _amount;
+            raisedAmount += payAmountInUDST;
             emit RoundData(round, msg.sender, _amount, 0, payAmountInUDST);
         } else {
             revert mintingIsNotAllowed();
@@ -227,6 +233,7 @@ contract AIMToken is ERC20, Ownable {
             }
             remainingSupply -= _amount;
             soldTokens[msg.sender] += _amount;
+            raisedAmount += payAmountInUDST;
             emit RoundData(round, msg.sender, _amount, msg.value, 0);
         }
         //////// stage Two ////////////
@@ -244,6 +251,7 @@ contract AIMToken is ERC20, Ownable {
             }
             remainingSupply -= _amount;
             soldTokens[msg.sender] += _amount;
+            raisedAmount += payAmountInUDST;
             emit RoundData(round, msg.sender, _amount, msg.value, 0);
         }
         //////// stage Three ////////////
@@ -261,6 +269,7 @@ contract AIMToken is ERC20, Ownable {
             }
             remainingSupply -= _amount;
             soldTokens[msg.sender] += _amount;
+            raisedAmount += payAmountInUDST;
             emit RoundData(round, msg.sender, _amount, msg.value, 0);
         }
         //////// stage four ////////////
@@ -279,6 +288,7 @@ contract AIMToken is ERC20, Ownable {
             }
             remainingSupply -= _amount;
             soldTokens[msg.sender] += _amount;
+            raisedAmount += payAmountInUDST;
             emit RoundData(round, msg.sender, _amount, msg.value, 0);
         }
         //////// stage five ////////////
@@ -299,7 +309,7 @@ contract AIMToken is ERC20, Ownable {
             }
             remainingSupply -= _amount;
             soldTokens[msg.sender] += _amount;
-
+            raisedAmount += payAmountInUDST;
             emit RoundData(round, msg.sender, _amount, msg.value, 0);
         } else {
             revert mintingIsNotAllowed();
@@ -330,7 +340,7 @@ contract AIMToken is ERC20, Ownable {
 
     //withdraw USDT tokens
     function withdrawUSDT(uint256 _amount) public onlyOwner {
-        if (USDTtoken.balanceOf(msg.sender) < 1000000) {
+        if (USDTtoken.balanceOf(address(this)) < _amount*10**6) {
             revert contractDontHaveUSDT();
         }
         USDTtoken.transfer(owner(), _amount);
