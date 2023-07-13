@@ -1,30 +1,21 @@
-import React, { useEffect, useState, useRef } from "react";
-import Header from "../pages/landingpage/Header";
-import Snack from "../components/shared/Snack";
+import React, { useEffect, useState, useRef, useContext } from "react";
 import Buy from "../components/svg/Buy";
 import { AiOutlineClose } from "react-icons/ai";
 import BuyWithUsdt from "../components/svg/BuyWithUsdt";
-import Disconnect from "../components/svg/Disconnect";
-import { Link } from "react-router-dom";
-import BackButton from "../components/svg/BackButton";
-import Wallet from "../components/svg/Wallet";
 import apis from "../Services";
-import Web3Modal from "web3modal";
-import { BigNumber, Contract, ethers, providers, utils } from "ethers";
+import { ethers } from "ethers";
 import Modal from "react-bootstrap/Modal";
-import Web3 from "web3";
-import AIMTOKEN_CONTRACT_ABI from '../contractsData/AIMToken.json'
-import AIMTOKEN_CONTRACT_ADDRESS from '../contractsData/AIMToken-address.json'
-import TETHER_TOKEN_CONTRACT_ABI from '../contractsData/TetherToken.json'
-import TETHER_TOKEN_CONTRACT_ADDRESS from '../contractsData/TetherToken-address.json'
 import Claim from "../components/svg/Claim";
+import { Store } from "../context/Store";
+import AIMTOKEN_CONTRACT_ADDRESS from "../contractsData/AIMToken-address.json"
+import AIMTOKEN_CONTRACT_ABI from "../contractsData/AIMToken.json"
+import TETHER_TOKEN_CONTRACT_ADDRESS from "../contractsData/TetherToken-address.json"
+import TETHER_TOKEN_CONTRACT_ABI from "../contractsData/TetherToken.json"
+
 
 
 const getAIMTokenContrat = () => {
   const provider = new ethers.providers.Web3Provider(ethereum);
-  // const provider = new ethers.providers.JsonRpcProvider(
-  //   "https://polygon-mainnet.g.alchemy.com/v2/8JkHo3qUxg6xK4OpBBG7XrfND3pZL0ig"
-  // );
   const signer = provider.getSigner();
   const AIMContract = new ethers.Contract(AIMTOKEN_CONTRACT_ADDRESS.address, AIMTOKEN_CONTRACT_ABI.abi, signer);
   return AIMContract;
@@ -33,86 +24,67 @@ const getAIMTokenContrat = () => {
 
 const getUSDTTokenContrat = () => {
   const provider = new ethers.providers.Web3Provider(ethereum);
-  // const provider = new ethers.providers.JsonRpcProvider(
-  //   "https://polygon-mainnet.g.alchemy.com/v2/8JkHo3qUxg6xK4OpBBG7XrfND3pZL0ig"
-  // );
   const signer = provider.getSigner();
   const USDTContract = new ethers.Contract(TETHER_TOKEN_CONTRACT_ADDRESS.address, TETHER_TOKEN_CONTRACT_ABI.abi, signer);
   return USDTContract;
 }
 
-const getProviderAIMTokenContrat = () => {
-  // const provider = new ethers.providers.Web3Provider(ethereum);
-  const provider = new ethers.providers.JsonRpcProvider(
-    "http://localhost:8545"
-  );
-
-  // const provider = new ethers.providers.JsonRpcProvider(
-  //   "https://eth-mainnet.g.alchemy.com/v2/ZNNDDz0q4xxwLvO9wQw-dPsHQ0urQ_J8"
-  // );
-
-  // const signer = provider.getSigner();
-  const AIMContract = new ethers.Contract(AIMTOKEN_CONTRACT_ADDRESS.address, AIMTOKEN_CONTRACT_ABI.abi, provider);
-  return AIMContract;
-}
 
 const PreSales = ({ changeNetwork, account, setAccount, loader, setloader }) => {
-  const zero = BigNumber.from(0);
-  // console.log("loding",loader);
-  // console.log("setloding",setloader);
+
+  const { activeRound, CurrentRoundPrice, coinsPerDollar, totalRaisedAmount, raisedAmount, roundStatus,
+    claimStatus } = useContext(Store)
 
 
-  const web3ModalRef = useRef();
+  // 6 0 0 0 15500000 true true
+
+  // let activeRound = 6;
+  // let CurrentRoundPrice = 0;
+  // let coinsPerDollar = 0;
+  // let totalRaisedAmount = 0;
+  // let raisedAmount = 15500000;
+  // let roundStatus= true ;
+  // let claimStatus= true ;
+
+  // const activeRound = 0;
+  // const CurrentRoundPrice = 0;
+  // const coinsPerDollar = 0;
+  // const totalRaisedAmount = 0;
+  // const raisedAmount = 0;
+  // const roundStatus= false ;
+  // const claimStatus= false ;
+
+  // console.log(activeRound, CurrentRoundPrice, coinsPerDollar, totalRaisedAmount, raisedAmount, roundStatus,
+  //   claimStatus);
 
   const [connect, sendUSDTBox] = useState(false);
-
   const [connector, sendETHBox] = useState(false);
-
-  const [roundNumber, setRoundNumber] = useState(zero);
-
-  const [roundStatus, setRoundStatus] = useState(false);
-
-  const [claimStatus, setClaimStatus] = useState(false);
-
-  const [roundPrice, setRoundPrice] = useState(zero);
-
-  const [coinsPerDollar, setCoinsPerDollar] = useState(zero);
-
-  const [userAddress, setUserAddress] = useState("");
-
-  const [totalSupply, setTotalSupply] = useState(0);
-
-  const [raisedAmount, setRaisedAmount] = useState(0);
-
   const [onBars, setOnBars] = useState(0);
-
   const [offBars, setOffBars] = useState(0);
-
   const [usersTokens, setUsersTokens] = useState(0);
-
   const [price, setPrice] = useState(null)
-
   const [walletConnected, setWalletConnected] = useState(false);
+  const [Bar, setBar]=useState([]);
 
-  const onBarsList = [];
+  // var Bar = [];
 
   const offBarsList = [];
 
-  for (let i = 0; i < offBars; i++) {
-    offBarsList.push(
-      <div
-        className="loader-bar-black"
-        style={{ display: "block" }}
-        key={i}
-      ></div>
-    );
-  }
+  // for (let i = 0; i < offBars; i++) {
+  //   offBarsList.push(
+  //     <div
+  //       className="loader-bar-black"
+  //       style={{ display: "block" }}
+  //       key={i}
+  //     ></div>
+  //   );
+  // }
 
-  for (let i = 0; i < onBars; i++) {
-    onBarsList.push(
-      <div className="loader-bar" style={{ display: "block" }} key={i}></div>
-    );
-  }
+  // for (let i = 0; i < onBars; i++) {
+  //   onBarsList.push(
+  //     <div className="loader-bar" style={{ display: "block" }} key={i}></div>
+  //   );
+  // }
 
 
   const checkIsWalletConnected = async () => {
@@ -136,28 +108,6 @@ const PreSales = ({ changeNetwork, account, setAccount, loader, setloader }) => 
   }
 
 
-  const checkActiveRound = async () => {
-    const _round = Number(roundNumber);
-
-    if (_round > 0 || _round > 6) {
-      setRoundStatus(true);
-      if (_round > 5) {
-        setClaimStatus(true)
-      }
-    } else {
-      setRoundStatus(false);
-    }
-  };
-
-  const getNumberOfRound = async () => {
-    try {
-      const _roundNumber = await getProviderAIMTokenContrat().round();
-      setRoundNumber(_roundNumber.toString());
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
   const claimTokens = async () => {
     try {
       if (!walletConnected) {
@@ -173,60 +123,8 @@ const PreSales = ({ changeNetwork, account, setAccount, loader, setloader }) => 
 
 
 
-  const getCoinsPerDollar = async () => {
-    if (roundPrice > 0) {
-      const coins = 1 / roundPrice;
-      setCoinsPerDollar(coins);
-    }
-  };
-
-
-  // setInterval(async () => {
-  //   await getNumberOfRound()
-  //   await getRaisedAmount();
-  // }, 10000);
-
-
-  const getRoundPrice = async () => {
-    const round = roundNumber;
-    let _roundPrice;
-
-    if (round == 1) {
-      _roundPrice = 0.005;
-    } else if (round == 2) {
-      _roundPrice = 0.01;
-    } else if (round == 3) {
-      _roundPrice = 0.02;
-    } else if (round == 4) {
-      _roundPrice = 0.04;
-    } else if (round == 5) {
-      _roundPrice = 0.08;
-    } else {
-      _roundPrice = 0;
-    }
-
-    setRoundPrice(_roundPrice.toString());
-  };
-
-
-
-  // const getCurrentUser = async () => {
-  //   const web3 = new Web3(window.ethereum);
-
-  //   // Request access to the user's accounts
-  //   await window.ethereum.enable();
-
-  //   // Get the user's addresses from Metamask
-  //   const accounts = await web3.eth.getAccounts();
-
-  //   // Retrieve the user's address
-  //   const userAddress = setUserAddress(accounts[0]);
-  // };
-
-
   const sendUSDT = async () => {
     try {
-     
       if (!walletConnected) {
         changeNetwork();
         return;
@@ -237,14 +135,25 @@ const PreSales = ({ changeNetwork, account, setAccount, loader, setloader }) => 
       const _amount = Number(price);
       const tokensPurchase = ethers.utils.parseEther(_amount.toString());
 
+
+
+      const remaningToken = await getAIMTokenContrat().remainingSupply()
+
+      if (Number(remaningToken) - Number(_amount) < 0) {
+        alert(`Round Limit Exceed : you can buy ${remaningToken / 10 ** 18}`);
+        window.location.reload();
+        return;
+      }
+
       const amountUSDT = await getAIMTokenContrat().sellTokenInUDSTPrice(
         tokensPurchase.toString(),
-        roundPrice * 10 ** 6
+        CurrentRoundPrice * 10 ** 6
       );
 
       if (amountUSDT?.toString() < 30000000) {
         alert("Please purchase tokens of more than 30 dollar");
         window.location.reload();
+        return;
       }
 
       // console.log("amountUSDT", amountUSDT.toString());
@@ -253,7 +162,7 @@ const PreSales = ({ changeNetwork, account, setAccount, loader, setloader }) => 
         amountUSDT
       );
 
-      appprove.wait();
+      await appprove.wait()
 
       let tx = await getAIMTokenContrat().mintByUSDT(tokensPurchase.toString());
 
@@ -265,14 +174,12 @@ const PreSales = ({ changeNetwork, account, setAccount, loader, setloader }) => 
       console.log(error);
     }
 
-
-
   };
 
+
+
   const sendETH = async () => {
-
     try {
-
 
       if (!walletConnected) {
         changeNetwork();
@@ -284,21 +191,26 @@ const PreSales = ({ changeNetwork, account, setAccount, loader, setloader }) => 
 
       let tokenEth = ethers.utils.parseEther(_amount.toString())
 
+      const remaningToken = await getAIMTokenContrat().remainingSupply()
 
-      // const _amount = Number(document.getElementById("ethInput").value);
+      if (Number(remaningToken) - Number(_amount) < 0) {
+        alert(`Round Limit Exceed : you can buy ${remaningToken / 10 ** 18}`);
+        window.location.reload();
+        return;
+      }
 
       const amountUSDT = await getAIMTokenContrat().sellTokenInUDSTPrice(
         tokenEth?.toString(),
-        roundPrice * 10 ** 6
+        CurrentRoundPrice * 10 ** 6
       );
 
       if (amountUSDT?.toString() < 30000000) {
         alert("Please purchase tokens of more than 30 dollar");
-        window.location.reload();
+       window.location.reload();
+      return;
       }
 
-
-      const amountValue = await getAIMTokenContrat().sellTokenInETHPrice(tokenEth?.toString(), roundPrice * 10 ** 6);
+      const amountValue = await getAIMTokenContrat().sellTokenInETHPrice(tokenEth?.toString(), CurrentRoundPrice * 10 ** 6);
 
       const tx = await getAIMTokenContrat().mintByEth(tokenEth.toString(), {
         value: amountValue.toString(),
@@ -315,140 +227,56 @@ const PreSales = ({ changeNetwork, account, setAccount, loader, setloader }) => 
   };
 
 
-
-
-
   const getNumberOfTokensOwned = async () => {
     try {
       const tokensOfUser = await getAIMTokenContrat().soldTokens(account);
-      setUsersTokens(tokensOfUser.toString()/10 ** 18)
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
-
-
-
-
-
-  // /*
-  //         connectWallet: Connects the MetaMask wallet
-  //       */
-  // const connectWallet = async () => {
-  //   try {
-  //     // Get the provider from web3Modal, which in our case is MetaMask
-  //     // When used for the first time, it prompts the user to connect their wallet
-  //     await getProviderOrSigner();
-  //     setWalletConnected(true);
-  //   } catch (err) {
-  //   }
-  // };
-
-  // const disConnectWallet = async () => {
-  //   try {
-
-  //     web3ModalRef.current.clearCachedProvider();
-  //     window.localStorage.clear();
-  //     setWalletConnected(false);
-  //   } catch (err) {
-  //   }
-  // };
-
-
-
-  // const getUSDTPrice = async () => {
-  //   try {
-  //     // const provider = await getProviderOrSigner();
-
-  //     // const tokenContract = new Contract(
-  //     //   AIMTOKEN_CONTRACT_ADDRESS.address,
-  //     //   AIMTOKEN_CONTRACT_ABI.abi,
-  //     //   provider
-  //     // );
-  //     // Get the number of round
-  //     // const _roundNumber = await tokenContract.round();
-  //     const usdPrice = await getProviderAIMTokenContrat().getLatestUSDTPrice();
-  //     // console.log("usdPrice", usdPrice.toString());
-  //     // setRoundNumber(_roundNumber.toString());
-  //     // console.log("roundNumber", _roundNumber.toString());
-
-  //     return usdPrice.toString();
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  // };
-
-  const getTotalAmountToRaise = async () => {
-    try {
-      let roudTotalAmount = (roundPrice * 10 ** 6) * (100_000_000 * 10 ** 18) / 10 ** 18
-      setTotalSupply(roudTotalAmount.toString());
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
-  const getRaisedAmount = async () => {
-    try {
-
-      const CureentroundNumber = await getProviderAIMTokenContrat().round();
-      const response = await apis.getRound(CureentroundNumber?.toString());
-
-      // console.log("response", CureentroundNumber.toString(), response.data.data);
-
-
-      const balanceOfUSDT = Number(response.data.data.total_usdt_amount);
-
-    
-      // const balanceOfUSDT = Number(
-      //   await getUSDTTokenContrat().balanceOf(AIMTOKEN_CONTRACT_ADDRESS.address)
-      // );
-
-
-      //const provider = new Web3.providers.HttpProvider('https://eth-mainnet.g.alchemy.com/v2/ZNNDDz0q4xxwLvO9wQw-dPsHQ0urQ_J8');
-      // const provider = new Web3.providers.HttpProvider('http://localhost:8545');
-
-      // const web3 = new Web3(window.ethereum);
-
-      // const balanceOfETH = Number(
-      //   await web3.eth.getBalance(AIMTOKEN_CONTRACT_ADDRESS.address)
-      // );
-
-       const balanceOfETH = Number(response.data.data.total_eth_amount)
-      
-      const usdPrice = await getProviderAIMTokenContrat().getLatestUSDTPrice();
-   
-
-      const priceUSDT = Number(usdPrice);
-
-      const ethToUSDT = (balanceOfETH / priceUSDT);
-
-      const temp = balanceOfUSDT/10**6;
-
-      const totalUSDT = Number(temp + ethToUSDT);
-      
-     
-      setRaisedAmount(totalUSDT);
+      setUsersTokens(tokensOfUser.toString() / 10 ** 18)
     } catch (err) {
     }
   };
 
+
+
+  //// add common to totalRaised ////
+  function numberWithCommas(x) {
+    x = x.toString();
+    var pattern = /(-?\d+)(\d{3})/;
+    while (pattern.test(x))
+      x = x.replace(pattern, "$1,$2");
+    return x;
+  }
 
 
   const getNumberOfBars = async () => {
-    const totalBars = 20;
-    const amountPerBar = Number(totalSupply) / totalBars;
+   
 
+    let calPercentange = raisedAmount * 100 / totalRaisedAmount;
+   let percentage;
+    if(Math.ceil(+calPercentange) > 9){
+      percentage = Math.ceil(Math.ceil(+calPercentange)/10);
+    }
+    else{
+      percentage = Math.ceil(+calPercentange)
+    }
 
-    const _onBars = Math.round(Number(raisedAmount) / amountPerBar);
-
-
-    setOnBars(_onBars);
-
-    const _offBars = Math.round(totalBars - _onBars - 1);
-
-    setOffBars(_offBars);
+    let percentages = Math.ceil(+percentage);
+  console.log("percentages",percentages);
+    let bar=[]
+    for (let index = 0; index < 10; index++) {
+      if (index < percentages -1) {
+        bar.push(1)
+      } 
+      else if(index == percentages -1){
+        bar.push(2)
+      }
+      else {
+        bar.push(0)
+      }
+    }
+    setBar(bar);
   };
+
+  // console.log("bar",Bar);
 
 
   const handleEvent = async (_round, _user, _soldToken, _BuywithEth, _BuywithUSDT) => {
@@ -476,28 +304,15 @@ const PreSales = ({ changeNetwork, account, setAccount, loader, setloader }) => 
   }
 
 
-
-
-
   useEffect(() => {
-    
     getNumberOfBars();
-    
-    getTotalAmountToRaise();
-    getCoinsPerDollar();
-    checkActiveRound();
-
-    getRaisedAmount();
-
-    getNumberOfRound();
-    getRoundPrice();
-  }, [totalSupply, roundPrice, roundNumber]);
+  }, [raisedAmount])
 
 
   useEffect(() => {
     checkIsWalletConnected();
     getNumberOfTokensOwned();
-  },[account])
+  }, [account])
 
 
   return (
@@ -511,14 +326,14 @@ const PreSales = ({ changeNetwork, account, setAccount, loader, setloader }) => 
                   <h2>
                     {/* Round{" "} */}
                     {roundStatus
-                      ? "Round:" + roundNumber + " has started!"
+                      ? "Round:" + activeRound + " has started!"
                       : "No round is live at the moment"}
                   </h2>
                   {/* <h3>has started!</h3> */}
                   <p>
                     <span>1 USDT</span>
                     <span> = </span>
-                    <span>{coinsPerDollar.toString()} AIM</span>
+                    <span>{coinsPerDollar?.toString()} AIM</span>
                   </p>
                 </div>
                 <div className="image-wrap">
@@ -530,7 +345,7 @@ const PreSales = ({ changeNetwork, account, setAccount, loader, setloader }) => 
                     />
                     <div className="detail">
                       <h2>
-                        You have {usersTokens.toString()} AIM
+                        You have {Number(usersTokens).toFixed(2)} AIM
                         Tokens
                       </h2>
                       {/* <h3>View your potential returns</h3> */}
@@ -582,8 +397,8 @@ const PreSales = ({ changeNetwork, account, setAccount, loader, setloader }) => 
                   <span>USDT Raised: </span>
                   <br />
                   <span>
-                    {(raisedAmount.toFixed(2))} /{" "}
-                    {totalSupply.toString()/10**6}
+                    {(raisedAmount?.toFixed(2))} /{" "}
+                    {numberWithCommas(totalRaisedAmount?.toString())}
                   </span>
                 </p>
                 <h2>Amount raised</h2>
@@ -592,110 +407,34 @@ const PreSales = ({ changeNetwork, account, setAccount, loader, setloader }) => 
                   <br />
                   <span>0x23250A16AFDd06c9e2c44E3F7A6CcE5A23B2107d</span>
                 </p>
+                {/* cutfrom here */}
                 <div className="loader-root">
-                  <div
-                    className="loader-inner"
-                    style={{
-                      width:
-                        "max(min(25.5rem, 100% - 0.75rem), 3.375rem)",
-                    }}
-                  >
+                  <div className="loader-inner"
+                    style={{ width: "max(min(25.5rem, 100% - 0.75rem), 3.375rem)", }}>
                     <div className="loader-bar-container">
-                      {/* FILLED BLOCK */}
+                      {Bar.map((x) => {
+                        return (
+                          <>
+                          {x == 1
+                            &&
+                            <div className="loader-bar" style={{ display: "block" }}></div>
+                          }
+                          {x == 2 &&
+                          <div className="loader-bar last" style={{ display: "block" }}></div>
+                          }
+                          {x == 0 &&
+                          <div className="loader-bar-black" style={{ display: "block" }}></div>
+                          }       
+                          {/* BLINKING BLOCK */ }
+                          {/* <div className="loader-bar last" style={{ display: "block" }}></div> */ }
+                      </>
+                      )
+                      })}
 
-                      {onBarsList}
-
-                      {/* <div
-                                        className="loader-bar"
-                                        style={{ display: "block" }}
-                                      ></div>
-
-                                      <div
-                                        className="loader-bar"
-                                        style={{ display: "block" }}
-                                      ></div>
-                                      <div
-                                        className="loader-bar"
-                                        style={{ display: "block" }}
-                                      ></div>
-                                      <div
-                                        className="loader-bar"
-                                        style={{ display: "block" }}
-                                      ></div>
-                                      <div
-                                        className="loader-bar"
-                                        style={{ display: "block" }}
-                                      ></div>
-                                      <div
-                                        className="loader-bar"
-                                        style={{ display: "block" }}
-                                      ></div>
-                                      <div
-                                        className="loader-bar"
-                                        style={{ display: "block" }}
-                                      ></div>
-                                      <div
-                                        className="loader-bar"
-                                        style={{ display: "block" }}
-                                      ></div>
-                                      <div
-                                        className="loader-bar"
-                                        style={{ display: "block" }}
-                                      ></div>
-                                      <div
-                                        className="loader-bar"
-                                        style={{ display: "block" }}
-                                      ></div>
-                                      <div
-                                        className="loader-bar"
-                                        style={{ display: "block" }}
-                                      ></div>
-                                      <div
-                                        className="loader-bar"
-                                        style={{ display: "block" }}
-                                      ></div> */}
-
-                      {/* BLINKING BLOCK */}
-                      <div
-                        className="loader-bar last"
-                        style={{ display: "block" }}
-                      ></div>
-
-                      {/* BLACK BLOCKS */}
-
-                      {offBarsList}
-
-                      {/* <div
-                                        className="loader-bar-black"
-                                        style={{ display: "block" }}
-                                      ></div>
-                                      <div
-                                        className="loader-bar-black"
-                                        style={{ display: "block" }}
-                                      ></div>
-                                      <div
-                                        className="loader-bar-black"
-                                        style={{ display: "block" }}
-                                      ></div>
-                                      <div
-                                        className="loader-bar-black"
-                                        style={{ display: "block" }}
-                                      ></div>
-                                      <div
-                                        className="loader-bar-black"
-                                        style={{ display: "block" }}
-                                      ></div>
-                                      <div
-                                        className="loader-bar-black"
-                                        style={{ display: "block" }}
-                                      ></div>
-                                      <div
-                                        className="loader-bar-black"
-                                        style={{ display: "block" }}
-                                      ></div> */}
                     </div>
                   </div>
                 </div>
+
               </div>
             </div>
           </div>

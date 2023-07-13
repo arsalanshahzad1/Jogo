@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import LandingPage from './pages/landingpage/LandingPage';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css'
-import PreSales from './pages/PreSales';
 import Main from './components/Dashboard/Screens/Main';
-import Dashboard from './components/Dashboard/Screens/Dashboard';
 import { ethers } from "ethers";
 
 const { ethereum } = window;
@@ -25,8 +23,9 @@ function App() {
         method: "wallet_switchEthereumChain",
         params: [{
           // chainId: "0x7A69" //localHost
-          //chainId: "0x5" //goerli
-          chainId: "0x1" //mainNet
+          chainId: "0x5" //goerli
+          // chainId: "0x1" //mainNet
+          //  chainId: "0xaa36a7" //sepolia 
         }]
       });
       await web3Handler();

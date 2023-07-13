@@ -83,7 +83,7 @@ contract AIMToken is ERC20, Ownable {
         _mint(liquidityTokensWallet, liquidityTokens);
         _mint(exchangeTokensWallet, exchangeTokens);
 
-        USDTtoken = IERC20USDT(0xdAC17F958D2ee523a2206206994597C13D831ec7); //0xdAC17F958D2ee523a2206206994597C13D831ec7
+        USDTtoken = IERC20USDT(0x14EdAd7784360B622e9F284fFB314216De14cB0a); //0xdAC17F958D2ee523a2206206994597C13D831ec7
     }
 
     function totalSupply() public pure override returns (uint256) {
@@ -95,7 +95,10 @@ contract AIMToken is ERC20, Ownable {
             revert allRoundsAreFinished();
         }
         round += 1;
+        if(round < 6) {
         remainingSupply += roundLimit;
+        raisedAmount = 0;
+        }
     }
 
     // minting tokens function
@@ -104,7 +107,7 @@ contract AIMToken is ERC20, Ownable {
             revert waitForStartingSaleRoud();
         }
 
-        if ((remainingSupply - _amount) <= 0) {
+        if ((remainingSupply - _amount) < 0) {
             revert roundSupplyLimitExceed();
         }
 
@@ -214,7 +217,7 @@ contract AIMToken is ERC20, Ownable {
             revert waitForStartingSaleRoud();
         }
 
-        if ((remainingSupply - _amount) <= 0) {
+        if ((remainingSupply - _amount) < 0) {
             revert roundSupplyLimitExceed();
         }
 
@@ -234,7 +237,7 @@ contract AIMToken is ERC20, Ownable {
             remainingSupply -= _amount;
             soldTokens[msg.sender] += _amount;
             raisedAmount += payAmountInUDST;
-            emit RoundData(round, msg.sender, _amount, msg.value, 0);
+            emit RoundData(round, msg.sender, _amount, msg.value, payAmountInUDST);
         }
         //////// stage Two ////////////
         else if (round == 2) {
@@ -252,7 +255,7 @@ contract AIMToken is ERC20, Ownable {
             remainingSupply -= _amount;
             soldTokens[msg.sender] += _amount;
             raisedAmount += payAmountInUDST;
-            emit RoundData(round, msg.sender, _amount, msg.value, 0);
+            emit RoundData(round, msg.sender, _amount, msg.value, payAmountInUDST);
         }
         //////// stage Three ////////////
         else if (round == 3) {
@@ -270,7 +273,7 @@ contract AIMToken is ERC20, Ownable {
             remainingSupply -= _amount;
             soldTokens[msg.sender] += _amount;
             raisedAmount += payAmountInUDST;
-            emit RoundData(round, msg.sender, _amount, msg.value, 0);
+            emit RoundData(round, msg.sender, _amount, msg.value, payAmountInUDST);
         }
         //////// stage four ////////////
         else if (round == 4) {
@@ -289,7 +292,7 @@ contract AIMToken is ERC20, Ownable {
             remainingSupply -= _amount;
             soldTokens[msg.sender] += _amount;
             raisedAmount += payAmountInUDST;
-            emit RoundData(round, msg.sender, _amount, msg.value, 0);
+            emit RoundData(round, msg.sender, _amount, msg.value, payAmountInUDST);
         }
         //////// stage five ////////////
         else if (round == 5) {
@@ -310,7 +313,7 @@ contract AIMToken is ERC20, Ownable {
             remainingSupply -= _amount;
             soldTokens[msg.sender] += _amount;
             raisedAmount += payAmountInUDST;
-            emit RoundData(round, msg.sender, _amount, msg.value, 0);
+            emit RoundData(round, msg.sender, _amount, msg.value, payAmountInUDST);
         } else {
             revert mintingIsNotAllowed();
         }
@@ -343,7 +346,7 @@ contract AIMToken is ERC20, Ownable {
         if (USDTtoken.balanceOf(address(this)) < _amount*10**6) {
             revert contractDontHaveUSDT();
         }
-        USDTtoken.transfer(owner(), _amount);
+        USDTtoken.transfer(owner(), _amount*10**6);
     }
 
     //claiming Tokens

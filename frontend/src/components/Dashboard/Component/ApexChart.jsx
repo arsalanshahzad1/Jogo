@@ -5,26 +5,15 @@ import ReactApexChart from 'react-apexcharts';
 const ApexChart = ({data}) => {
 
   let result =  data?.total_users > 0 ? true : false;
-  
-  let roundLimit = 100_000_000
-  // let roundRuning;
 
-  // if(data.tokensSoldInCurrentRound.toString()>1000000*10**18){
-  //   roundRuning =  Number(data.tokensSoldInCurrentRound.toString())/10**18;
-  // }else{
-  //   roundRuning = Number(data.tokensSoldInCurrentRound.toString())/10**14;
-  // }
+  let target = 100000000;
+  let sold = Number(data?.total_token_sale)/10**18;
+  let total =  target - sold;
   
-  // console.log("11111111111111",data.tokensSoldInCurrentRound.toString()/10**12)
+  // const series = [Number(data?.total_token_sale)/10**18,Number(roundLimit)];
   
-  
-  const series = [Number(data?.total_token_sale)/10**18,Number(roundLimit)];
-  
-  // const series = [Number(data.tokensSoldInCurrentRound.toString()),Number(roundLimit)];
-    
-  const Dummy = [1000000000000,10,10,10,10,10,10,10,10,10,10,10,10];
-  
-  
+  const series = [sold,total];
+  const Dummy = [0,1];
   
   const options = {
     chart: {

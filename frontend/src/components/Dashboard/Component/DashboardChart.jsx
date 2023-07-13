@@ -49,7 +49,7 @@ const DashboardChart = ({ filter ,dataMonthly,data}) => {
           case 'Total Users':
             return dataMonthly?.total_users;
           case 'Total Earning':
-            return dataMonthly?.total_eth;
+            return dataMonthly?.total_usdt;
           default:
             return [];
         }

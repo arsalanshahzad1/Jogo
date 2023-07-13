@@ -1,11 +1,10 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
 import PirChartTwo from "../components/common/PirChartTwo";
+import { Store } from "../context/Store";
 
-const TokenEconomics = (index, setIndex, activeRound) => {
-  // console.log("activeRound", index.activeRound);
-
-  const round = index.activeRound;
-
+const TokenEconomics = (index, setIndex) => {
+const { activeRound} = useContext(Store)
+// const activeRound = 0;
   return (
     <>
       <section id="tokenEco">
@@ -38,7 +37,7 @@ const TokenEconomics = (index, setIndex, activeRound) => {
             </p>
           </div>
           <div className="round-section">
-            <div className={round == 1 ? "wrap active" : "wrap"}>
+            <div className={activeRound == 1 ? "wrap active" : "wrap"}>
               <h2>Stage 1</h2>
               <p>
                 100,000,000 <br /> AIM <br /> x 0.005
@@ -46,7 +45,7 @@ const TokenEconomics = (index, setIndex, activeRound) => {
               <h2>=$500,000</h2>
             </div>
 
-            <div className={round == 2 ? "wrap active" : "wrap"}>
+            <div className={activeRound == 2 ? "wrap active" : "wrap"}>
               <h2>Stage 2</h2>
               <p>
                 100,000,000 <br /> AIM <br /> x 0.01
@@ -54,7 +53,7 @@ const TokenEconomics = (index, setIndex, activeRound) => {
               <h2>=$1,000,000</h2>
             </div>
 
-            <div className={round == 3 ? "wrap active" : "wrap"}>
+            <div className={activeRound == 3 ? "wrap active" : "wrap"}>
               <h2>Stage 3</h2>
               <p>
                 100,000,000 <br /> AIM <br /> x 0.02
@@ -62,14 +61,14 @@ const TokenEconomics = (index, setIndex, activeRound) => {
               <h2>=$2,000,000</h2>
             </div>
 
-            <div className={round == 4 ? "wrap active" : "wrap"}>
+            <div className={activeRound == 4 ? "wrap active" : "wrap"}>
               <h2>Stage 4</h2>
               <p>
                 100,000,000 <br /> AIM <br /> x 0.04
               </p>
               <h2>=$4,000,000</h2>
             </div>
-            <div className={round == 5 ? "wrap active" : "wrap"}>
+            <div className={activeRound == 5 ? "wrap active" : "wrap"}>
               <h2>Stage 5</h2>
               <p>
                 100,000,000 <br /> AIM <br /> x 0.08

@@ -18,6 +18,9 @@ function DashboardTwo({ account, setAccount }) {
         setShow(false);
     };
     
+    
+    // console.log(statisticsData,"statisticsData")
+    
 
     const getUsersData = async()=>{
         const response = await apis.getdata();
@@ -30,19 +33,19 @@ function DashboardTwo({ account, setAccount }) {
         const response = await apis.getStatistics();
         setStatisticsData(response?.data?.data)       
    
-        const data = response?.data?.data?.EthDataByDay.map((item)=>{
+        const data = response?.data?.data?.UsdtDataByDay.map((item)=>{
             if(item > 100000)
             {
-                return Number(item/10**18).toFixed(4)
+                return Number(item/10**6).toFixed(4)
             }
             return item
            })
            
-        const ethWeekData = response?.data?.data?.EthDataByWeek.map((item)=>{
+        const ethWeekData = response?.data?.data?.UsdtDataByWeek.map((item)=>{
             if(item > 100000)
             {
                 // console.log("CAAAAAAAAAAAAAAAAAAAAA")
-                return Number(item/10**18).toFixed(4)
+                return Number(item/10**6).toFixed(4)
             }
             return item
            })
@@ -51,14 +54,15 @@ function DashboardTwo({ account, setAccount }) {
 
     const getMonthlyData = async()=>{
         const response = await apis.getStatisticsMonthly();
-       const data = response?.data?.data?.total_eth.map((item)=>{
+       const data = response?.data?.data?.total_usdt.map((item)=>{
+        // console.log("item",item);
         if(item > 100000)
         {
-            return Number(item/10**18).toFixed(4)
+            return Number(item/10**6).toFixed(4)
         }
         return item
     })
-        setStatisticsDataMonthly({total_eth:data ,total_users:response?.data?.data.total_users})      
+        setStatisticsDataMonthly({total_usdt:data ,total_users:response?.data?.data.total_users})      
     }
 // console.log(data,"data")
 

@@ -12,12 +12,9 @@ import Twiitter from "../../components/svg/Twiitter";
 import MobileLayout from "../MobileLayout";
 import Telegram from "../../components/svg/Telegram";
 import Video from "../../components/shared/Video";
-import { useLocation, useParams } from "react-router-dom";
-import Web3Modal from "web3modal";
-import { BigNumber, Contract, providers, utils } from "ethers";
+import { useLocation} from "react-router-dom";
+import { BigNumber } from "ethers";
 import About from './About'
-import AIMTOKEN_CONTRACT_ABI from '../../contractsData/AIMToken.json'
-import AIMTOKEN_CONTRACT_ADDRESS from '../../contractsData/AIMToken-address.json'
 import PreSales from "../PreSales";
 import BillGates from "./BillGates";
 import FAQ from "./FAQ";
@@ -31,21 +28,7 @@ import trustwallet from '../../../public/assets/images/trustwallet.png'
 
 
 
-const getAIMTokenContrat = () => {
-  const provider = new ethers.providers.Web3Provider(ethereum);
-  // const provider = new ethers.providers.JsonRpcProvider(
-  //   "https://polygon-mainnet.g.alchemy.com/v2/8JkHo3qUxg6xK4OpBBG7XrfND3pZL0ig"
-  // );
-  const signer = provider.getSigner();
-  const AIMContract = new ethers.Contract(AIMTOKEN_CONTRACT_ADDRESS.address, AIMTOKEN_CONTRACT_ABI.abi, signer);
-  return AIMContract;
-}
-
-
-const LandingPage = ({ ShowPopup,
-  setShowPopup,walletConnected, changeNetwork, account, setAccount, state, setState, index, setIndex, loader, setloader }) => {
-  const zero = BigNumber.from(0);
-  const [roundNumber, setRoundNumber] = useState(zero);
+const LandingPage = ({ ShowPopup,setShowPopup,walletConnected, changeNetwork, account, setAccount, state, setState, index, setIndex, loader, setloader }) => {
   const web3ModalRef = useRef();
   const [close, setClose] = useState("");
   const location = useLocation();
@@ -56,45 +39,45 @@ const LandingPage = ({ ShowPopup,
   const [activeSection, setActiveSection] = useState("home");
 
 
-  const getNumberOfRound = async () => {
-    try {
-      // const provider = await getProviderOrSigner();
+  // const getNumberOfRound = async () => {
+  //   try {
+  //     // const provider = await getProviderOrSigner();
 
-      // const tokenContract = new Contract(
-      //   AIMTOKEN_CONTRACT_ADDRESS.address,
-      //   AIMTOKEN_CONTRACT_ABI.abi,
-      //   provider
-      // );
-      // Get the number of round
-      const _roundNumber = await getAIMTokenContrat().round();
-      // const usdPrice = await tokenContract.getLatestUSDTPrice();
-      // console.log("usdPrice",usdPrice);
-      setRoundNumber(_roundNumber.toString());
-      // console.log("roundNumber", _roundNumber.toString());
-    } catch (err) {
-      console.error(err);
-    }
-  };
+  //     // const tokenContract = new Contract(
+  //     //   AIMTOKEN_CONTRACT_ADDRESS.address,
+  //     //   AIMTOKEN_CONTRACT_ABI.abi,
+  //     //   provider
+  //     // );
+  //     // Get the number of round
+  //     const _roundNumber = await getAIMTokenContrat().round();
+  //     // const usdPrice = await tokenContract.getLatestUSDTPrice();
+  //     // console.log("usdPrice",usdPrice);
+  //     setRoundNumber(_roundNumber.toString());
+  //     // console.log("roundNumber", _roundNumber.toString());
+  //   } catch (err) {
+  //     console.error(err);
+  //   }
+  // };
 
-  const getUSDTPrice = async () => {
-    try {
-      // const provider = await getProviderOrSigner();
+  // const getUSDTPrice = async () => {
+  //   try {
+  //     // const provider = await getProviderOrSigner();
 
-      // const tokenContract = new Contract(
-      //   AIMTOKEN_CONTRACT_ADDRESS.address,
-      //   AIMTOKEN_CONTRACT_ABI.abi,
-      //   provider
-      // );
-      // Get the number of round
-      // const _roundNumber = await tokenContract.round();
-      const usdPrice = await getAIMTokenContrat().getLatestUSDTPrice();
-      // console.log("usdPrice", usdPrice.toString());
-      // setRoundNumber(_roundNumber.toString());
-      // console.log("roundNumber", _roundNumber.toString());
-    } catch (err) {
-      console.error(err);
-    }
-  };
+  //     // const tokenContract = new Contract(
+  //     //   AIMTOKEN_CONTRACT_ADDRESS.address,
+  //     //   AIMTOKEN_CONTRACT_ABI.abi,
+  //     //   provider
+  //     // );
+  //     // Get the number of round
+  //     // const _roundNumber = await tokenContract.round();
+  //     const usdPrice = await getAIMTokenContrat().getLatestUSDTPrice();
+  //     // console.log("usdPrice", usdPrice.toString());
+  //     // setRoundNumber(_roundNumber.toString());
+  //     // console.log("roundNumber", _roundNumber.toString());
+  //   } catch (err) {
+  //     console.error(err);
+  //   }
+  // };
 
 
 
@@ -178,9 +161,13 @@ const LandingPage = ({ ShowPopup,
                                 <BuyNow activeSection={activeSection} />
                               </span>
                             </Link>
-                            <ul className="social-icons" onClick={() => {setShowPopup(!ShowPopup)}}>
+                            
+                            <ul className="social-icons" onClick={() => {if(!account){
+                                  setShowPopup(!ShowPopup)}}}>
                               <li>
-                                <Link onClick={() => {setShowPopup(true)}}>
+                                <Link  onClick={() => { if(!account){
+                                  setShowPopup(true)
+                                } }}>
                                   <Wallet />
                                 </Link>
                               </li>
@@ -343,8 +330,6 @@ const LandingPage = ({ ShowPopup,
                                 <TokenEconomics
                                   index={index}
                                   setIndex={setIndex}
-                                  id="token"
-                                  activeRound={roundNumber}
                                 />
 
                                 <FundAllocation index={index} setIndex={setIndex} />
