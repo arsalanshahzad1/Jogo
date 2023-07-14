@@ -35,7 +35,7 @@ function Dashboard({ changeNetwork, account, setAccount }) {
 
 
     return (
-        //0xB08F5f1D719cE9e6cb320253589483CE47fF0072 change wallet address
+        //0xB08F5f1D719cE9e6cb320253589483CE47fF0072 change wallet address //owner address
         account?.toLowerCase().toString() === "0xB55e7BeF988707156F7d85c0BA7071AA521F93fd".toLowerCase().toString()
             ?
             <div className='DashboardMain dashboardResponsive'>

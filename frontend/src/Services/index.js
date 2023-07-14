@@ -49,6 +49,6 @@ const createBackendServer = (baseURL) => {
     };
 };
 
-const apis = createBackendServer("https://jogo-media.pluton.ltd");
+const apis = createBackendServer("https://jogoxx.aimeme.ai/");
 
 export default apis;

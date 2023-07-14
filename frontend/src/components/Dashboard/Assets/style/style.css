@@ -231,7 +231,7 @@
     align-items: center;
     justify-content: center;
     font-family: 'heading';
-
+text-transform: uppercase;
 }
 
 .D-one-holder {
@@ -295,6 +295,7 @@
     text-align: center;
     width: max-content;
     border-radius: 10px;
+    text-transform: uppercase;
 }
 
 .hideDropdown {

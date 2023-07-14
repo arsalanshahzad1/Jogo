@@ -64,7 +64,7 @@ const PreSales = ({ changeNetwork, account, setAccount, loader, setloader }) => 
   const [usersTokens, setUsersTokens] = useState(0);
   const [price, setPrice] = useState(null)
   const [walletConnected, setWalletConnected] = useState(false);
-  const [Bar, setBar]=useState([]);
+  const [Bar, setBar] = useState([]);
 
   // var Bar = [];
 
@@ -113,6 +113,9 @@ const PreSales = ({ changeNetwork, account, setAccount, loader, setloader }) => 
       if (!walletConnected) {
         changeNetwork();
         return;
+      }
+      if(usersTokens == 0){
+        window.alert("You have 0 AIM tokens to claim");
       }
       await getAIMTokenContrat().claimAIMToken();
       window.alert("Tokens claimed");
@@ -205,8 +208,8 @@ const PreSales = ({ changeNetwork, account, setAccount, loader, setloader }) => 
 
       if (amountUSDT?.toString() < 30000000) {
         alert("Please purchase tokens of more than 30 dollar");
-       window.location.reload();
-      return;
+        window.location.reload();
+        return;
       }
 
       const amountValue = await getAIMTokenContrat().sellTokenInETHPrice(tokenEth?.toString(), CurrentRoundPrice * 10 ** 6);
@@ -229,7 +232,7 @@ const PreSales = ({ changeNetwork, account, setAccount, loader, setloader }) => 
   const getNumberOfTokensOwned = async () => {
     try {
       const tokensOfUser = await getAIMTokenContrat().soldTokens(account);
-      console.log("tokensOfUser",tokensOfUser.toString());
+      console.log("tokensOfUser", tokensOfUser.toString());
       setUsersTokens(tokensOfUser.toString() / 10 ** 18)
     } catch (err) {
     }
@@ -248,25 +251,25 @@ const PreSales = ({ changeNetwork, account, setAccount, loader, setloader }) => 
 
 
   const getNumberOfBars = async () => {
-   
+
 
     let calPercentange = raisedAmount * 100 / totalRaisedAmount;
-   let percentage;
-    if(Math.ceil(+calPercentange) > 9){
-      percentage = Math.ceil(Math.ceil(+calPercentange)/10);
+    let percentage;
+    if (Math.ceil(+calPercentange) > 9) {
+      percentage = Math.ceil(Math.ceil(+calPercentange) / 10);
     }
-    else{
+    else {
       percentage = Math.ceil(+calPercentange)
     }
 
     let percentages = Math.ceil(+percentage);
-  
-    let bar=[]
+
+    let bar = []
     for (let index = 0; index < 10; index++) {
-      if (index < percentages -1) {
+      if (index < percentages - 1) {
         bar.push(1)
-      } 
-      else if(index == percentages -1){
+      }
+      else if (index == percentages - 1) {
         bar.push(2)
       }
       else {
@@ -322,20 +325,24 @@ const PreSales = ({ changeNetwork, account, setAccount, loader, setloader }) => 
           <div className="row">
             <div className="col-lg-7 col-md-7">
               <div className="left-wrap">
-                <div className="detail-wrap">
-                  <h2>
-                    {/* Round{" "} */}
-                    {roundStatus
-                      ? "Round:" + activeRound + " has started!"
-                      : "No round is live at the moment"}
-                  </h2>
-                  {/* <h3>has started!</h3> */}
-                  <p>
-                    <span>1 USDT</span>
-                    <span> = </span>
-                    <span>{coinsPerDollar?.toString()} AIM</span>
-                  </p>
-                </div>
+                {activeRound < 6 && (
+                  <div className="detail-wrap">
+                    <h2>
+                      {/* Round{" "} */}
+                      {activeRound > 0 ?
+                        "Round:" + activeRound + " has started!"
+                        :
+                        "No round is live at the moment"}
+                    </h2>
+                    {/* <h3>has started!</h3> */}
+                    <p>
+                      <span>1 USDT</span>
+                      <span> = </span>
+                      <span>{coinsPerDollar?.toString()} AIM</span>
+                    </p>
+                  </div>
+                )
+                }
                 <div className="image-wrap">
                   <div className="wrap">
                     <img
@@ -351,7 +358,7 @@ const PreSales = ({ changeNetwork, account, setAccount, loader, setloader }) => 
                       {/* <h3>View your potential returns</h3> */}
                       <p className="p1">Wallet Address</p>
                       <p className="p2">{account}</p>
-                      {roundStatus && (
+                      {activeRound > 0 && activeRound < 6 ?
                         <div className="btn-line-one">
                           <span
                             onClick={() => sendUSDTBox(true)}
@@ -368,7 +375,9 @@ const PreSales = ({ changeNetwork, account, setAccount, loader, setloader }) => 
                             <Buy classes={"buy-with-eth"} />
                           </span>
                         </div>
-                      )}
+                        :
+                        ""
+                      }
                       {/* style={{pointerEvents :  claimStatus ? '' : 'none'}} */}
                       {claimStatus ?
                         <div className="btn-line-two" >
@@ -393,21 +402,29 @@ const PreSales = ({ changeNetwork, account, setAccount, loader, setloader }) => 
                   alt=""
                   width={"60%"}
                 />
-                <p>
-                  <span>USDT Raised: </span>
-                  <br />
-                  <span>
-                    {(raisedAmount?.toFixed(2))} /{" "}
-                    {numberWithCommas(totalRaisedAmount?.toString())}
-                  </span>
-                </p>
-                <h2>Amount raised</h2>
+                {activeRound < 6 && (
+                  <p>
+                    <span>USDT Raised: </span>
+                    <br />
+                    <span>
+                      {(raisedAmount?.toFixed(2))} /{" "}
+                      {numberWithCommas(totalRaisedAmount?.toString())}
+                    </span>
+                  </p>
+                )}
+
+                {activeRound < 6 && (
+                  <h2>Amount raised</h2>
+                )}
+
                 <p>
                   <span>Token Address:</span>
                   <br />
                   <span>0x23250A16AFDd06c9e2c44E3F7A6CcE5A23B2107d</span>
                 </p>
                 {/* cutfrom here */}
+{activeRound < 6 &&(
+
                 <div className="loader-root">
                   <div className="loader-inner"
                     style={{ width: "max(min(25.5rem, 100% - 0.75rem), 3.375rem)", }}>
@@ -415,25 +432,26 @@ const PreSales = ({ changeNetwork, account, setAccount, loader, setloader }) => 
                       {Bar.map((x) => {
                         return (
                           <>
-                          {x == 1
-                            &&
-                            <div className="loader-bar" style={{ display: "block" }}></div>
-                          }
-                          {x == 2 &&
-                          <div className="loader-bar last" style={{ display: "block" }}></div>
-                          }
-                          {x == 0 &&
-                          <div className="loader-bar-black" style={{ display: "block" }}></div>
-                          }       
-                          {/* BLINKING BLOCK */ }
-                          {/* <div className="loader-bar last" style={{ display: "block" }}></div> */ }
-                      </>
-                      )
+                            {x == 1
+                              &&
+                              <div className="loader-bar" style={{ display: "block" }}></div>
+                            }
+                            {x == 2 &&
+                              <div className="loader-bar last" style={{ display: "block" }}></div>
+                            }
+                            {x == 0 &&
+                              <div className="loader-bar-black" style={{ display: "block" }}></div>
+                            }
+                            {/* BLINKING BLOCK */}
+                            {/* <div className="loader-bar last" style={{ display: "block" }}></div> */}
+                          </>
+                        )
                       })}
 
                     </div>
                   </div>
                 </div>
+)}
 
               </div>
             </div>

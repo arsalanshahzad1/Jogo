@@ -6,7 +6,6 @@ import AIMTOKEN_CONTRACT_ABI from "../contractsData/AIMToken.json"
 
 
 
-
 export const Store = createContext();
 
 
@@ -16,13 +15,13 @@ const getProviderAIMTokenContrat = () => {
     // const provider = new ethers.providers.JsonRpcProvider(
     //     "http://localhost:8545"
     // );
-
+    
     const provider = new ethers.providers.JsonRpcProvider(
-      "https://eth-goerli.g.alchemy.com/v2/o-AGgcLzt-RSOtHljyWZuYXKTphehHzB"
+      `https://eth-goerli.g.alchemy.com/v2/${process.env.testNetApi}`
     );
 
     // const provider = new ethers.providers.JsonRpcProvider(
-    //   "https://eth-mainnet.g.alchemy.com/v2/ZNNDDz0q4xxwLvO9wQw-dPsHQ0urQ_J8"
+    //   `https://eth-mainnet.g.alchemy.com/v2/${process.env.mainnetApi}`
     // );
 
     const signer = provider.getSigner();
@@ -43,13 +42,14 @@ export const StoreProvider = ({ children }) => {
     const getActiveRound = async () => {
         // console.log("call getActiveRound");
         try {
+            
             const round = await getProviderAIMTokenContrat().round();
             // console.log("round", round);
             setActiveRound(round.toString());
 
             // here we check round which is started 
 
-            if (round.toString() > 0 || round.toString() > 6) {
+            if (round.toString() > 0 || round.toString() < 6) {
                 setRoundStatus(true);
                 if (round.toString() > 5) {
                     setClaimStatus(true)

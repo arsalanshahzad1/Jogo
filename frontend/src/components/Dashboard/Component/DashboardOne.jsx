@@ -25,7 +25,7 @@ const AimTokenContract = () => {
 const { ethereum } = window;
 function DashboardOne({ checkIsWalletConnected, changeNetwork, account, setAccount }) {
     const [show, setShow] = useState(false)
-    const [selectedRound, setSelectedRound] = useState('1');
+    const [selectedRound, setSelectedRound] = useState('Select Round');
     const [runingRound, setrunningRound] = useState('');
     const [UpcomingRound, setUpcomingRound] = useState(null);
     const [CheckData, setCheckData] = useState(false);
@@ -41,9 +41,19 @@ function DashboardOne({ checkIsWalletConnected, changeNetwork, account, setAccou
     }
 
     const apiResponses = async () => {
-        // console.log('selectedRound',selectedRound);
-        const response = await apis.getRound(selectedRound);
-        setrunningRound([response.data.data])
+        // console.log('selectedRound',selectedRound);1
+        console.log(selectedRound,"selectedRound")
+        if(selectedRound !== "Select Round")
+        {
+            const response = await apis.getRound(selectedRound);
+            console.log(response.data?.data,"response")
+            setrunningRound([response.data.data])
+              
+        }
+        else{
+            setrunningRound([])
+        }
+        
         // console.log("response2", response.data.data);
 
     }
@@ -51,8 +61,17 @@ function DashboardOne({ checkIsWalletConnected, changeNetwork, account, setAccou
 
 
     const handleRoundSelect = (round) => {
-        setSelectedRound(round);
-        setShow(false);
+        if(round === "Select Round")
+        {
+            setSelectedRound("Select Round");
+            setShow(false);
+        
+        }
+        else{
+            setSelectedRound(round);
+            setShow(false);
+        
+        }
     };
 
 
@@ -62,7 +81,7 @@ function DashboardOne({ checkIsWalletConnected, changeNetwork, account, setAccou
         apiResponses();
     }, [account, selectedRound]);
 
-
+console.log("UpcomingRound",UpcomingRound);
     return (
         <div>
 
@@ -71,15 +90,19 @@ function DashboardOne({ checkIsWalletConnected, changeNetwork, account, setAccou
                     <Link onClick={changeNetwork}>
                         <WalletConnect />
                     </Link>
-                )
-                }
+                )}
 
-                <Link onClick={startRound}>
-                    <ChangeRound classes={"sale-btn"} />
-                </Link>
-                <div>
-                    : {UpcomingRound?.toString()}
-                </div>
+                
+           
+                    {UpcomingRound != 7  &&(
+                    <div>
+                    <Link onClick={startRound}>
+                        <ChangeRound classes={"sale-btn"} />
+                    </Link>
+                      : {UpcomingRound?.toString()}
+                    </div>
+                    )}
+                
 
 
             </div>
@@ -87,12 +110,13 @@ function DashboardOne({ checkIsWalletConnected, changeNetwork, account, setAccou
 
             <div className='DropHolder'>
                 <div className='ButtonDropDown' onClick={() => setShow(!show)}>
-                    {selectedRound}
+                   {selectedRound !== "Select Round" ? "Round " + selectedRound  : selectedRound} 
                     <ArrowDropDownIcon />
                 </div>
                 <div className={`dropdowndiv ${show ? '' : 'hideDropdown'}`}>
-                    <p onClick={() => handleRoundSelect('1')}> Round 1</p>
                     {/* <p onClick={() => handleRoundSelect('1')}>Round 1</p> */}
+                    <p>Select Round</p>
+                    <p onClick={() => handleRoundSelect('1')}> Round 1</p>
                     <p onClick={() => handleRoundSelect('2')}>Round 2</p>
                     <p onClick={() => handleRoundSelect('3')}>Round 3</p>
                     <p onClick={() => handleRoundSelect('4')}>Round 4</p>
@@ -104,7 +128,7 @@ function DashboardOne({ checkIsWalletConnected, changeNetwork, account, setAccou
                 <div className='D-one-holder'>
 
                     <div className='D-one-holder-inner-1'>
-                        <div className='CardsForData borderyellow'>
+                        <div className='CardsForData'>
                             <p className='Card-text-one'>
                                 No Of Users In Round
                             </p>
@@ -151,7 +175,7 @@ function DashboardOne({ checkIsWalletConnected, changeNetwork, account, setAccou
                         <div className='D-one-holder'>
 
                             <div className='D-one-holder-inner-1'>
-                                <div className='CardsForData borderyellow'>
+                                <div className='CardsForData'>
                                     <p className='Card-text-one'>
                                         No Of Users In Round
                                     </p>
