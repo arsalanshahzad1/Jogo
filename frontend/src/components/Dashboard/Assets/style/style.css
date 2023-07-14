@@ -204,6 +204,7 @@
     height: 100%;
     width: 100%;
     margin-top: 20px;
+    min-height: 592px;
 }
 .ChangeroundButton {
     gap: 10px;
@@ -245,7 +246,7 @@
     display: flex;
     flex: 1;
     flex-wrap: wrap;
-    justify-content: left;
+    justify-content: space-between;
 }
 
 .D-one-holder-inner-2 {
@@ -260,7 +261,7 @@
     padding: 10px;
     border: grey 3px solid;
     border-radius: 10px;
-    margin: 10px;
+    margin: 10px 0px;
 
 }
 
@@ -274,6 +275,8 @@
     font-size: 32px;
     font-weight: 400;
     margin: 0;
+    word-wrap: break-word;
+    line-height: 28px;
 
 }
 
@@ -316,8 +319,14 @@
 }
 
 .width225 {
-    width: 270px !important;
+    width: 32% !important;
 }
+.dashboard-chart text title {
+fill: #FFFFFF !important;
+}
+.dashboard-chart text tspan {
+    fill: #FFFFFF !important;
+    }
 
 @media(max-width:1024px) {
     .MainApp {
@@ -346,7 +355,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 90%;
+    width: 100%;
     flex-wrap: wrap;
 
 }
@@ -389,7 +398,7 @@
     }
 }
 
-.dashboard-chart .apexcharts-tooltip {
+.dashboard-chart .apexcharts-tooltip *{
     background-color: #000000 !important;
     color: #ffffff !important;
   }

@@ -1,7 +1,10 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import ReactApexChart from 'react-apexcharts';
 
-const DashboardChart = ({ filter ,dataMonthly,data}) => {
+const DashboardChart = ({ activeData,filter,data}) => {
+  const [dataName, setdataName]= useState(["Total Users","Total ETH","Total USDT"]);
+
+  
   const getXAxisCategories = () => {
     switch (filter) {
       case 'Daily':
@@ -23,23 +26,24 @@ const DashboardChart = ({ filter ,dataMonthly,data}) => {
         return ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
     }
   };
+
   const getFilteredData = (seriesName) => {
     switch (filter) {
       case 'Daily':
         switch (seriesName) {
           case 'Total Users':
-            return data?.UserDataByDay;
-          case 'Total Earning':
-            return   data?.EthDataByDay;
+            return data?.day;
+          // case 'Total Earning':
+          //   return   data?.EthDataByDay;
           default:
             return [];
         }
       case 'Weekly':
         switch (seriesName) {
           case 'Total Users':
-            return data?.UserDataBYWeek;
-          case 'Total Earning':
-            return  data?.EthDataByWeek;
+            return data?.week;
+          // case 'Total Earning':
+          //   return  data?.EthDataByWeek;
            default:
             return [];
         }
@@ -47,9 +51,9 @@ const DashboardChart = ({ filter ,dataMonthly,data}) => {
       default:
         switch (seriesName) {
           case 'Total Users':
-            return dataMonthly?.total_users;
-          case 'Total Earning':
-            return dataMonthly?.total_usdt;
+            return data?.month;
+          // case 'Total Earning':
+          //   return dataMonthly?.total_usdt;
           default:
             return [];
         }
@@ -66,8 +70,19 @@ const DashboardChart = ({ filter ,dataMonthly,data}) => {
         horizontal: false,
         columnWidth: '55%',
         endingShape: 'rounded',
+        colors: {
+          ranges: [
+            {
+              from: 0,
+              to: 99*2**52, // Set a range that covers all values
+              color: '#FFC107', // Change the color to yellow (#FFC107)
+            },
+          ],
+        },
       },
     },
+   
+  
     dataLabels: {
       enabled: false,
     },
@@ -82,6 +97,7 @@ const DashboardChart = ({ filter ,dataMonthly,data}) => {
     yaxis: {
       title: {
         text: 'Range',
+        
       },
     },
     fill: {
@@ -99,13 +115,10 @@ const DashboardChart = ({ filter ,dataMonthly,data}) => {
 
   const chartSeries = [
     {
-      name: 'Total Users',
+      name: dataName[activeData],
       data: getFilteredData('Total Users'),
-    },
-    {
-      name: 'Total Earning',
-      data: getFilteredData('Total Earning'),
-    },
+    }
+  
   ];
 
   return (

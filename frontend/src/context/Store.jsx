@@ -13,13 +13,13 @@ export const Store = createContext();
 const getProviderAIMTokenContrat = () => {
     //  const provider = new ethers.providers.Web3Provider(ethereum);
 
-    const provider = new ethers.providers.JsonRpcProvider(
-        "http://localhost:8545"
-    );
-
     // const provider = new ethers.providers.JsonRpcProvider(
-    //   "https://eth-goerli.g.alchemy.com/v2/o-AGgcLzt-RSOtHljyWZuYXKTphehHzB"
+    //     "http://localhost:8545"
     // );
+
+    const provider = new ethers.providers.JsonRpcProvider(
+      "https://eth-goerli.g.alchemy.com/v2/o-AGgcLzt-RSOtHljyWZuYXKTphehHzB"
+    );
 
     // const provider = new ethers.providers.JsonRpcProvider(
     //   "https://eth-mainnet.g.alchemy.com/v2/ZNNDDz0q4xxwLvO9wQw-dPsHQ0urQ_J8"

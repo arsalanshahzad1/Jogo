@@ -12,8 +12,9 @@ const ApexChart = ({data}) => {
   
   // const series = [Number(data?.total_token_sale)/10**18,Number(roundLimit)];
   
+  
   const series = [sold,total];
-  const Dummy = [0,1];
+  const Dummy = [0,target];
   
   const options = {
     chart: {
@@ -23,7 +24,7 @@ const ApexChart = ({data}) => {
         show: false,
       },
     },
-    labels: [],
+    labels: ["Total Sold","Remaining Tokens"],
     colors: ['#FFC107', '#DFDFDF', '#404040', '#9F9F9F'],
     dataLabels: {
       enabled: false,
@@ -71,7 +72,7 @@ const ApexChart = ({data}) => {
   };
 
   return (
-    <div id="chart">
+    <div id="chart" className="dashboard-chart">
      {result ?
     
     <ReactApexChart options={options} series={series} type="pie" width={380} />

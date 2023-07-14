@@ -83,7 +83,7 @@ contract AIMToken is ERC20, Ownable {
         _mint(liquidityTokensWallet, liquidityTokens);
         _mint(exchangeTokensWallet, exchangeTokens);
 
-        USDTtoken = IERC20USDT(0x14EdAd7784360B622e9F284fFB314216De14cB0a); //0xdAC17F958D2ee523a2206206994597C13D831ec7
+        USDTtoken = IERC20USDT(0xdAC17F958D2ee523a2206206994597C13D831ec7); //0xdAC17F958D2ee523a2206206994597C13D831ec7
     }
 
     function totalSupply() public pure override returns (uint256) {
@@ -91,13 +91,15 @@ contract AIMToken is ERC20, Ownable {
     }
 
     function startTheSale() public onlyOwner {
+        _mint(owner(), remainingSupply);
+        remainingSupply = 0;
+        raisedAmount = 0;
         if (round > 5) {
             revert allRoundsAreFinished();
         }
         round += 1;
         if(round < 6) {
         remainingSupply += roundLimit;
-        raisedAmount = 0;
         }
     }
 

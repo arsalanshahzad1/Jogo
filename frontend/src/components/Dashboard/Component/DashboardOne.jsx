@@ -26,7 +26,7 @@ const { ethereum } = window;
 function DashboardOne({ checkIsWalletConnected, changeNetwork, account, setAccount }) {
     const [show, setShow] = useState(false)
     const [selectedRound, setSelectedRound] = useState('1');
-    const [runingRound, setrunningRound] = useState([]);
+    const [runingRound, setrunningRound] = useState('');
     const [UpcomingRound, setUpcomingRound] = useState(null);
     const [CheckData, setCheckData] = useState(false);
 
@@ -73,7 +73,7 @@ function DashboardOne({ checkIsWalletConnected, changeNetwork, account, setAccou
                     </Link>
                 )
                 }
-                
+
                 <Link onClick={startRound}>
                     <ChangeRound classes={"sale-btn"} />
                 </Link>
@@ -100,9 +100,7 @@ function DashboardOne({ checkIsWalletConnected, changeNetwork, account, setAccou
 
                 </div>
             </div>
-
-            {runingRound?.map((data, index) => (
-
+            {runingRound == '' ?
                 <div className='D-one-holder'>
 
                     <div className='D-one-holder-inner-1'>
@@ -111,7 +109,7 @@ function DashboardOne({ checkIsWalletConnected, changeNetwork, account, setAccou
                                 No Of Users In Round
                             </p>
                             <p className='Card-text-two'>
-                                {data?.total_users}
+                               0
                             </p>
                         </div>
                         <div className='CardsForData'>
@@ -119,7 +117,7 @@ function DashboardOne({ checkIsWalletConnected, changeNetwork, account, setAccou
                                 Eth Raised In Current Round
                             </p>
                             <p className='Card-text-two'>
-                                {data?.total_eth_amount / 10 ** 18}
+                               0.00
                             </p>
                         </div>
                         <div className='CardsForData'>
@@ -127,7 +125,7 @@ function DashboardOne({ checkIsWalletConnected, changeNetwork, account, setAccou
                                 Tokens Sold In Current Round
                             </p>
                             <p className='Card-text-two'>
-                                {data?.total_token_sale / 10 ** 18}
+                               0.00
                             </p>
                         </div>
                         <div className='CardsForData'>
@@ -135,10 +133,57 @@ function DashboardOne({ checkIsWalletConnected, changeNetwork, account, setAccou
                                 USDT Raised In Current Round
                             </p>
                             <p className='Card-text-two'>
-                                {data?.total_usdt_amount / 10 ** 6}
+                               0.00
                             </p>
                         </div>
-                        {/* <div className='CardsForData'>
+                    </div>
+                    <div className='D-one-holder-inner-2'>
+                        <ApexChart data={0} />
+                    </div>
+                </div>
+               
+               :
+
+                <>
+
+                    {runingRound?.map((data, index) => (
+
+                        <div className='D-one-holder'>
+
+                            <div className='D-one-holder-inner-1'>
+                                <div className='CardsForData borderyellow'>
+                                    <p className='Card-text-one'>
+                                        No Of Users In Round
+                                    </p>
+                                    <p className='Card-text-two'>
+                                        {data?.total_users}
+                                    </p>
+                                </div>
+                                <div className='CardsForData'>
+                                    <p className='Card-text-one'>
+                                        Eth Raised In Current Round
+                                    </p>
+                                    <p className='Card-text-two'>
+                                        {data?.total_eth_amount / 10 ** 18}
+                                    </p>
+                                </div>
+                                <div className='CardsForData'>
+                                    <p className='Card-text-one'>
+                                        Tokens Sold In Current Round
+                                    </p>
+                                    <p className='Card-text-two'>
+                                        {data?.total_token_sale / 10 ** 18}
+                                    </p>
+                                </div>
+                                <div className='CardsForData'>
+                                    <p className='Card-text-one'>
+                                        USDT Raised In Current Round
+                                    </p>
+                                    <p className='Card-text-two'>
+                                        {data?.total_usdt_amount / 10 ** 6}
+                                    </p>
+                                </div>
+                                {/* <div className='CardsForData'>
                         <p className='Card-text-one'>
                             User Participant
                         </p>
@@ -154,14 +199,16 @@ function DashboardOne({ checkIsWalletConnected, changeNetwork, account, setAccou
                             300k+
                         </p>
                     </div> */}
-                    </div>
-                    <div className='D-one-holder-inner-2'>
-                        <ApexChart data={data} />
-                    </div>
-                </div>
+                            </div>
+                            <div className='D-one-holder-inner-2'>
+                                <ApexChart data={data} />
+                            </div>
+                        </div>
 
-            ))
+                    ))
 
+                    }
+                </>
             }
 
 

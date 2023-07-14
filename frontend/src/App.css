@@ -2328,6 +2328,8 @@ p {
   text-align: center;
   color: #FF6347;
   font-family: 'heading';
+  width: 380px;
+  margin-inline: auto;
 }
 
 .sale-section .image-wrap .detail h3 {

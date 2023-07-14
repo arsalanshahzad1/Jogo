@@ -125,6 +125,7 @@ const PreSales = ({ changeNetwork, account, setAccount, loader, setloader }) => 
 
   const sendUSDT = async () => {
     try {
+      console.log("DOMEEE");
       if (!walletConnected) {
         changeNetwork();
         return;
@@ -138,9 +139,8 @@ const PreSales = ({ changeNetwork, account, setAccount, loader, setloader }) => 
 
 
       const remaningToken = await getAIMTokenContrat().remainingSupply()
-
-      if (Number(remaningToken) - Number(_amount) < 0) {
-        alert(`Round Limit Exceed : you can buy ${remaningToken / 10 ** 18}`);
+      if (Number(remaningToken) - Number(tokensPurchase) < 0) {
+        alert(`Round Limit Exceed : Remaining Tokens are ${remaningToken / 10 ** 18}`);
         window.location.reload();
         return;
       }
@@ -191,10 +191,9 @@ const PreSales = ({ changeNetwork, account, setAccount, loader, setloader }) => 
 
       let tokenEth = ethers.utils.parseEther(_amount.toString())
 
-      const remaningToken = await getAIMTokenContrat().remainingSupply()
-
-      if (Number(remaningToken) - Number(_amount) < 0) {
-        alert(`Round Limit Exceed : you can buy ${remaningToken / 10 ** 18}`);
+      const remaningToken = await getAIMTokenContrat().remainingSupply();
+      if (Number(remaningToken) - Number(tokenEth) < 0) {
+        alert(`Round Limit Exceed : Remaining Tokens are ${remaningToken / 10 ** 18}`);
         window.location.reload();
         return;
       }
@@ -230,6 +229,7 @@ const PreSales = ({ changeNetwork, account, setAccount, loader, setloader }) => 
   const getNumberOfTokensOwned = async () => {
     try {
       const tokensOfUser = await getAIMTokenContrat().soldTokens(account);
+      console.log("tokensOfUser",tokensOfUser.toString());
       setUsersTokens(tokensOfUser.toString() / 10 ** 18)
     } catch (err) {
     }
@@ -260,7 +260,7 @@ const PreSales = ({ changeNetwork, account, setAccount, loader, setloader }) => 
     }
 
     let percentages = Math.ceil(+percentage);
-  console.log("percentages",percentages);
+  
     let bar=[]
     for (let index = 0; index < 10; index++) {
       if (index < percentages -1) {
