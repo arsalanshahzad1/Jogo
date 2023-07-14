@@ -15,7 +15,9 @@ function App() {
   const [account, setAccount] = useState(null)
   const [walletConnected, setWalletConnected] = useState(false);
   const [ShowPopup, setShowPopup] = useState(false)
-
+  // const apiKey = process.env.testNetApi;
+  // const baseUrl = process.env.mainnetApi;
+ 
   const changeNetwork = async () => {
     try {
       if (!ethereum) throw new Error("No crypto wallet found");

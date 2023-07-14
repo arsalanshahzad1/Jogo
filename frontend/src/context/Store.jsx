@@ -1,11 +1,7 @@
 import { ethers, providers } from "ethers";
-import { useState, useEffect, createContext } from "react";
+import React, { useState, useEffect, createContext } from "react";
 import AIMTOKEN_CONTRACT_ADDRESS from "../contractsData/AIMToken-address.json"
 import AIMTOKEN_CONTRACT_ABI from "../contractsData/AIMToken.json"
-
-
-
-
 export const Store = createContext();
 
 
@@ -17,9 +13,9 @@ const getProviderAIMTokenContrat = () => {
     // );
     
     const provider = new ethers.providers.JsonRpcProvider(
-      `https://eth-goerli.g.alchemy.com/v2/${process.env.testNetApi}`
+      `https://eth-goerli.g.alchemy.com/v2/${process.env.TESTNET_API}`
     );
-
+   
     // const provider = new ethers.providers.JsonRpcProvider(
     //   `https://eth-mainnet.g.alchemy.com/v2/${process.env.mainnetApi}`
     // );
@@ -30,7 +26,6 @@ const getProviderAIMTokenContrat = () => {
 }
 
 export const StoreProvider = ({ children }) => {
-    
     const [activeRound, setActiveRound] = useState(0);
     const [CurrentRoundPrice, setCurentRoundPrice] = useState(0)
     const [coinsPerDollar, setCoinPerDollaer] = useState(0)
@@ -38,7 +33,7 @@ export const StoreProvider = ({ children }) => {
     const [raisedAmount, setRaisedAmount] = useState(0);
     const [roundStatus, setRoundStatus] = useState(false);
     const [claimStatus, setClaimStatus] = useState(false);
-
+   
     const getActiveRound = async () => {
         // console.log("call getActiveRound");
         try {
