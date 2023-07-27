@@ -8,16 +8,16 @@ export const Store = createContext();
 const getProviderAIMTokenContrat = () => {
     //  const provider = new ethers.providers.Web3Provider(ethereum);
 
-    // const provider = new ethers.providers.JsonRpcProvider(
-    //     "http://localhost:8545"
-    // );
-    
     const provider = new ethers.providers.JsonRpcProvider(
-      `https://eth-goerli.g.alchemy.com/v2/${process.env.TESTNET_API}`
+        "http://localhost:8545"
     );
+    
+    // const provider = new ethers.providers.JsonRpcProvider(
+    //   `https://eth-goerli.g.alchemy.com/v2/${process.env.TESTNET_API}`
+    // );
    
     // const provider = new ethers.providers.JsonRpcProvider(
-    //   `https://eth-mainnet.g.alchemy.com/v2/${process.env.mainnetApi}`
+    //   `https://eth-mainnet.g.alchemy.com/v2/${process.env.MAINNET_API}`
     // );
 
     const signer = provider.getSigner();
@@ -78,7 +78,9 @@ export const StoreProvider = ({ children }) => {
             }
             //change here code 
             let roudTotalAmount = (_roundPrice.toString()* 10 ** 6) * (100000000 * 10**18) / 10 ** 18
+            
             setTotalRaisedAmount(roudTotalAmount.toString()/10**6);
+
             // setTotalRaisedAmount(5000);
         } catch (error) {
             // Handle any errors
@@ -92,8 +94,9 @@ export const StoreProvider = ({ children }) => {
         // console.log("CureentroundNumber", CureentroundNumber.toString());
         setRaisedAmount(CureentroundNumber.toString()/10**6);
         // setRaisedAmount(2500);
-
+      
     }
+    
 
     useEffect(() => {
         getActiveRound();

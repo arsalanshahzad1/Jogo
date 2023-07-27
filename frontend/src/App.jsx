@@ -25,8 +25,8 @@ function App() {
         method: "wallet_switchEthereumChain",
         params: [{
           // chainId: "0x7A69" //localHost
-          chainId: "0x5" //goerli
-          // chainId: "0x1" //mainNet
+          // chainId: "0x5" //goerli
+          chainId: "0x1" //mainNet
           //  chainId: "0xaa36a7" //sepolia 
         }]
       });

@@ -32,7 +32,7 @@ const getUSDTTokenContrat = () => {
 
 const PreSales = ({ changeNetwork, account, setAccount, loader, setloader }) => {
 
-  const { activeRound, CurrentRoundPrice, coinsPerDollar, totalRaisedAmount, raisedAmount, roundStatus,
+  const { activeRound, CurrentRoundPrice, coinsPerDollar, totalRaisedAmount, raisedAmount,
     claimStatus } = useContext(Store)
 
 
@@ -59,8 +59,8 @@ const PreSales = ({ changeNetwork, account, setAccount, loader, setloader }) => 
 
   const [connect, sendUSDTBox] = useState(false);
   const [connector, sendETHBox] = useState(false);
-  const [onBars, setOnBars] = useState(0);
-  const [offBars, setOffBars] = useState(0);
+  // const [onBars, setOnBars] = useState(0);
+  // const [offBars, setOffBars] = useState(0);
   const [usersTokens, setUsersTokens] = useState(0);
   const [price, setPrice] = useState(null)
   const [walletConnected, setWalletConnected] = useState(false);
@@ -68,7 +68,7 @@ const PreSales = ({ changeNetwork, account, setAccount, loader, setloader }) => 
 
   // var Bar = [];
 
-  const offBarsList = [];
+  // const offBarsList = [];
 
   // for (let i = 0; i < offBars; i++) {
   //   offBarsList.push(
@@ -255,6 +255,7 @@ const PreSales = ({ changeNetwork, account, setAccount, loader, setloader }) => 
 
     let calPercentange = raisedAmount * 100 / totalRaisedAmount;
     let percentage;
+
     if (Math.ceil(+calPercentange) > 9) {
       percentage = Math.ceil(Math.ceil(+calPercentange) / 10);
     }
@@ -265,21 +266,29 @@ const PreSales = ({ changeNetwork, account, setAccount, loader, setloader }) => 
     let percentages = Math.ceil(+percentage);
 
     let bar = []
-    for (let index = 0; index < 10; index++) {
-      if (index < percentages - 1) {
-        bar.push(1)
-      }
-      else if (index == percentages - 1) {
-        bar.push(2)
-      }
-      else {
-        bar.push(0)
+    if(totalRaisedAmount !== 0){
+      for (let index = 0; index < 10; index++) {
+        if (index < percentages - 1) {
+          bar.push(1)
+        }
+        else if (index == percentages - 1) {
+          bar.push(2)
+        }
+        else {
+          bar.push(0)
+        }
       }
     }
     setBar(bar);
   };
 
+
+
+
+  
   // console.log("bar",Bar);
+
+
 
 
   const handleEvent = async (_round, _user, _soldToken, _BuywithEth, _BuywithUSDT) => {
@@ -290,8 +299,9 @@ const PreSales = ({ changeNetwork, account, setAccount, loader, setloader }) => 
       eth_amount: _BuywithEth.toString(),
       usdt_amount: _BuywithUSDT.toString()
     }
-    const response = await apis.addUser(data);
 
+    const response = await apis.addUser(data);
+    
     if (response.data.status) {
       sendUSDTBox(false)
       window.alert("Successfully minted Crypto Dev Tokens");
@@ -309,7 +319,10 @@ const PreSales = ({ changeNetwork, account, setAccount, loader, setloader }) => 
 
   useEffect(() => {
     getNumberOfBars();
-  }, [raisedAmount])
+  }, [raisedAmount,totalRaisedAmount])
+
+
+
 
 
   useEffect(() => {
@@ -420,7 +433,7 @@ const PreSales = ({ changeNetwork, account, setAccount, loader, setloader }) => 
                 <p>
                   <span>Token Address:</span>
                   <br />
-                  <span>0x23250A16AFDd06c9e2c44E3F7A6CcE5A23B2107d</span>
+                  <span>0xfd124A610Ae299E574A83fbF3738dB75DB1D751d</span>
                 </p>
                 {/* cutfrom here */}
 {activeRound < 6 &&(

@@ -60,6 +60,7 @@ async function main() {
 
   console.log("usdToken balance ", balance)
   saveFrontendFiles(deployedAIMTokenContract, "AIMToken");
+  // saveFrontendFiles(USDT, "TetherToken");
 
 }
 
